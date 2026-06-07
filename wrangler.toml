@@ -1,0 +1,9 @@
+name = "concretiq"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "."
+
+[env.production]
+name = "concretiq"
+
+[env.preview]
+name = "concretiq-preview"
