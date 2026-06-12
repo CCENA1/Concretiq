@@ -4,592 +4,395 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ConcretIQ — AI Construction Chemicals Expert</title>
-<meta name="description" content="AI-powered construction chemicals specifications. Mapei product intelligence for UAE and global projects.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0C0D0F;--bg2:#111315;--bg3:#181B1E;--bg4:#1F2327;
-  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.04);
-  --amber:#E8910A;--amber2:#F5A623;--amber3:#FFC044;
-  --teal:#16A085;--teal2:#1ABC9C;
-  --text:#C8D0D8;--text2:#8A96A2;--text3:#525E6A;
-  --white:#F2F4F6;--danger:#C0392B;
-  --font-h:'Fraunces',Georgia,serif;
-  --font-b:'DM Sans',system-ui,sans-serif;
-  --rad:10px;--rad2:16px;--rad3:22px;
+  --void:#07090B;--ink:#0D1219;--ink2:#121920;--ink3:#181F28;--ink4:#1E2733;
+  --rim:rgba(255,255,255,0.065);--rim2:rgba(255,255,255,0.03);
+  --gold:#C8860A;--gold2:#E09B1A;--gold3:#F5B942;
+  --teal:#0D9488;--teal2:#14B8A6;
+  --sky:#0EA5E9;
+  --tx:#C4CDD8;--tx2:#7A8A9A;--tx3:#3D4F60;
+  --wh:#EEF2F6;
+  --r:8px;--r2:14px;--r3:20px;--r4:28px;
+  --fh:'Syne',sans-serif;--fb:'DM Sans',sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--font-b);font-size:16px;line-height:1.6;overflow-x:hidden}
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-thumb{background:var(--amber);border-radius:2px}
-button{font-family:var(--font-b);cursor:pointer}
-input,select{font-family:var(--font-b)}
-a{text-decoration:none;color:inherit}
-
-/* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+html{scroll-behavior:smooth;font-size:15px}
+body{background:var(--void);color:var(--tx);font-family:var(--fb);overflow-x:hidden;min-height:100vh;line-height:1.6}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+button,input,select{font-family:var(--fb)}a{text-decoration:none;color:inherit}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(232,145,10,.2)}50%{box-shadow:0 0 40px rgba(232,145,10,.4)}}
-
-.au{animation:fadeUp .5s ease both}
-.au1{animation:fadeUp .5s .1s ease both}
-.au2{animation:fadeUp .5s .2s ease both}
-.au3{animation:fadeUp .5s .3s ease both}
-.au4{animation:fadeUp .5s .4s ease both}
-
-/* NAV */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  height:58px;padding:0 clamp(1rem,4vw,2.5rem);
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(12,13,15,0.88);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo{display:flex;align-items:center;gap:9px}
-.nav-mark{
-  width:30px;height:30px;border-radius:7px;
-  background:linear-gradient(135deg,var(--amber),var(--amber3));
-  display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900;color:#000;
-}
-.nav-name{font-family:var(--font-h);font-size:1.1rem;font-weight:700;color:var(--white)}
-.nav-name sup{font-family:var(--font-b);font-size:.5rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber2);vertical-align:super}
-.nav-center{display:flex;align-items:center;gap:1.5rem}
-.nav-center a{font-size:.82rem;font-weight:500;color:var(--text2);transition:color .2s}
-.nav-center a:hover{color:var(--white)}
-.nav-pill{
-  display:flex;align-items:center;gap:5px;font-size:.7rem;font-weight:600;
-  letter-spacing:.08em;text-transform:uppercase;color:var(--teal2);
-  border:1px solid rgba(26,188,156,.2);background:rgba(26,188,156,.06);
-  border-radius:100px;padding:3px 10px;
-}
-.nav-pill span{width:5px;height:5px;border-radius:50%;background:var(--teal2);animation:blink 2s infinite}
-.nav-btn{
-  background:var(--amber);color:#000;border:none;
-  padding:.42rem 1rem;border-radius:var(--rad);
-  font-size:.82rem;font-weight:700;transition:background .2s,transform .15s;
-}
-.nav-btn:hover{background:var(--amber2);transform:translateY(-1px)}
-
-/* HERO */
-#home{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  padding:80px 1.5rem 60px;position:relative;overflow:hidden;text-align:center;
-}
-.hero-grid{
-  position:absolute;inset:0;
-  background-image:linear-gradient(rgba(232,145,10,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(232,145,10,.05) 1px,transparent 1px);
-  background-size:64px 64px;
-  mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,black 20%,transparent 80%);
-  pointer-events:none;
-}
-.hero-glow{
-  position:absolute;width:600px;height:400px;
-  background:radial-gradient(ellipse,rgba(232,145,10,.12) 0%,transparent 70%);
-  top:10%;left:50%;transform:translateX(-50%);pointer-events:none;
-}
-.hero-inner{position:relative;z-index:1;max-width:820px;margin:0 auto}
-.hero-tag{
-  display:inline-flex;align-items:center;gap:7px;
-  font-size:.73rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--amber2);border:1px solid rgba(232,145,10,.22);
-  background:rgba(232,145,10,.07);border-radius:100px;padding:5px 14px;
-  margin-bottom:1.75rem;
-}
-.hero-tag span{width:5px;height:5px;border-radius:50%;background:var(--amber2);animation:blink 2s .5s infinite}
-h1.hero-h{
-  font-family:var(--font-h);font-size:clamp(2.6rem,6.5vw,5.2rem);
-  font-weight:900;line-height:1.0;letter-spacing:-.04em;color:var(--white);
-  margin-bottom:1.4rem;
-}
-.hero-h em{font-style:italic;color:var(--amber2)}
-.hero-h .grad{
-  background:linear-gradient(90deg,var(--amber2),var(--amber3),var(--teal2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.hero-sub{
-  font-size:clamp(.95rem,1.8vw,1.1rem);color:var(--text2);
-  max-width:540px;margin:0 auto 2.25rem;line-height:1.75;
-}
-.hero-btns{display:flex;align-items:center;justify-content:center;gap:.85rem;flex-wrap:wrap;margin-bottom:3.25rem}
-.btn-primary{
-  display:inline-flex;align-items:center;gap:7px;
-  background:linear-gradient(135deg,var(--amber),var(--amber2));
-  color:#000;border:none;padding:.8rem 1.75rem;border-radius:var(--rad2);
-  font-size:.95rem;font-weight:700;
-  box-shadow:0 6px 24px rgba(232,145,10,.28);
-  transition:transform .2s,box-shadow .2s;
-}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(232,145,10,.38)}
-.btn-ghost{
-  display:inline-flex;align-items:center;gap:7px;
-  background:transparent;border:1px solid var(--border);
-  color:var(--text);padding:.8rem 1.75rem;border-radius:var(--rad2);
-  font-size:.95rem;font-weight:500;transition:border-color .2s,background .2s;
-}
-.btn-ghost:hover{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.04)}
-.hero-stats{display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap}
-.hstat{text-align:center}
-.hstat-n{font-family:var(--font-h);font-size:2rem;font-weight:900;color:var(--white);line-height:1}
-.hstat-l{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-top:3px}
-.hsdiv{width:1px;height:32px;background:var(--border)}
-
-/* SECTION BASE */
-section{padding:clamp(60px,10vw,110px) clamp(1rem,4vw,2.5rem)}
-.wrap{max-width:1240px;margin:0 auto}
-.eyebrow{
-  font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--amber2);margin-bottom:.85rem;display:flex;align-items:center;gap:7px;
-}
-.eyebrow::before{content:'';width:18px;height:1px;background:var(--amber)}
-h2.sh{
-  font-family:var(--font-h);font-size:clamp(1.8rem,3.8vw,3rem);
-  font-weight:900;color:var(--white);letter-spacing:-.035em;line-height:1.1;margin-bottom:.8rem;
-}
-.ssub{font-size:.95rem;color:var(--text2);max-width:480px;line-height:1.75;margin-bottom:2.75rem}
-
-/* MODULES */
-#modules{background:var(--bg2)}
-.mod-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-  gap:1px;background:var(--border);
-  border:1px solid var(--border);border-radius:var(--rad3);overflow:hidden;
-}
-.mod-card{
-  background:var(--bg2);padding:1.6rem 1.4rem;cursor:pointer;
-  position:relative;transition:background .2s;overflow:hidden;
-}
-.mod-card:hover{background:var(--bg3)}
-.mod-card::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--amber),var(--teal2));
-  transform:scaleX(0);transition:transform .3s;transform-origin:left;
-}
-.mod-card:hover::after{transform:scaleX(1)}
-.mod-ico{font-size:1.5rem;margin-bottom:.9rem}
-.mod-arr{position:absolute;top:1.2rem;right:1.2rem;color:var(--text3);font-size:.85rem;transition:color .2s,transform .2s}
-.mod-card:hover .mod-arr{color:var(--amber2);transform:translate(2px,-2px)}
-.mod-card h3{font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:.3rem}
-.mod-card p{font-size:.77rem;color:var(--text2);line-height:1.5}
-
-/* PLATFORM */
-#platform{background:var(--bg)}
-.plat-shell{
-  display:grid;grid-template-columns:240px 1fr;
-  border:1px solid var(--border);border-radius:var(--rad3);
-  overflow:hidden;min-height:680px;
-  box-shadow:0 32px 80px rgba(0,0,0,.5);
-}
-.plat-sb{
-  background:var(--bg2);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;padding:1.1rem;gap:.3rem;
-}
-.sb-lbl{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);padding:.4rem .5rem .2rem}
-.sb-item{
-  display:flex;align-items:center;gap:8px;padding:.6rem .7rem;
-  border-radius:var(--rad);font-size:.8rem;color:var(--text2);font-weight:500;
-  cursor:pointer;transition:background .2s,color .2s;
-}
-.sb-item:hover{background:var(--bg3);color:var(--white)}
-.sb-item.active{background:rgba(232,145,10,.1);border:1px solid rgba(232,145,10,.2);color:var(--amber2)}
-.sb-div{height:1px;background:var(--border);margin:.35rem 0}
-.sb-new-btn{
-  margin-top:auto;background:var(--amber);color:#000;border:none;
-  padding:.65rem;border-radius:var(--rad);font-size:.8rem;font-weight:700;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  transition:background .2s;
-}
-.sb-new-btn:hover{background:var(--amber2)}
-.plat-main{background:var(--bg);display:flex;flex-direction:column}
-.plat-head{
-  padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;
-}
-.plat-title{font-size:.95rem;font-weight:700;color:var(--white)}
-.plat-status{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text2);margin-top:2px}
-.status-dot{width:6px;height:6px;border-radius:50%;background:var(--teal2);box-shadow:0 0 0 3px rgba(26,188,156,.15);animation:pulse 2.5s infinite}
-.step-lbl{font-size:.72rem;color:var(--text2)}
-.prog-rail{height:2px;background:var(--border)}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--amber),var(--amber3));transition:width .4s ease;width:0%}
-.plat-body{flex:1;padding:1.5rem;overflow-y:auto;display:flex;flex-direction:column;gap:1.25rem;max-height:560px}
-.plat-body::-webkit-scrollbar{width:2px}
-.plat-body::-webkit-scrollbar-thumb{background:var(--bg4)}
-.plat-foot{
-  padding:.9rem 1.5rem;border-top:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;gap:.75rem;
-}
-.foot-hint{font-size:.75rem;color:var(--text2)}
-.foot-right{display:flex;align-items:center;gap:.6rem}
-
-/* BUTTONS */
-.btn-back{
-  background:transparent;border:1px solid var(--border);color:var(--text2);
-  padding:.5rem 1rem;border-radius:var(--rad);font-size:.8rem;font-weight:500;
-  transition:border-color .2s;
-}
-.btn-back:hover{border-color:rgba(255,255,255,.15)}
-.btn-next{
-  background:var(--amber);color:#000;border:none;
-  padding:.5rem 1.4rem;border-radius:var(--rad);
-  font-size:.8rem;font-weight:700;
-  display:flex;align-items:center;gap:6px;
-  transition:background .2s,transform .15s;
-}
-.btn-next:hover{background:var(--amber2);transform:translateY(-1px)}
-.btn-next:disabled{opacity:.35;cursor:not-allowed;transform:none}
-.btn-gen{
-  background:linear-gradient(135deg,var(--amber),var(--amber3));color:#000;border:none;
-  padding:.5rem 1.4rem;border-radius:var(--rad);font-size:.8rem;font-weight:700;
-  display:flex;align-items:center;gap:6px;
-  box-shadow:0 4px 18px rgba(232,145,10,.28);
-  transition:transform .2s,box-shadow .2s;
-}
-.btn-gen:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(232,145,10,.38)}
-.btn-gen:disabled{opacity:.35;cursor:not-allowed;transform:none}
-
-/* AI BUBBLE */
-.ai-bub{display:flex;gap:10px;animation:fadeUp .35s ease both}
-.ai-av{
-  width:28px;height:28px;flex-shrink:0;border-radius:7px;margin-top:2px;
-  background:linear-gradient(135deg,var(--amber),var(--amber3));
-  display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:900;color:#000;
-}
-.ai-body{
-  background:var(--bg2);border:1px solid var(--border);
-  border-radius:3px 13px 13px 13px;padding:.85rem 1rem;max-width:560px;
-}
-.ai-name{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber2);margin-bottom:.35rem}
-.ai-txt{font-size:.85rem;color:var(--text);line-height:1.7}
-.ai-txt strong{color:var(--white)}
-
-/* QUESTION */
-.q-block{animation:fadeUp .3s ease both}
-.q-lbl{font-size:.86rem;font-weight:600;color:var(--white);margin-bottom:.8rem}
-.q-hint{font-size:.73rem;color:var(--text2);margin-bottom:.75rem;margin-top:-.4rem}
-
-/* Options grid */
-.opt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:.55rem}
-.opt-card{
-  background:var(--bg2);border:1px solid var(--border);border-radius:var(--rad2);
-  padding:.85rem .7rem;cursor:pointer;text-align:center;
-  transition:border-color .2s,background .2s,transform .1s;
-}
-.opt-card:hover{border-color:rgba(232,145,10,.35);background:var(--bg3);transform:translateY(-1px)}
-.opt-card.sel{border-color:var(--amber);background:rgba(232,145,10,.08)}
-.oc-e{font-size:1.5rem;margin-bottom:.35rem}
-.oc-l{font-size:.78rem;font-weight:600;color:var(--white)}
-.oc-s{font-size:.68rem;color:var(--text2);margin-top:1px}
-
-/* Radio list */
-.radio-list{display:flex;flex-direction:column;gap:.4rem}
-.radio-opt{
-  display:flex;align-items:flex-start;gap:.7rem;
-  background:var(--bg2);border:1px solid var(--border);border-radius:var(--rad);
-  padding:.75rem .9rem;cursor:pointer;transition:border-color .2s,background .2s;
-}
-.radio-opt:hover{border-color:rgba(232,145,10,.3)}
-.radio-opt.sel{border-color:var(--amber);background:rgba(232,145,10,.07)}
-.rdot{
-  width:15px;height:15px;border-radius:50%;border:2px solid var(--text3);flex-shrink:0;
-  margin-top:1px;transition:border-color .2s;display:flex;align-items:center;justify-content:center;
-}
-.radio-opt.sel .rdot{border-color:var(--amber);background:var(--amber)}
-.radio-opt.sel .rdot::after{content:'';width:5px;height:5px;border-radius:50%;background:#000}
-.r-lbl{font-size:.83rem;font-weight:600;color:var(--white)}
-.r-desc{font-size:.73rem;color:var(--text2);line-height:1.4;margin-top:1px}
-
-/* Chips */
-.chip-grp{display:flex;flex-wrap:wrap;gap:.45rem}
-.chip{
-  background:var(--bg2);border:1px solid var(--border);color:var(--text);
-  padding:.38rem .85rem;border-radius:100px;font-size:.78rem;font-weight:500;cursor:pointer;
-  transition:border-color .2s,background .2s,color .2s;
-}
-.chip:hover{border-color:rgba(232,145,10,.3)}
-.chip.sel{border-color:var(--amber);background:rgba(232,145,10,.1);color:var(--amber2)}
-
-/* Input */
-.s-input{
-  width:100%;background:var(--bg2);border:1px solid var(--border);color:var(--text);
-  padding:.7rem .9rem;border-radius:var(--rad);font-family:var(--font-b);font-size:.85rem;
-  transition:border-color .2s;
-}
-.s-input:focus{outline:none;border-color:rgba(232,145,10,.4)}
-.s-input::placeholder{color:var(--text3)}
-
-/* Summary card */
-.sum-card{
-  background:var(--bg2);border:1px solid rgba(232,145,10,.22);
-  border-radius:var(--rad2);padding:1.4rem;animation:fadeUp .4s ease both;
-}
-.sum-card h4{font-family:var(--font-h);font-size:1rem;font-weight:700;color:var(--white);margin-bottom:.9rem}
-.sum-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:.6rem}
-.sum-item{background:var(--bg3);border-radius:var(--rad);padding:.6rem .8rem}
-.sum-k{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);margin-bottom:.15rem}
-.sum-v{font-size:.8rem;font-weight:600;color:var(--white)}
-
-/* Loading */
-.load-wrap{display:flex;flex-direction:column;align-items:center;gap:1.1rem;padding:2.5rem;text-align:center}
-.load-ring{width:44px;height:44px;border-radius:50%;border:2px solid var(--border);border-top-color:var(--amber);animation:spin .8s linear infinite}
-.load-txt{font-size:.88rem;font-weight:600;color:var(--white)}
-.load-steps{display:flex;flex-direction:column;gap:.3rem;text-align:left}
-.ls{font-size:.75rem;color:var(--text2);display:flex;align-items:center;gap:.55rem}
-.ls::before{content:'○';font-size:.65rem;flex-shrink:0}
-.ls.done{color:var(--teal2)}.ls.done::before{content:'✓'}
-.ls.act{color:var(--amber2)}.ls.act::before{content:'◉'}
-
-/* RESULTS */
-.res-hero{
-  background:linear-gradient(135deg,rgba(232,145,10,.09),rgba(22,160,133,.06));
-  border:1px solid rgba(232,145,10,.18);border-radius:var(--rad2);padding:1.4rem;margin-bottom:1.25rem;
-}
-.res-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:.75rem}
-.res-badge{
-  display:inline-flex;align-items:center;gap:5px;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  background:rgba(26,188,156,.1);border:1px solid rgba(26,188,156,.2);color:var(--teal2);
-  padding:3px 9px;border-radius:var(--rad);
-}
-.res-title{font-family:var(--font-h);font-size:1.3rem;font-weight:800;color:var(--white);letter-spacing:-.02em;margin-top:.3rem}
-.res-sub{font-size:.82rem;color:var(--text2);line-height:1.65;margin-top:.35rem}
-.res-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem}
-.res-tag{background:var(--bg3);border:1px solid var(--border);color:var(--text);font-size:.7rem;font-weight:500;padding:2px 8px;border-radius:100px}
-.res-acts{display:flex;gap:.5rem;flex-wrap:wrap}
-.res-btn{
-  display:flex;align-items:center;gap:5px;background:var(--bg2);border:1px solid var(--border);
-  color:var(--text);padding:.45rem .9rem;border-radius:var(--rad);font-size:.76rem;font-weight:500;
-  transition:border-color .2s,background .2s;
-}
-.res-btn:hover{border-color:rgba(255,255,255,.14);background:var(--bg3)}
-
-/* OUTPUT TABS */
-.out-tabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
-.out-tabs::-webkit-scrollbar{display:none}
-.otab{padding:.6rem 1rem;font-size:.78rem;font-weight:600;color:var(--text2);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s}
-.otab:hover{color:var(--text)}
-.otab.active{color:var(--amber2);border-bottom-color:var(--amber)}
-.o-panel{display:none;padding-top:1.1rem}
-.o-panel.active{display:block}
-
-/* SPEC */
-.spec-doc{font-size:.82rem;color:var(--text);line-height:1.85}
-.s-clause{display:flex;gap:.8rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border2)}
-.s-clause:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-.s-num{font-family:var(--font-h);font-weight:700;color:var(--amber2);min-width:40px;font-size:.76rem;padding-top:.1rem}
-.s-body h5{font-size:.83rem;font-weight:700;color:var(--white);margin-bottom:.28rem}
-.s-body p{color:var(--text2);line-height:1.72}
-
-/* LAYERS */
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(200,134,10,.3)}50%{box-shadow:0 0 0 8px rgba(200,134,10,0)}}
+.u0{animation:up .6s ease both}.u1{animation:up .6s .12s ease both}.u2{animation:up .6s .22s ease both}.u3{animation:up .6s .32s ease both}.u4{animation:up .6s .42s ease both}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;padding:0 clamp(1rem,4vw,2.5rem);display:flex;align-items:center;justify-content:space-between;background:rgba(7,9,11,0.88);backdrop-filter:blur(22px);border-bottom:1px solid var(--rim)}
+.n-logo{display:flex;align-items:center;gap:9px;cursor:pointer}
+.n-mark{width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,var(--gold),var(--gold3));display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:.62rem;font-weight:800;color:#000;box-shadow:0 2px 12px rgba(200,134,10,.4)}
+.n-name{font-family:var(--fh);font-size:1.05rem;font-weight:700;color:var(--wh)}
+.n-name sup{font-family:var(--fb);font-size:.48rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold2);vertical-align:super}
+.n-links{display:flex;align-items:center;gap:1.6rem}
+.n-links a{font-size:.8rem;font-weight:500;color:var(--tx2);transition:color .2s}
+.n-links a:hover{color:var(--wh)}
+.n-live{display:flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal2);border:1px solid rgba(20,184,166,.2);background:rgba(20,184,166,.06);border-radius:100px;padding:3px 10px}
+.n-live i{width:5px;height:5px;border-radius:50%;background:var(--teal2);animation:blink 2s infinite;font-style:normal;display:inline-block}
+.n-cta{background:var(--gold);color:#000;border:none;padding:.42rem 1.1rem;border-radius:var(--r);font-size:.8rem;font-weight:700;cursor:pointer;transition:background .2s,transform .15s}
+.n-cta:hover{background:var(--gold2);transform:translateY(-1px)}
+#home{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px clamp(1rem,5vw,3rem) 60px;position:relative;overflow:hidden;text-align:center}
+.h-bg{position:absolute;inset:0;pointer-events:none}
+.h-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(200,134,10,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(200,134,10,.045) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,black 10%,transparent 75%)}
+.h-glow1{position:absolute;width:800px;height:500px;background:radial-gradient(ellipse,rgba(200,134,10,.12) 0%,transparent 65%);top:-80px;left:50%;transform:translateX(-50%);filter:blur(60px)}
+.h-glow2{position:absolute;width:400px;height:400px;background:radial-gradient(ellipse,rgba(13,148,136,.09) 0%,transparent 65%);bottom:-40px;right:-60px;filter:blur(80px)}
+.h-inner{position:relative;z-index:1;max-width:880px;margin:0 auto}
+.h-pill{display:inline-flex;align-items:center;gap:7px;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold2);border:1px solid rgba(200,134,10,.22);background:rgba(200,134,10,.07);border-radius:100px;padding:5px 14px;margin-bottom:2rem}
+.h-pill i{width:5px;height:5px;border-radius:50%;background:var(--gold2);animation:blink 2s .4s infinite;font-style:normal;display:inline-block}
+h1.hh{font-family:var(--fh);font-size:clamp(2.8rem,7vw,5.6rem);font-weight:800;line-height:.98;letter-spacing:-.05em;color:var(--wh);margin-bottom:1.5rem}
+.hh .it{font-style:italic;font-family:'DM Sans',sans-serif;font-weight:300;color:rgba(200,134,10,.7)}
+.hh .gr{background:linear-gradient(95deg,var(--gold2),var(--gold3),var(--teal2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.h-sub{font-size:clamp(.9rem,1.7vw,1.08rem);color:var(--tx2);max-width:560px;margin:0 auto 2.5rem;line-height:1.78;font-weight:300}
+.h-btns{display:flex;align-items:center;justify-content:center;gap:.85rem;flex-wrap:wrap;margin-bottom:4rem}
+.btn-g{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:.85rem 2rem;border-radius:var(--r2);font-size:.93rem;font-weight:700;cursor:pointer;box-shadow:0 6px 28px rgba(200,134,10,.3);transition:transform .2s,box-shadow .2s}
+.btn-g:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(200,134,10,.42)}
+.btn-o{display:inline-flex;align-items:center;gap:7px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--tx);padding:.85rem 2rem;border-radius:var(--r2);font-size:.93rem;font-weight:500;cursor:pointer;transition:border-color .2s,background .2s}
+.btn-o:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.04)}
+.h-stats{display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap}
+.hs{text-align:center}
+.hs-n{font-family:var(--fh);font-size:2rem;font-weight:800;color:var(--wh);line-height:1}
+.hs-l{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);margin-top:3px}
+.hsd{width:1px;height:30px;background:var(--rim)}
+.trust{background:var(--ink2);border-top:1px solid var(--rim);border-bottom:1px solid var(--rim);padding:.85rem clamp(1rem,4vw,2.5rem);display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap}
+.ti{display:flex;align-items:center;gap:6px;font-size:.73rem;font-weight:500;color:var(--tx2)}
+section.pad{padding:clamp(60px,9vw,110px) clamp(1rem,4vw,2.5rem)}
+.wrap{max-width:1260px;margin:0 auto}
+.ew{display:inline-flex;align-items:center;gap:7px;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);margin-bottom:.9rem}
+.ew::before{content:'';width:18px;height:1px;background:var(--gold)}
+h2.sh{font-family:var(--fh);font-size:clamp(1.9rem,4vw,3rem);font-weight:800;color:var(--wh);letter-spacing:-.04em;line-height:1.08;margin-bottom:.85rem}
+.ss{font-size:.93rem;color:var(--tx2);max-width:500px;line-height:1.78;margin-bottom:2.75rem}
+.mg{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:1px;background:var(--rim);border:1px solid var(--rim);border-radius:var(--r4);overflow:hidden}
+.mc{background:var(--ink2);padding:1.6rem 1.4rem;cursor:pointer;position:relative;overflow:hidden;transition:background .25s}
+.mc:hover{background:var(--ink3)}
+.mc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--teal2));transform:scaleX(0);transition:transform .35s cubic-bezier(.4,0,.2,1);transform-origin:left}
+.mc:hover::after{transform:scaleX(1)}
+.mc-e{font-size:1.5rem;margin-bottom:.9rem;display:block}
+.mc-ar{position:absolute;top:1.2rem;right:1.2rem;color:var(--tx3);font-size:.75rem;transition:all .25s}
+.mc:hover .mc-ar{color:var(--gold2);transform:translate(2px,-2px)}
+.mc h3{font-family:var(--fh);font-size:.87rem;font-weight:700;color:var(--wh);margin-bottom:.28rem}
+.mc p{font-size:.74rem;color:var(--tx2);line-height:1.5}
+.plat{display:grid;grid-template-columns:245px 1fr;border:1px solid var(--rim);border-radius:var(--r4);overflow:hidden;min-height:700px;box-shadow:0 40px 100px rgba(0,0,0,.6)}
+.psb{background:var(--ink2);border-right:1px solid var(--rim);display:flex;flex-direction:column;padding:1.1rem;gap:.28rem}
+.sb-hd{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--tx3);padding:.4rem .5rem .25rem}
+.sb-it{display:flex;align-items:center;gap:8px;padding:.58rem .7rem;border-radius:var(--r);font-size:.78rem;color:var(--tx2);font-weight:500;cursor:pointer;transition:background .18s,color .18s}
+.sb-it:hover{background:var(--ink3);color:var(--wh)}
+.sb-it.on{background:rgba(200,134,10,.1);border:1px solid rgba(200,134,10,.2);color:var(--gold2)}
+.sb-div{height:1px;background:var(--rim);margin:.3rem 0}
+.sb-dot{width:6px;height:6px;border-radius:50%;margin-left:auto;background:var(--teal2);box-shadow:0 0 6px var(--teal2)}
+.sb-new{margin-top:auto;background:var(--gold);color:#000;border:none;padding:.6rem;border-radius:var(--r);font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:background .2s}
+.sb-new:hover{background:var(--gold2)}
+.pmain{background:var(--void);display:flex;flex-direction:column}
+.ph{padding:1rem 1.5rem;border-bottom:1px solid var(--rim);display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;background:rgba(13,18,25,.6)}
+.pt{font-family:var(--fh);font-size:.92rem;font-weight:700;color:var(--wh)}
+.ps{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--tx2);margin-top:2px}
+.psd{width:6px;height:6px;border-radius:50%;background:var(--teal2);box-shadow:0 0 0 3px rgba(20,184,166,.15);animation:pulse 2.5s infinite}
+.psl{font-size:.7rem;color:var(--tx2)}
+.prog{height:2px;background:var(--rim)}
+.pf{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold3));transition:width .5s cubic-bezier(.4,0,.2,1);width:0%}
+.pbody{flex:1;padding:1.5rem;overflow-y:auto;display:flex;flex-direction:column;gap:1.25rem;max-height:560px}
+.pbody::-webkit-scrollbar{width:2px}
+.pfoot{padding:.85rem 1.5rem;border-top:1px solid var(--rim);display:flex;align-items:center;justify-content:space-between;gap:.75rem;background:rgba(13,18,25,.4)}
+.fh2{font-size:.72rem;color:var(--tx2)}
+.fr{display:flex;align-items:center;gap:.55rem}
+.bback{background:transparent;border:1px solid var(--rim);color:var(--tx2);padding:.48rem .95rem;border-radius:var(--r);font-size:.78rem;font-weight:500;cursor:pointer;transition:border-color .2s}
+.bback:hover{border-color:rgba(255,255,255,.14)}
+.bnext{background:var(--gold);color:#000;border:none;padding:.48rem 1.3rem;border-radius:var(--r);font-size:.78rem;font-weight:700;display:flex;align-items:center;gap:5px;cursor:pointer;transition:background .2s,transform .15s}
+.bnext:hover{background:var(--gold2);transform:translateY(-1px)}
+.bnext:disabled{opacity:.3;cursor:not-allowed;transform:none}
+.bgen{background:linear-gradient(135deg,var(--gold),var(--gold3));color:#000;border:none;padding:.48rem 1.3rem;border-radius:var(--r);font-size:.78rem;font-weight:700;display:flex;align-items:center;gap:5px;box-shadow:0 4px 20px rgba(200,134,10,.3);cursor:pointer;transition:transform .2s,box-shadow .2s}
+.bgen:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(200,134,10,.4)}
+.bgen:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.aib{display:flex;gap:10px;animation:up .35s ease both}
+.aiav{width:28px;height:28px;flex-shrink:0;border-radius:7px;margin-top:2px;background:linear-gradient(135deg,var(--gold),var(--gold3));display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:.58rem;font-weight:800;color:#000;box-shadow:0 2px 10px rgba(200,134,10,.35)}
+.aibd{background:var(--ink2);border:1px solid var(--rim);border-radius:3px 13px 13px 13px;padding:.82rem 1rem;max-width:560px}
+.ailbl{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold2);margin-bottom:.35rem}
+.aitx{font-size:.83rem;color:var(--tx);line-height:1.72}
+.aitx strong{color:var(--wh)}
+.qblk{animation:up .32s ease both}
+.qlbl{font-size:.84rem;font-weight:600;color:var(--wh);margin-bottom:.8rem}
+.qhint{font-size:.72rem;color:var(--tx2);margin:.3rem 0 .75rem}
+.og{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:.5rem}
+.oc{background:var(--ink2);border:1px solid var(--rim);border-radius:var(--r2);padding:.82rem .65rem;cursor:pointer;text-align:center;transition:border-color .2s,background .2s,transform .15s}
+.oc:hover{border-color:rgba(200,134,10,.35);background:var(--ink3);transform:translateY(-1px)}
+.oc.sel{border-color:var(--gold);background:rgba(200,134,10,.09)}
+.oc-e{font-size:1.5rem;margin-bottom:.32rem}
+.oc-l{font-size:.76rem;font-weight:600;color:var(--wh);line-height:1.3}
+.oc-s{font-size:.67rem;color:var(--tx2);margin-top:2px}
+.rl{display:flex;flex-direction:column;gap:.38rem}
+.ro{display:flex;align-items:flex-start;gap:.65rem;background:var(--ink2);border:1px solid var(--rim);border-radius:var(--r);padding:.7rem .88rem;cursor:pointer;transition:border-color .2s,background .2s}
+.ro:hover{border-color:rgba(200,134,10,.3)}
+.ro.sel{border-color:var(--gold);background:rgba(200,134,10,.07)}
+.rodot{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--tx3);flex-shrink:0;margin-top:2px;transition:all .18s;display:flex;align-items:center;justify-content:center}
+.ro.sel .rodot{border-color:var(--gold);background:var(--gold)}
+.ro.sel .rodot::after{content:'';width:4px;height:4px;border-radius:50%;background:#000}
+.rol{font-size:.81rem;font-weight:600;color:var(--wh)}
+.rod{font-size:.71rem;color:var(--tx2);line-height:1.4;margin-top:1px}
+.cg{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{background:var(--ink2);border:1px solid var(--rim);color:var(--tx);padding:.36rem .82rem;border-radius:100px;font-size:.76rem;font-weight:500;cursor:pointer;transition:all .2s}
+.chip:hover{border-color:rgba(200,134,10,.3)}
+.chip.sel{border-color:var(--gold);background:rgba(200,134,10,.1);color:var(--gold2)}
+.sinp{width:100%;background:var(--ink2);border:1px solid var(--rim);color:var(--tx);padding:.68rem .9rem;border-radius:var(--r);font-family:var(--fb);font-size:.83rem;transition:border-color .2s}
+.sinp:focus{outline:none;border-color:rgba(200,134,10,.4)}
+.sinp::placeholder{color:var(--tx3)}
+.sumc{background:var(--ink2);border:1px solid rgba(200,134,10,.2);border-radius:var(--r3);padding:1.4rem;animation:up .4s ease both}
+.sumc h4{font-family:var(--fh);font-size:.95rem;font-weight:700;color:var(--wh);margin-bottom:.9rem}
+.sumg{display:grid;grid-template-columns:repeat(auto-fill,minmax(162px,1fr));gap:.55rem}
+.sumi{background:var(--ink3);border-radius:var(--r);padding:.55rem .75rem}
+.sumk{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tx2);margin-bottom:.12rem}
+.sumv{font-size:.78rem;font-weight:600;color:var(--wh)}
+.smc{background:var(--ink2);border:1px solid rgba(200,134,10,.2);border-radius:var(--r3);padding:1.5rem;animation:up .4s ease both}
+.smc h4{font-family:var(--fh);font-size:.95rem;font-weight:700;color:var(--wh);margin-bottom:.45rem}
+.smc p{font-size:.8rem;color:var(--tx2);margin-bottom:1.25rem;line-height:1.65}
+.smcg{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.smco{background:var(--ink3);border:1px solid var(--rim);border-radius:var(--r2);padding:1.1rem;cursor:pointer;transition:border-color .2s,background .2s;display:flex;flex-direction:column;gap:.4rem}
+.smco:hover{border-color:rgba(200,134,10,.35);background:var(--ink4)}
+.smco.sel{border-color:var(--gold);background:rgba(200,134,10,.08)}
+.smco-e{font-size:1.4rem}
+.smco-t{font-size:.82rem;font-weight:700;color:var(--wh)}
+.smco-d{font-size:.72rem;color:var(--tx2);line-height:1.5}
+.tag-e{display:inline-flex;font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:4px;width:fit-content}
+.tag-t{background:rgba(14,165,233,.1);color:var(--sky);border:1px solid rgba(14,165,233,.2)}
+.tag-d{background:rgba(20,184,166,.1);color:var(--teal2);border:1px solid rgba(20,184,166,.2)}
+.lw{display:flex;flex-direction:column;align-items:center;gap:1.1rem;padding:2.5rem;text-align:center}
+.lring{width:42px;height:42px;border-radius:50%;border:2px solid var(--rim);border-top-color:var(--gold);animation:spin .75s linear infinite}
+.ltxt{font-size:.86rem;font-weight:600;color:var(--wh)}
+.lsteps{display:flex;flex-direction:column;gap:.28rem;text-align:left;margin-top:.5rem}
+.ls{font-size:.74rem;color:var(--tx2);display:flex;align-items:center;gap:.5rem}
+.ls::before{content:'○';font-size:.62rem;flex-shrink:0;color:var(--tx3)}
+.ls.done{color:var(--teal2)}.ls.done::before{content:'✓';color:var(--teal2)}
+.ls.act{color:var(--gold2)}.ls.act::before{content:'◉';color:var(--gold2)}
+.rhero{background:linear-gradient(135deg,rgba(200,134,10,.09),rgba(13,148,136,.05));border:1px solid rgba(200,134,10,.18);border-radius:var(--r3);padding:1.4rem;margin-bottom:1.25rem}
+.rtop{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:.85rem}
+.rbadge{display:inline-flex;align-items:center;gap:5px;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(20,184,166,.1);border:1px solid rgba(20,184,166,.2);color:var(--teal2);padding:3px 9px;border-radius:var(--r)}
+.rtitle{font-family:var(--fh);font-size:1.25rem;font-weight:800;color:var(--wh);letter-spacing:-.03em;margin-top:.32rem;line-height:1.2}
+.rsub{font-size:.8rem;color:var(--tx2);line-height:1.65;margin-top:.35rem}
+.rtags{display:flex;flex-wrap:wrap;gap:.38rem;margin-top:.75rem}
+.rtag{background:var(--ink3);border:1px solid var(--rim);color:var(--tx);font-size:.68rem;font-weight:500;padding:2px 8px;border-radius:100px}
+.racts{display:flex;gap:.5rem;flex-wrap:wrap}
+.rbtn{display:flex;align-items:center;gap:5px;background:var(--ink2);border:1px solid var(--rim);color:var(--tx);padding:.42rem .9rem;border-radius:var(--r);font-size:.74rem;font-weight:500;cursor:pointer;transition:all .2s}
+.rbtn:hover{border-color:rgba(200,134,10,.3);background:var(--ink3);color:var(--wh)}
+.rat{background:rgba(14,165,233,.05);border:1px solid rgba(14,165,233,.15);border-radius:var(--r2);padding:1rem 1.1rem;margin-bottom:1.25rem}
+.rat-hd{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sky);margin-bottom:.45rem}
+.rat p{font-size:.8rem;color:var(--tx2);line-height:1.7}
+.otabs{display:flex;border-bottom:1px solid var(--rim);overflow-x:auto;scrollbar-width:none}
+.otabs::-webkit-scrollbar{display:none}
+.otab{padding:.58rem 1rem;font-size:.76rem;font-weight:600;color:var(--tx2);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s}
+.otab:hover{color:var(--tx)}
+.otab.on{color:var(--gold2);border-bottom-color:var(--gold)}
+.opanel{display:none;padding-top:1.1rem}
+.opanel.on{display:block}
 .layers{display:flex;flex-direction:column;gap:.55rem}
-.layer{
-  display:flex;align-items:flex-start;gap:.9rem;
-  background:var(--bg2);border:1px solid var(--border);border-radius:var(--rad2);
-  padding:.9rem 1rem;position:relative;overflow:hidden;
-}
-.layer::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber)}
-.layer-n{
-  width:24px;height:24px;border-radius:50%;flex-shrink:0;
-  background:rgba(232,145,10,.15);border:1px solid rgba(232,145,10,.3);
-  display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:800;color:var(--amber2);
-}
-.layer-role{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal2);margin-bottom:.18rem}
-.layer-name{font-size:.88rem;font-weight:700;color:var(--white);margin-bottom:.2rem}
-.layer-note{font-size:.76rem;color:var(--text2)}
-.layer-specs{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.45rem}
-.lsp{font-size:.67rem;color:var(--text2);background:var(--bg3);padding:2px 7px;border-radius:4px;border:1px solid var(--border2)}
-.lsp strong{color:var(--text)}
-
-/* BOQ */
-.boq-wrap{overflow-x:auto}
-table.boq-t{width:100%;border-collapse:collapse;font-size:.78rem;min-width:580px}
-.boq-t th{text-align:left;padding:.6rem .8rem;background:var(--bg2);color:var(--text2);font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border)}
-.boq-t td{padding:.6rem .8rem;border-bottom:1px solid var(--border2);color:var(--text)}
-.boq-t tr:last-child td{border-bottom:none}
-.boq-t tr:hover td{background:rgba(255,255,255,.01)}
-.td-prod{color:var(--amber2);font-weight:600}
-.td-unit{color:var(--teal2);font-weight:600}
-.boq-note{margin-top:.9rem;background:rgba(232,145,10,.05);border:1px solid rgba(232,145,10,.12);border-radius:var(--rad);padding:.7rem .9rem;font-size:.76rem;color:var(--text2);line-height:1.6}
-
-/* METHOD STATEMENT */
-.ms-list{display:flex;flex-direction:column;gap:.65rem}
-.ms-step{display:flex;gap:.9rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rad2);padding:.9rem 1rem}
-.ms-n{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--amber),var(--amber3));display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:800;color:#000}
-.ms-h{font-size:.83rem;font-weight:700;color:var(--white);margin-bottom:.22rem}
-.ms-p{font-size:.78rem;color:var(--text2);line-height:1.68}
-
-/* ITP */
-.itp-t{width:100%;border-collapse:collapse;font-size:.78rem}
-.itp-t th{text-align:left;padding:.55rem .8rem;background:var(--bg2);color:var(--text2);font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border)}
-.itp-t td{padding:.6rem .8rem;border-bottom:1px solid var(--border2);color:var(--text)}
-.itp-t tr:last-child td{border-bottom:none}
-.itp-ic{text-align:center;font-size:.9rem}
-
-/* RISKS */
-.risk-list{display:flex;flex-direction:column;gap:.55rem}
-.risk-card{display:flex;align-items:flex-start;gap:.8rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rad2);padding:.9rem 1rem}
-.risk-sev{font-size:.62rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:1px}
-.sev-high{background:rgba(192,57,43,.15);color:#e87070;border:1px solid rgba(192,57,43,.25)}
-.sev-medium{background:rgba(232,145,10,.15);color:var(--amber3);border:1px solid rgba(232,145,10,.25)}
-.sev-low{background:rgba(26,188,156,.1);color:var(--teal2);border:1px solid rgba(26,188,156,.2)}
-.risk-h{font-size:.82rem;font-weight:700;color:var(--white);margin-bottom:.22rem}
-.risk-p{font-size:.76rem;color:var(--text2);line-height:1.6}
-
-/* VE */
-.ve-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.65rem}
-.ve-card{background:var(--bg2);border:1px solid rgba(26,188,156,.15);border-radius:var(--rad2);padding:1rem}
-.ve-h{font-size:.83rem;font-weight:700;color:var(--white);margin-bottom:.35rem}
-.ve-save{display:inline-block;background:rgba(26,188,156,.1);color:var(--teal2);font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:4px;margin-bottom:.55rem}
-.ve-p{font-size:.76rem;color:var(--text2);line-height:1.6}
-.ve-trade{font-size:.73rem;color:var(--text3);margin-top:.35rem}
-
-/* PRODUCT DB */
-#products{background:var(--bg2)}
-.pdb{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rad3);overflow:hidden}
-.pdb-head{padding:1.1rem 1.4rem;border-bottom:1px solid var(--border);display:flex;gap:.65rem;align-items:center;flex-wrap:wrap}
-.pdb-input{flex:1;min-width:160px;background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:.62rem .9rem;border-radius:var(--rad);font-family:var(--font-b);font-size:.83rem}
-.pdb-input:focus{outline:none;border-color:rgba(232,145,10,.4)}
-.pdb-input::placeholder{color:var(--text3)}
-.pdb-cats{padding:.8rem 1.4rem;border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;gap:.38rem}
-.pdb-cat{background:var(--bg2);border:1px solid var(--border);color:var(--text2);padding:.33rem .8rem;border-radius:100px;font-size:.73rem;font-weight:500;cursor:pointer;transition:all .2s}
-.pdb-cat:hover,.pdb-cat.active{border-color:var(--amber);color:var(--amber2);background:rgba(232,145,10,.07)}
-.pdb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1px;background:var(--border)}
-.pdb-item{background:var(--bg2);padding:1.1rem;cursor:pointer;transition:background .2s}
-.pdb-item:hover{background:var(--bg3)}
-.pdb-top{display:flex;justify-content:space-between;align-items:flex-start;gap:.4rem;margin-bottom:.55rem}
-.pdb-name{font-size:.88rem;font-weight:700;color:var(--white)}
-.pdb-ctag{font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:rgba(26,188,156,.08);border:1px solid rgba(26,188,156,.18);color:var(--teal2);padding:2px 6px;border-radius:4px;white-space:nowrap}
-.pdb-desc{font-size:.76rem;color:var(--text2);line-height:1.52;margin-bottom:.75rem}
-.pdb-specs{display:flex;flex-wrap:wrap;gap:.32rem}
-.pdb-sp{font-size:.66rem;color:var(--text2);background:var(--bg3);padding:2px 6px;border-radius:4px;border:1px solid var(--border2)}
-.pdb-sp strong{color:var(--text)}
-.pdb-rec{font-size:.63rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:rgba(232,145,10,.1);border:1px solid rgba(232,145,10,.2);color:var(--amber2);padding:2px 7px;border-radius:4px}
-.pdb-orig{font-size:.63rem;font-weight:700;background:rgba(26,188,156,.07);border:1px solid rgba(26,188,156,.15);color:var(--teal2);padding:2px 7px;border-radius:4px}
-
-/* FEATURES */
-#features{background:var(--bg)}
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--rad3);overflow:hidden}
-.feat-card{background:var(--bg);padding:1.9rem 1.6rem;transition:background .2s}
-.feat-card:hover{background:var(--bg2)}
-.feat-n{font-family:var(--font-h);font-size:2.6rem;font-weight:900;color:rgba(232,145,10,.15);line-height:1;margin-bottom:.75rem}
-.feat-card h3{font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:.4rem}
-.feat-card p{font-size:.8rem;color:var(--text2);line-height:1.68}
-
-/* CTA */
-#cta{background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(232,145,10,.08) 0%,transparent 70%);text-align:center}
-.cta-h{font-family:var(--font-h);font-size:clamp(1.9rem,4.5vw,3.2rem);font-weight:900;color:var(--white);letter-spacing:-.04em;line-height:1.1;margin-bottom:.9rem}
-.cta-sub{font-size:.95rem;color:var(--text2);max-width:420px;margin:0 auto 1.9rem;line-height:1.72}
-.cta-form{display:flex;gap:.6rem;max-width:380px;margin:0 auto}
-.cta-inp{flex:1;background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:.75rem .9rem;border-radius:var(--rad);font-family:var(--font-b);font-size:.85rem}
-.cta-inp:focus{outline:none;border-color:rgba(232,145,10,.4)}
-.cta-inp::placeholder{color:var(--text3)}
-
-/* FOOTER */
-footer{padding:1.75rem clamp(1rem,4vw,2.5rem);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
-.foot-copy{font-size:.73rem;color:var(--text3)}
-.foot-links{display:flex;gap:1.25rem}
-.foot-links a{font-size:.73rem;color:var(--text3);transition:color .2s}
-.foot-links a:hover{color:var(--text2)}
-
-/* FAB */
-.fab{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;width:48px;height:48px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--amber),var(--amber3));display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 6px 24px rgba(232,145,10,.38);transition:transform .2s;animation:glow 3s infinite}
-.fab:hover{transform:scale(1.1)}
-
-/* TOAST */
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--danger);color:#fff;padding:.65rem 1.3rem;border-radius:var(--rad);font-size:.8rem;font-weight:600;z-index:500;display:none;white-space:nowrap}
+.lyr{display:flex;align-items:flex-start;gap:.9rem;background:var(--ink2);border:1px solid var(--rim);border-radius:var(--r2);padding:.9rem 1rem;position:relative;overflow:hidden}
+.lyr::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),var(--gold3))}
+.lyrc{width:24px;height:24px;border-radius:50%;flex-shrink:0;background:rgba(200,134,10,.12);border:1px solid rgba(200,134,10,.28);display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:800;color:var(--gold2)}
+.lyrole{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal2);margin-bottom:.18rem}
+.lyrname{font-size:.86rem;font-weight:700;color:var(--wh);margin-bottom:.2rem}
+.lyrnote{font-size:.75rem;color:var(--tx2);line-height:1.5}
+.lyrsp{display:flex;flex-wrap:wrap;gap:.32rem;margin-top:.45rem}
+.lsp{font-size:.65rem;color:var(--tx2);background:var(--ink3);padding:2px 7px;border-radius:4px;border:1px solid var(--rim2)}
+.lsp strong{color:var(--tx)}
+.sdoc{font-size:.8rem;color:var(--tx);line-height:1.85}
+.sc{display:flex;gap:.78rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--rim2)}
+.sc:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.scn{font-family:var(--fh);font-weight:700;color:var(--gold2);min-width:38px;font-size:.74rem;padding-top:.1rem}
+.scb h5{font-size:.81rem;font-weight:700;color:var(--wh);margin-bottom:.25rem}
+.scb p{color:var(--tx2);line-height:1.72}
+.dsdoc{font-size:.82rem;line-height:1.85}
+.dssec{margin-bottom:1.5rem}
+.dssect{font-family:var(--fh);font-size:.88rem;font-weight:700;color:var(--wh);padding:.5rem .8rem;background:rgba(200,134,10,.08);border-left:2px solid var(--gold);border-radius:0 var(--r) var(--r) 0;margin-bottom:.75rem;letter-spacing:.02em}
+.dsc{display:flex;gap:.75rem;margin-bottom:.75rem;padding-bottom:.75rem;border-bottom:1px solid var(--rim2)}
+.dsc:last-child{border-bottom:none}
+.dscn{font-family:var(--fh);font-weight:700;color:var(--gold);min-width:36px;font-size:.72rem;padding-top:.1rem}
+.dscb h5{font-size:.8rem;font-weight:700;color:var(--wh);margin-bottom:.22rem}
+.dscb p{color:var(--tx2);line-height:1.7}
+.dsprods{margin-top:1.25rem}
+.dsprodlbl{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal2);margin-bottom:.65rem}
+.dsprodg{display:flex;flex-direction:column;gap:.5rem}
+.dsprod{background:var(--ink2);border:1px solid var(--rim);border-radius:var(--r2);padding:.8rem 1rem;display:flex;gap:.75rem}
+.dsprod-e{font-size:1.1rem;flex-shrink:0;margin-top:1px}
+.dsprod-n{font-size:.82rem;font-weight:700;color:var(--wh);margin-bottom:.18rem}
+.dsprod-d{font-size:.74rem;color:var(--tx2);line-height:1.55}
+.dsprod-w{font-size:.71rem;color:var(--teal2);margin-top:.28rem;font-style:italic}
+.dsnotes{margin-top:1.25rem}
+.dsnote{display:flex;gap:.6rem;background:rgba(14,165,233,.05);border:1px solid rgba(14,165,233,.12);border-radius:var(--r);padding:.6rem .85rem;margin-bottom:.4rem;font-size:.76rem;color:var(--tx2);line-height:1.6}
+.dsnote::before{content:'ℹ';color:var(--sky);flex-shrink:0}
+.boqw{overflow-x:auto}
+table.boqt{width:100%;border-collapse:collapse;font-size:.76rem;min-width:560px}
+.boqt th{text-align:left;padding:.58rem .78rem;background:var(--ink2);color:var(--tx2);font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--rim)}
+.boqt td{padding:.58rem .78rem;border-bottom:1px solid var(--rim2);color:var(--tx);vertical-align:top}
+.boqt tr:last-child td{border-bottom:none}
+.boqt tr:hover td{background:rgba(255,255,255,.01)}
+.tdp{color:var(--gold2);font-weight:600}
+.tdu{color:var(--teal2);font-weight:600}
+.boqnote{margin-top:.9rem;background:rgba(200,134,10,.05);border:1px solid rgba(200,134,10,.12);border-radius:var(--r);padding:.65rem .88rem;font-size:.74rem;color:var(--tx2);line-height:1.6}
+.mslist{display:flex;flex-direction:column;gap:.6rem}
+.msstep{display:flex;gap:.85rem;background:var(--ink2);border:1px solid var(--rim);border-radius:var(--r2);padding:.85rem .95rem}
+.msn{width:24px;height:24px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--gold),var(--gold3));display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:#000}
+.msh{font-size:.8rem;font-weight:700;color:var(--wh);margin-bottom:.2rem}
+.msp{font-size:.76rem;color:var(--tx2);line-height:1.68}
+.itpt{width:100%;border-collapse:collapse;font-size:.76rem}
+.itpt th{text-align:left;padding:.55rem .78rem;background:var(--ink2);color:var(--tx2);font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--rim)}
+.itpt td{padding:.58rem .78rem;border-bottom:1px solid var(--rim2);color:var(--tx)}
+.itpt tr:last-child td{border-bottom:none}
+.itpic{text-align:center;font-size:.88rem}
+.riskl{display:flex;flex-direction:column;gap:.5rem}
+.riskc{display:flex;align-items:flex-start;gap:.75rem;background:var(--ink2);border:1px solid var(--rim);border-radius:var(--r2);padding:.85rem .95rem}
+.risksv{font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:1px}
+.svhi{background:rgba(220,38,38,.12);color:#f87171;border:1px solid rgba(220,38,38,.22)}
+.svmd{background:rgba(217,119,6,.12);color:var(--gold3);border:1px solid rgba(217,119,6,.22)}
+.svlo{background:rgba(20,184,166,.1);color:var(--teal2);border:1px solid rgba(20,184,166,.18)}
+.riskh{font-size:.8rem;font-weight:700;color:var(--wh);margin-bottom:.2rem}
+.riskp{font-size:.74rem;color:var(--tx2);line-height:1.6}
+.veg{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:.6rem}
+.vec{background:var(--ink2);border:1px solid rgba(20,184,166,.15);border-radius:var(--r2);padding:1rem}
+.veh{font-size:.81rem;font-weight:700;color:var(--wh);margin-bottom:.32rem}
+.ves{display:inline-block;background:rgba(20,184,166,.1);color:var(--teal2);font-size:.66rem;font-weight:700;padding:2px 7px;border-radius:4px;margin-bottom:.5rem}
+.vep{font-size:.74rem;color:var(--tx2);line-height:1.6}
+.vet{font-size:.7rem;color:var(--tx3);margin-top:.3rem}
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--rim);border:1px solid var(--rim);border-radius:var(--r4);overflow:hidden}
+.fc{background:var(--ink2);padding:1.9rem 1.65rem;transition:background .22s}
+.fc:hover{background:var(--ink3)}
+.fcn{font-family:var(--fh);font-size:2.7rem;font-weight:800;color:rgba(200,134,10,.14);line-height:1;margin-bottom:.75rem}
+.fc h3{font-family:var(--fh);font-size:.87rem;font-weight:700;color:var(--wh);margin-bottom:.4rem}
+.fc p{font-size:.78rem;color:var(--tx2);line-height:1.68}
+.pdb{background:var(--ink2);border:1px solid var(--rim);border-radius:var(--r4);overflow:hidden}
+.pdbh{padding:1.1rem 1.4rem;border-bottom:1px solid var(--rim);display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.pdbi{flex:1;min-width:160px;background:var(--ink3);border:1px solid var(--rim);color:var(--tx);padding:.6rem .88rem;border-radius:var(--r);font-family:var(--fb);font-size:.81rem;transition:border-color .2s}
+.pdbi:focus{outline:none;border-color:rgba(200,134,10,.4)}
+.pdbi::placeholder{color:var(--tx3)}
+.pdbcats{padding:.78rem 1.4rem;border-bottom:1px solid var(--rim);display:flex;flex-wrap:wrap;gap:.36rem}
+.pdbcat{background:var(--ink3);border:1px solid var(--rim);color:var(--tx2);padding:.32rem .78rem;border-radius:100px;font-size:.72rem;font-weight:500;cursor:pointer;transition:all .18s}
+.pdbcat:hover,.pdbcat.on{border-color:var(--gold);color:var(--gold2);background:rgba(200,134,10,.08)}
+.pdbgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(262px,1fr));gap:1px;background:var(--rim)}
+.pdbit{background:var(--ink2);padding:1.1rem;cursor:pointer;transition:background .2s}
+.pdbit:hover{background:var(--ink3)}
+.pdbtp{display:flex;justify-content:space-between;align-items:flex-start;gap:.4rem;margin-bottom:.5rem}
+.pdbnm{font-size:.86rem;font-weight:700;color:var(--wh)}
+.pdbct{font-size:.58rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:rgba(20,184,166,.07);border:1px solid rgba(20,184,166,.16);color:var(--teal2);padding:2px 6px;border-radius:3px;white-space:nowrap}
+.pdbds{font-size:.74rem;color:var(--tx2);line-height:1.52;margin-bottom:.72rem}
+.pdbsp{display:flex;flex-wrap:wrap;gap:.3rem}
+.pdbs{font-size:.64rem;color:var(--tx2);background:var(--ink3);padding:2px 6px;border-radius:3px;border:1px solid var(--rim2)}
+.pdbs strong{color:var(--tx)}
+.pdbrc{font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:rgba(200,134,10,.1);border:1px solid rgba(200,134,10,.2);color:var(--gold2);padding:2px 7px;border-radius:3px}
+.pdbor{font-size:.6rem;font-weight:700;background:rgba(20,184,166,.07);border:1px solid rgba(20,184,166,.14);color:var(--teal2);padding:2px 7px;border-radius:3px}
+#cta{background:linear-gradient(135deg,var(--ink2),var(--ink),var(--ink2));position:relative;overflow:hidden;text-align:center}
+#cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(200,134,10,.08),transparent 70%);pointer-events:none}
+.ctah{font-family:var(--fh);font-size:clamp(1.9rem,4.5vw,3.2rem);font-weight:800;color:var(--wh);letter-spacing:-.04em;line-height:1.1;margin-bottom:.9rem}
+.ctah em{font-style:italic;color:var(--gold2)}
+.ctas{font-size:.93rem;color:var(--tx2);max-width:420px;margin:0 auto 2rem;line-height:1.75}
+.ctaf{display:flex;gap:.55rem;max-width:380px;margin:0 auto}
+.ctai{flex:1;background:var(--ink2);border:1px solid var(--rim);color:var(--tx);padding:.75rem .9rem;border-radius:var(--r);font-family:var(--fb);font-size:.83rem;transition:border-color .2s}
+.ctai:focus{outline:none;border-color:rgba(200,134,10,.4)}
+.ctai::placeholder{color:var(--tx3)}
+footer{padding:1.75rem clamp(1rem,4vw,2.5rem);border-top:1px solid var(--rim);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;background:var(--ink)}
+.ftc{font-size:.7rem;color:var(--tx3)}
+.ftl{display:flex;gap:1.25rem}
+.ftl a{font-size:.7rem;color:var(--tx3);transition:color .2s}
+.ftl a:hover{color:var(--tx2)}
+.fab{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;width:46px;height:46px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--gold),var(--gold3));display:flex;align-items:center;justify-content:center;font-size:1.15rem;box-shadow:0 6px 24px rgba(200,134,10,.4);cursor:pointer;transition:transform .2s;animation:breathe 3s infinite}
+.fab:hover{transform:scale(1.12)}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--ink3);border:1px solid rgba(200,134,10,.3);color:var(--wh);padding:.6rem 1.3rem;border-radius:var(--r);font-size:.78rem;font-weight:500;z-index:500;display:none;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.4)}
 .toast.show{display:block}
-
-/* RESPONSIVE */
-@media(max-width:820px){.plat-shell{grid-template-columns:1fr}.plat-sb{display:none}}
-@media(max-width:560px){.opt-grid{grid-template-columns:1fr 1fr}.hero-stats{gap:1.25rem}.hsdiv{display:none}.cta-form{flex-direction:column}.nav-center{display:none}}
+@media(max-width:820px){.plat{grid-template-columns:1fr}.psb{display:none}}
+@media(max-width:560px){.og{grid-template-columns:1fr 1fr}.smcg{grid-template-columns:1fr}.h-stats{gap:1.25rem}.hsd{display:none}.ctaf{flex-direction:column}.n-links{display:none}}
 </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">
-    <div class="nav-mark">CQ</div>
-    <div class="nav-name">ConcretIQ<sup>AI</sup></div>
+  <div class="n-logo" onclick="G('#home')">
+    <div class="n-mark">CQ</div>
+    <div class="n-name">ConcretIQ<sup>AI</sup></div>
   </div>
-  <div class="nav-center">
-    <a href="#modules">Modules</a>
-    <a href="#platform">Consult</a>
-    <a href="#features">Features</a>
-    <a href="#products">Products</a>
-    <div class="nav-pill"><span></span>AI Online</div>
+  <div class="n-links">
+    <a href="#modules">Modules</a><a href="#platform">Consult</a>
+    <a href="#features">Features</a><a href="#products">Products</a>
+    <div class="n-live"><i></i>AI Online</div>
   </div>
-  <button class="nav-btn" onclick="gotoSection('#platform')">Start Consultation</button>
+  <button class="n-cta" onclick="G('#platform')">Start Consultation</button>
 </nav>
 
-<!-- HERO -->
-<section id="home">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-inner">
-    <div class="hero-tag au"><span></span>Mapei Product Intelligence · Claude AI</div>
-    <h1 class="hero-h au1"><em>Expert</em> Construction<br><span class="grad">Chemicals Intelligence</span></h1>
-    <p class="hero-sub au2">ConcretIQ asks every question a senior consultant would — then generates complete specifications, BOQs, method statements and Mapei product systems.</p>
-    <div class="hero-btns au3">
-      <button class="btn-primary" onclick="gotoSection('#platform')">⚡ Begin AI Consultation</button>
-      <button class="btn-ghost" onclick="gotoSection('#modules')">Explore Modules →</button>
+<section id="home" style="background:var(--void)">
+  <div class="h-bg"><div class="h-grid"></div><div class="h-glow1"></div><div class="h-glow2"></div></div>
+  <div class="h-inner">
+    <div class="h-pill u0"><i></i>Mapei Product Intelligence · Claude AI · UAE Focused</div>
+    <h1 class="hh u1"><span class="it">Expert</span><br>Construction<br><span class="gr">Chemicals AI</span></h1>
+    <p class="h-sub u2">ConcretIQ consults the way a senior engineer would — asking every technical question before recommending a single product. Then generates your complete specification package.</p>
+    <div class="h-btns u3">
+      <button class="btn-g" onclick="G('#platform')">⚡ Begin AI Consultation</button>
+      <button class="btn-o" onclick="G('#modules')">Explore Modules →</button>
     </div>
-    <div class="hero-stats au4">
-      <div class="hstat"><div class="hstat-n">7</div><div class="hstat-l">Expert Modules</div></div>
-      <div class="hsdiv"></div>
-      <div class="hstat"><div class="hstat-n">300+</div><div class="hstat-l">Mapei Products</div></div>
-      <div class="hsdiv"></div>
-      <div class="hstat"><div class="hstat-n">6</div><div class="hstat-l">Output Formats</div></div>
-      <div class="hsdiv"></div>
-      <div class="hstat"><div class="hstat-n">UAE</div><div class="hstat-l">Priority Origin</div></div>
+    <div class="h-stats u4">
+      <div class="hs"><div class="hs-n">7</div><div class="hs-l">Expert Modules</div></div>
+      <div class="hsd"></div>
+      <div class="hs"><div class="hs-n">300+</div><div class="hs-l">Mapei Products</div></div>
+      <div class="hsd"></div>
+      <div class="hs"><div class="hs-n">7</div><div class="hs-l">Output Formats</div></div>
+      <div class="hsd"></div>
+      <div class="hs"><div class="hs-n">UAE</div><div class="hs-l">Priority Origin</div></div>
     </div>
   </div>
 </section>
 
-<!-- MODULES -->
-<section id="modules">
+<div class="trust">
+  <div class="ti">🏗️ Waterproofing Systems</div>
+  <div class="ti">🔬 EN 1504 Compliant</div>
+  <div class="ti">🌍 UAE Manufacture Priority</div>
+  <div class="ti">📋 Consultant-Grade Specs</div>
+  <div class="ti">✏️ Designer Spec Mode</div>
+  <div class="ti">⚡ Generated in Minutes</div>
+</div>
+
+<section id="modules" class="pad" style="background:var(--ink2)">
   <div class="wrap">
-    <div class="eyebrow">Expert Modules</div>
+    <div class="ew">Expert Modules</div>
     <h2 class="sh">Seven Disciplines.<br>One Platform.</h2>
-    <p class="ssub">Select your application. ConcretIQ guides you through a complete technical questionnaire before any recommendation.</p>
-    <div class="mod-grid" id="mod-grid"></div>
+    <p class="ss">Select your application. ConcretIQ guides you through a complete technical questionnaire before any recommendation is made.</p>
+    <div class="mg" id="mod-grid"></div>
   </div>
 </section>
 
-<!-- PLATFORM -->
-<section id="platform">
+<section id="platform" class="pad">
   <div class="wrap">
-    <div class="eyebrow">AI Consultation Engine</div>
-    <h2 class="sh" style="margin-bottom:2rem">Ask. Answer. <em style="font-family:var(--font-h);font-style:italic">Specify.</em></h2>
-    <div class="plat-shell">
-      <div class="plat-sb">
-        <div class="sb-lbl">Active</div>
-        <div class="sb-item active"><span>💬</span><span id="sb-name">New Consultation</span></div>
+    <div class="ew">AI Consultation Engine</div>
+    <h2 class="sh" style="margin-bottom:2rem">Ask. Answer. <em style="font-style:italic;font-family:var(--fh)">Specify.</em></h2>
+    <div class="plat">
+      <div class="psb">
+        <div class="sb-hd">Active</div>
+        <div class="sb-it on"><span>💬</span><span id="sb-name">New Consultation</span><div class="sb-dot"></div></div>
         <div class="sb-div"></div>
-        <div class="sb-lbl">Recent</div>
-        <div class="sb-item"><span>💧</span>Podium Waterproofing</div>
-        <div class="sb-item"><span>🏗️</span>Industrial Flooring</div>
-        <div class="sb-item"><span>🔧</span>Chloride Repair</div>
-        <div class="sb-item"><span>🟦</span>Pool Tile System</div>
+        <div class="sb-hd">Recent</div>
+        <div class="sb-it"><span>💧</span>Podium Waterproofing</div>
+        <div class="sb-it"><span>🏗️</span>Industrial Flooring</div>
+        <div class="sb-it"><span>🔧</span>Chloride Repair</div>
+        <div class="sb-it"><span>🟦</span>Pool Tile System</div>
         <div class="sb-div"></div>
-        <button class="sb-new-btn" onclick="resetWizard()">+ New Consultation</button>
+        <button class="sb-new" onclick="resetW()">+ New Consultation</button>
       </div>
-      <div class="plat-main">
-        <div class="plat-head">
+      <div class="pmain">
+        <div class="ph">
           <div>
-            <div class="plat-title" id="plat-title">ConcretIQ Consultation</div>
-            <div class="plat-status"><div class="status-dot"></div>AI ready · Mapei database loaded</div>
+            <div class="pt" id="ptitle">ConcretIQ Consultation</div>
+            <div class="ps"><div class="psd"></div>AI ready · Mapei database loaded</div>
           </div>
-          <div class="step-lbl" id="step-lbl"></div>
+          <div class="psl" id="pslbl"></div>
         </div>
-        <div class="prog-rail"><div class="prog-fill" id="prog-fill"></div></div>
-        <div class="plat-body" id="plat-body"></div>
-        <div class="plat-foot">
-          <div class="foot-hint" id="foot-hint">Select a discipline to begin</div>
-          <div class="foot-right">
-            <button class="btn-back" id="btn-back" style="display:none" onclick="prevStep()">← Back</button>
-            <button class="btn-next" id="btn-next" disabled onclick="nextStep()">Continue →</button>
+        <div class="prog"><div class="pf" id="prog"></div></div>
+        <div class="pbody" id="pbody"></div>
+        <div class="pfoot">
+          <div class="fh2" id="fhint">Select a discipline to begin</div>
+          <div class="fr">
+            <button class="bback" id="btn-back" style="display:none" onclick="prevS()">← Back</button>
+            <button class="bnext" id="btn-next" disabled onclick="nextS()">Continue →</button>
           </div>
         </div>
       </div>
@@ -597,785 +400,686 @@ footer{padding:1.75rem clamp(1rem,4vw,2.5rem);border-top:1px solid var(--border)
   </div>
 </section>
 
-<!-- FEATURES -->
-<section id="features">
+<section id="features" class="pad" style="background:var(--ink2)">
   <div class="wrap">
-    <div class="eyebrow">Capabilities</div>
-    <h2 class="sh">Complete Specification<br>Workflow Coverage</h2>
-    <p class="ssub" style="margin-bottom:2.75rem">Every deliverable a consultant needs — generated in minutes, not weeks.</p>
-    <div class="feat-grid" id="feat-grid"></div>
+    <div class="ew">Capabilities</div>
+    <h2 class="sh">Everything a Consultant<br>Needs, Generated by AI</h2>
+    <p class="ss" style="margin-bottom:2.75rem">From first site assessment to final approval — ConcretIQ covers the complete technical documentation workflow.</p>
+    <div class="fg" id="feat-grid"></div>
   </div>
 </section>
 
-<!-- PRODUCTS -->
-<section id="products">
+<section id="products" class="pad">
   <div class="wrap">
-    <div class="eyebrow">Mapei Product Database</div>
-    <h2 class="sh">Searchable Product Intelligence</h2>
-    <p class="ssub" style="margin-bottom:1.75rem">UAE and Italian manufacture prioritised across all categories.</p>
+    <div class="ew">Mapei Product Intelligence</div>
+    <h2 class="sh">Searchable Product Database</h2>
+    <p class="ss" style="margin-bottom:1.75rem">UAE and Italian manufacture prioritised across all categories.</p>
     <div class="pdb">
-      <div class="pdb-head">
-        <input class="pdb-input" id="pdb-q" type="text" placeholder="Search products, e.g. Mapelastic, Purtop, Keraflex…" oninput="filterPdb()">
-        <button class="btn-next" style="width:auto;padding:.6rem 1.1rem" onclick="filterPdb()">Search</button>
+      <div class="pdbh">
+        <input class="pdbi" id="pdbq" type="text" placeholder="Search — Mapelastic, Purtop, Keraflex, Mapegrout…" oninput="filterP()">
+        <button class="bnext" style="width:auto;padding:.58rem 1.1rem" onclick="filterP()">Search</button>
       </div>
-      <div class="pdb-cats" id="pdb-cats"></div>
-      <div class="pdb-grid" id="pdb-grid"></div>
+      <div class="pdbcats" id="pdb-cats"></div>
+      <div class="pdbgrid" id="pdb-grid"></div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section id="cta">
-  <div class="wrap">
-    <div class="eyebrow" style="justify-content:center">Early Access</div>
-    <div class="cta-h">Start Specifying<br><em style="font-family:var(--font-h);font-style:italic">Smarter</em> Today</div>
-    <p class="cta-sub">Join consultants and engineers across the UAE using ConcretIQ to generate Mapei-backed specifications in minutes.</p>
-    <div class="cta-form">
-      <input class="cta-inp" type="email" placeholder="your@email.com">
-      <button class="btn-primary" style="white-space:nowrap;padding:.75rem 1.2rem">Request Access</button>
+<section id="cta" class="pad">
+  <div class="wrap" style="position:relative;z-index:1">
+    <div class="ew" style="justify-content:center;margin-bottom:1rem">Early Access Open</div>
+    <div class="ctah">Start Specifying<br><em>Smarter</em> Today</div>
+    <p class="ctas">Join consultants and engineers across the UAE using ConcretIQ to generate precise Mapei-backed specifications in minutes.</p>
+    <div class="ctaf">
+      <input class="ctai" type="email" placeholder="your@email.com">
+      <button class="btn-g" style="white-space:nowrap;padding:.75rem 1.25rem">Request Access</button>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="nav-logo">
-    <div class="nav-mark" style="width:24px;height:24px;font-size:.55rem">CQ</div>
-    <div class="nav-name" style="font-size:.9rem">ConcretIQ<sup>AI</sup></div>
-  </div>
-  <div class="foot-copy">© 2026 ConcretIQ AI — Construction Chemicals Intelligence</div>
-  <div class="foot-links">
-    <a href="#">Privacy</a><a href="#">Terms</a><a href="https://www.mapei.com" target="_blank">Mapei.com</a>
-  </div>
+  <div class="n-logo"><div class="n-mark" style="width:24px;height:24px;font-size:.52rem">CQ</div><div class="n-name" style="font-size:.88rem">ConcretIQ<sup>AI</sup></div></div>
+  <div class="ftc">© 2026 ConcretIQ AI — Construction Chemicals Intelligence</div>
+  <div class="ftl"><a href="#">Privacy</a><a href="#">Terms</a><a href="https://www.mapei.com" target="_blank">Mapei.com</a></div>
 </footer>
-
-<button class="fab" onclick="gotoSection('#platform')">⚡</button>
+<button class="fab" onclick="G('#platform')">⚡</button>
 <div class="toast" id="toast"></div>
-
 <script>
-// ─── SAFE NAVIGATION ───────────────────────────────────────
-function gotoSection(sel){
-  var el=document.querySelector(sel);
-  if(el) el.scrollIntoView({behavior:'smooth'});
-}
+function G(s){var e=document.querySelector(s);if(e)e.scrollIntoView({behavior:'smooth'});}
+function $(i){return document.getElementById(i);}
+function H(i,h){var e=$(i);if(e)e.innerHTML=h;}
+function T(i,t){var e=$(i);if(e)e.textContent=t;}
+function show(i){var e=$(i);if(e)e.style.display='';}
+function hide(i){var e=$(i);if(e)e.style.display='none';}
+function setP(p){var e=$('prog');if(e)e.style.width=p+'%';}
+function toast(m){var t=$('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},4000);}
+function esc(s){return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");}
+function setBtn(id,cls,lbl,dis,fn){var e=$(id);if(!e)return;e.textContent=lbl;e.className=cls;e.disabled=!!dis;e.onclick=fn||null;}
 
-// ─── DATA: MODULES ─────────────────────────────────────────
-var MODULES=[
+var MODS=[
   {id:'waterproofing',e:'💧',l:'Waterproofing Expert',s:'Roof, basement, podium, pool, tunnel, tank'},
-  {id:'flooring',e:'🏗️',l:'Flooring Expert',s:'Industrial, commercial, decorative, car park'},
-  {id:'resilient',e:'🪵',l:'Resilient Flooring',s:'Vinyl, LVT, rubber, linoleum, carpet'},
-  {id:'repair',e:'🔧',l:'Concrete Repair',s:'Structural, cosmetic, chloride, carbonation'},
+  {id:'flooring',e:'🏗️',l:'Flooring Expert',s:'Industrial, commercial, food, car park, decorative'},
+  {id:'resilient',e:'🪵',l:'Resilient Flooring',s:'Vinyl, LVT, rubber, linoleum, carpet tiles'},
+  {id:'repair',e:'🔧',l:'Concrete Repair',s:'Structural, chloride, carbonation, cosmetic'},
   {id:'anchors',e:'⚓',l:'Anchors & Grouts',s:'Chemical anchors, precision grouts, rebar'},
   {id:'tile',e:'🟦',l:'Tile & Stone Expert',s:'Adhesives, grouts, movement joints, pools'},
-  {id:'protective',e:'🛡️',l:'Protective Coatings',s:'Facades, floors, infrastructure, marine'},
+  {id:'protective',e:'🛡️',l:'Protective Coatings',s:'Facades, floors, marine, infrastructure'},
 ];
 
-// ─── DATA: PRODUCTS ─────────────────────────────────────────
-var PRODUCTS=[
-  {n:'Mapelastic Smart',c:'Waterproofing',e:'💧',d:'Two-component flexible cementitious waterproofing. Crack-bridging ≥1.5mm. Terraces, wet rooms, pools, podiums.',sp:[{k:'Coverage',v:'1.5–2.0 kg/m²'},{k:'Layers',v:'Min 2'},{k:'Origin',v:'UAE & Italy'},{k:'Class',v:'EN 14891 Type III'}],rec:'Top Pick',org:'UAE'},
-  {n:'Purtop 400 M',c:'Waterproofing',e:'💧',d:'Single-component polyurethane liquid membrane. Seamless, UV-stable. Exposed roofs and podium decks.',sp:[{k:'DFT',v:'1.2mm'},{k:'Coverage',v:'1.5 kg/m²'},{k:'Origin',v:'Italy'},{k:'Traffic',v:'Pedestrian'}],rec:'',org:'Italy'},
-  {n:'Purtop 500',c:'Waterproofing',e:'💧',d:'Hybrid PU membrane for trafficable decks. High elongation, light vehicular traffic.',sp:[{k:'DFT',v:'1.5mm'},{k:'Coverage',v:'2.0 kg/m²'},{k:'Origin',v:'Italy'},{k:'Traffic',v:'Light vehicular'}],rec:'',org:'Italy'},
-  {n:'Mapethene',c:'Waterproofing',e:'💧',d:'Pre-applied HDPE waterproofing for basements and tunnels. Blind-side application.',sp:[{k:'Thickness',v:'1.5mm'},{k:'Bond',v:'Pre-applied'},{k:'Origin',v:'Italy'},{k:'Standard',v:'ASTM D882'}],rec:'',org:'Italy'},
-  {n:'Plastimul',c:'Waterproofing',e:'💧',d:'Bitumen-acrylic cold-applied liquid waterproofing. Positive and negative side. Foundations, retaining walls.',sp:[{k:'Coverage',v:'1.5–2.0 kg/m²'},{k:'DFT',v:'1.0mm'},{k:'Origin',v:'UAE'},{k:'Side',v:'+/− side'}],rec:'',org:'UAE'},
-  {n:'Mapeproof SB',c:'Waterproofing',e:'💧',d:'Pre-applied sodium bentonite membrane. Self-sealing. Tunnels, foundation slabs with high water table.',sp:[{k:'Bentonite',v:'4.5 kg/m²'},{k:'Width',v:'1.0m'},{k:'Origin',v:'Italy'},{k:'Self-seal',v:'Yes'}],rec:'',org:'Italy'},
-  {n:'Mapefloor Finish 58 SL',c:'Flooring',e:'🏗️',d:'Self-leveling epoxy floor coating. Chemical and abrasion resistant. Pharma, food, industrial. EN 13813.',sp:[{k:'Thickness',v:'1–3mm'},{k:'Finish',v:'Gloss'},{k:'Origin',v:'Italy'},{k:'Std',v:'EN 13813'}],rec:'Top Pick',org:'Italy'},
-  {n:'Mapefloor PU 35',c:'Flooring',e:'🏗️',d:'PU-cementitious floor 3–6mm. Anti-thermal shock, chemical resistant, R12 slip. Food, beverage, cold stores.',sp:[{k:'Thickness',v:'3–6mm'},{k:'Temp',v:'-40°C to +120°C'},{k:'Origin',v:'Italy'},{k:'Slip',v:'R12'}],rec:'',org:'Italy'},
-  {n:'Mapefloor I 400 SL',c:'Flooring',e:'🏗️',d:'Solvent-free self-leveling epoxy for heavy-duty industrial floors. Excellent chemical resistance.',sp:[{k:'Thickness',v:'3–6mm'},{k:'Compressive',v:'>70 MPa'},{k:'Origin',v:'Italy'},{k:'Chemical',v:'Excellent'}],rec:'',org:'Italy'},
-  {n:'Ultratop Loft',c:'Flooring',e:'🏗️',d:'Decorative microcement-effect overlay 2–3mm. Retail, residential, hospitality floors and walls.',sp:[{k:'Thickness',v:'2–3mm'},{k:'BPN',v:'>36'},{k:'Origin',v:'Italy'},{k:'Finish',v:'Satin/Matt'}],rec:'',org:'Italy'},
-  {n:'Mapegrout T60',c:'Concrete Repair',e:'🔧',d:'Thixotropic single-component R3 repair mortar. Vertical and overhead. Fibre-reinforced, chloride-free.',sp:[{k:'Class',v:'R3 EN 1504-3'},{k:'Compressive',v:'>45 MPa'},{k:'Origin',v:'UAE & Italy'},{k:'Fibre',v:'PP'}],rec:'Top Pick',org:'UAE'},
-  {n:'Planitop 400',c:'Concrete Repair',e:'🔧',d:'Fine-grain R4 structural repair mortar. Carbonated and chloride-contaminated concrete. Bond >2.0 MPa.',sp:[{k:'Class',v:'R4 EN 1504-3'},{k:'Compressive',v:'>55 MPa'},{k:'Origin',v:'Italy'},{k:'Bond',v:'>2.0 MPa'}],rec:'',org:'Italy'},
-  {n:'Planitop Fast 330',c:'Concrete Repair',e:'🔧',d:'Rapid-setting R3 mortar. Trafficable in 3 hours. Fast-track repairs, chloride-free.',sp:[{k:'Class',v:'R3 EN 1504-3'},{k:'Walkable',v:'3 hrs'},{k:'Origin',v:'Italy'},{k:'Set',v:'Rapid'}],rec:'',org:'Italy'},
-  {n:'Mapefer 1K',c:'Concrete Repair',e:'🔧',d:'Single-component corrosion inhibiting primer for rebar (EN 1504-7). Passivates steel before repair.',sp:[{k:'Coverage',v:'0.7 kg/m²'},{k:'Layers',v:'2'},{k:'Origin',v:'Italy'},{k:'Std',v:'EN 1504-7'}],rec:'',org:'Italy'},
-  {n:'Keraflex Maxi S1',c:'Tile & Stone',e:'🟦',d:'High-performance flexible tile adhesive C2TE S1. Large format, stone, pools, facades. 30 min open time.',sp:[{k:'Class',v:'C2TE S1'},{k:'Open time',v:'30 min'},{k:'Origin',v:'UAE & Italy'},{k:'Format',v:'Up to 120×120cm'}],rec:'Top Pick',org:'UAE'},
-  {n:'Ultracolor Plus',c:'Tile & Stone',e:'🟦',d:'Cement grout for 2–20mm joints. Anti-efflorescence, stain-resistant, 24 colours. BioBlock protection.',sp:[{k:'Joint',v:'2–20mm'},{k:'Class',v:'CG2 WA'},{k:'Origin',v:'UAE & Italy'},{k:'Colours',v:'24'}],rec:'Top Pick',org:'UAE'},
-  {n:'Adesilex P10',c:'Tile & Stone',e:'🟦',d:'2-component epoxy adhesive and chemical-resistant grout. Aggressive environments, food plants.',sp:[{k:'Class',v:'RG EN 13888'},{k:'Chemical',v:'Excellent'},{k:'Origin',v:'Italy'},{k:'Joint',v:'2–15mm'}],rec:'',org:'Italy'},
-  {n:'Keraquick S1',c:'Tile & Stone',e:'🟦',d:'Fast-setting flexible adhesive C2FT S1. Set in 2–3 hours. Rapid refurbishment and cold stores.',sp:[{k:'Class',v:'C2FT S1'},{k:'Set',v:'2–3 hrs'},{k:'Origin',v:'Italy'},{k:'Use',v:'Fast-track'}],rec:'',org:'Italy'},
-  {n:'Mapefix PE SF',c:'Anchors & Grouts',e:'⚓',d:'Styrene-free polyester chemical anchor. ETA-approved. All base materials including hollow masonry.',sp:[{k:'Cure',v:'20°C: 6min'},{k:'Bar',v:'M8–M24'},{k:'Origin',v:'Italy'},{k:'ETA',v:'Yes'}],rec:'Top Pick',org:'Italy'},
-  {n:'Mapefix EP',c:'Anchors & Grouts',e:'⚓',d:'Two-component epoxy anchor. Heavy-duty concrete and masonry. Seismic C1+C2. High load capacity.',sp:[{k:'Seismic',v:'C1/C2'},{k:'Bar',v:'M8–M30'},{k:'Origin',v:'Italy'},{k:'Temp',v:'-40/+80°C'}],rec:'',org:'Italy'},
-  {n:'Mapefill',c:'Anchors & Grouts',e:'⚓',d:'Non-shrink cementitious precision grout. Machinery bases, bearings, column bases. High early strength.',sp:[{k:'Compressive',v:'>60 MPa'},{k:'Shrinkage',v:'Non-shrink'},{k:'Origin',v:'UAE'},{k:'Standard',v:'ASTM C1107'}],rec:'',org:'UAE'},
-  {n:'Primer SN',c:'Resilient Flooring',e:'🪵',d:'Solvent-free acrylic primer for absorbent substrates before self-leveling compounds and resilient adhesives.',sp:[{k:'Coverage',v:'150–200ml/m²'},{k:'Recoat',v:'30–60min'},{k:'Origin',v:'Italy'},{k:'VOC',v:'<30g/L'}],rec:'',org:'Italy'},
-  {n:'Nivoplan',c:'Resilient Flooring',e:'🪵',d:'Cementitious self-leveling compound 2–10mm. Smooths substrates before resilient flooring. Walkable 3hrs.',sp:[{k:'Thickness',v:'2–10mm'},{k:'Walkable',v:'3hrs'},{k:'Origin',v:'UAE'},{k:'CS',v:'C25 EN 13813'}],rec:'Top Pick',org:'UAE'},
-  {n:'Ultrabond Eco VS90',c:'Resilient Flooring',e:'🪵',d:'Pressure-sensitive acrylic adhesive for LVT and vinyl planks. Repositionable, low VOC, Class A+.',sp:[{k:'Coverage',v:'200–250ml/m²'},{k:'Open time',v:'40min'},{k:'Origin',v:'Italy'},{k:'VOC',v:'Class A+'}],rec:'Top Pick',org:'Italy'},
-  {n:'Elastocolor Waterproof',c:'Protective Coatings',e:'🛡️',d:'Elastic anti-carbonation paint for concrete facades. UV resistant, breathable, crack-bridging >0.3mm.',sp:[{k:'Coverage',v:'0.25–0.3 kg/m²'},{k:'Crack bridge',v:'>0.3mm'},{k:'Origin',v:'Italy'},{k:'Std',v:'EN 1504-2'}],rec:'Top Pick',org:'Italy'},
+var PRODS=[
+  {n:'Mapelastic Smart',c:'Waterproofing',e:'💧',d:'Two-component flexible cementitious waterproofing. Crack-bridging ≥1.5mm. Terraces, wet rooms, swimming pools. UAE-made.',sp:[{k:'Coverage',v:'1.5–2.0 kg/m²'},{k:'Layers',v:'Min 2'},{k:'Origin',v:'UAE & Italy'},{k:'Class',v:'EN 14891 III'}],rec:'Top Pick',org:'UAE'},
+  {n:'Purtop 400 M',c:'Waterproofing',e:'💧',d:'Single-component PU liquid membrane. Seamless, UV-stable, pedestrian traffic. Exposed roofs and terraces.',sp:[{k:'DFT',v:'1.2mm'},{k:'Coverage',v:'1.5 kg/m²'},{k:'Origin',v:'Italy'},{k:'Traffic',v:'Pedestrian'}],rec:'',org:'Italy'},
+  {n:'Purtop 500',c:'Waterproofing',e:'💧',d:'High-build hybrid PU membrane. Light vehicular traffic. Podium decks. High elongation.',sp:[{k:'DFT',v:'1.5mm'},{k:'Coverage',v:'2.0 kg/m²'},{k:'Origin',v:'Italy'},{k:'Traffic',v:'Light vehicular'}],rec:'',org:'Italy'},
+  {n:'Mapethene',c:'Waterproofing',e:'💧',d:'Pre-applied HDPE waterproofing. Blind-side basements and tunnels. Mechanically bonded to concrete.',sp:[{k:'Thickness',v:'1.5mm'},{k:'Bond',v:'Pre-applied'},{k:'Origin',v:'Italy'},{k:'Std',v:'ASTM D882'}],rec:'',org:'Italy'},
+  {n:'Plastimul',c:'Waterproofing',e:'💧',d:'Bitumen-acrylic cold-applied liquid. Positive and negative side. Foundations, retaining walls. UAE-made.',sp:[{k:'Coverage',v:'1.5–2.0 kg/m²'},{k:'DFT',v:'1.0mm'},{k:'Origin',v:'UAE'},{k:'Side',v:'+/− rated'}],rec:'',org:'UAE'},
+  {n:'Mapeproof SB',c:'Waterproofing',e:'💧',d:'Pre-applied sodium bentonite self-sealing membrane. Tunnels, foundation slabs in high groundwater.',sp:[{k:'Bentonite',v:'4.5 kg/m²'},{k:'Width',v:'1.0m'},{k:'Origin',v:'Italy'},{k:'Self-seal',v:'Yes'}],rec:'',org:'Italy'},
+  {n:'Mapefloor Finish 58 SL',c:'Flooring',e:'🏗️',d:'Self-leveling solvent-free epoxy 1–3mm. Chemical and abrasion resistant. Pharma, food, industrial.',sp:[{k:'Thickness',v:'1–3mm'},{k:'Finish',v:'Gloss/Matt'},{k:'Origin',v:'Italy'},{k:'Std',v:'EN 13813'}],rec:'Top Pick',org:'Italy'},
+  {n:'Mapefloor PU 35',c:'Flooring',e:'🏗️',d:'PU-cementitious system 3–6mm. Anti-thermal shock -40°C to +120°C. R12 slip. Food, beverage, cold stores.',sp:[{k:'Thickness',v:'3–6mm'},{k:'Temp',v:'-40 to +120°C'},{k:'Origin',v:'Italy'},{k:'Slip',v:'R12'}],rec:'Top Pick',org:'Italy'},
+  {n:'Mapefloor I 400 SL',c:'Flooring',e:'🏗️',d:'Heavy-duty solvent-free self-leveling epoxy. Compressive >70MPa. Fuels, oils, acids resistant.',sp:[{k:'Thickness',v:'3–6mm'},{k:'Compressive',v:'>70 MPa'},{k:'Origin',v:'Italy'},{k:'Chemical',v:'Excellent'}],rec:'',org:'Italy'},
+  {n:'Mapefloor Parking',c:'Flooring',e:'🏗️',d:'Epoxy-PU car park deck system. UV-stable top coat, anti-carbonation, crack bridging.',sp:[{k:'Thickness',v:'2–4mm'},{k:'UV',v:'Stable'},{k:'Origin',v:'Italy'},{k:'Traffic',v:'Vehicles'}],rec:'',org:'Italy'},
+  {n:'Ultratop Loft',c:'Flooring',e:'🏗️',d:'Decorative microcement-effect overlay 2–3mm. Retail, residential, hospitality floors and walls.',sp:[{k:'Thickness',v:'2–3mm'},{k:'Origin',v:'Italy'},{k:'Finish',v:'Satin/Matt'},{k:'BPN',v:'>36'}],rec:'',org:'Italy'},
+  {n:'Mapegrout T60',c:'Concrete Repair',e:'🔧',d:'Thixotropic R3 mortar. Vertical and overhead. PP fibre reinforced. Chloride-free. UAE-made.',sp:[{k:'Class',v:'R3 EN 1504-3'},{k:'Compressive',v:'>45 MPa'},{k:'Origin',v:'UAE & Italy'},{k:'Fibre',v:'PP'}],rec:'Top Pick',org:'UAE'},
+  {n:'Planitop 400',c:'Concrete Repair',e:'🔧',d:'Fine-grain R4 structural repair mortar. Carbonated and chloride-attacked concrete. Bond >2.0 MPa.',sp:[{k:'Class',v:'R4 EN 1504-3'},{k:'Compressive',v:'>55 MPa'},{k:'Origin',v:'Italy'},{k:'Bond',v:'>2.0 MPa'}],rec:'',org:'Italy'},
+  {n:'Planitop Fast 330',c:'Concrete Repair',e:'🔧',d:'Rapid-setting R3 mortar. Trafficable in 3 hours. Fast-track repairs. Chloride-free.',sp:[{k:'Class',v:'R3 EN 1504-3'},{k:'Walkable',v:'3 hrs'},{k:'Origin',v:'Italy'},{k:'Set',v:'Rapid'}],rec:'',org:'Italy'},
+  {n:'Mapefer 1K',c:'Concrete Repair',e:'🔧',d:'Single-component anti-corrosion rebar primer. Always use when rebar is exposed. EN 1504-7.',sp:[{k:'Coverage',v:'0.7 kg/m²'},{k:'Layers',v:'2 coats'},{k:'Origin',v:'Italy'},{k:'Std',v:'EN 1504-7'}],rec:'Essential',org:'Italy'},
+  {n:'Keraflex Maxi S1',c:'Tile & Stone',e:'🟦',d:'C2TE S1 flexible adhesive. Large format, natural stone, swimming pools, facades. UAE-made.',sp:[{k:'Class',v:'C2TE S1'},{k:'Open time',v:'30 min'},{k:'Origin',v:'UAE & Italy'},{k:'Format',v:'Up to 120×120cm'}],rec:'Top Pick',org:'UAE'},
+  {n:'Ultracolor Plus',c:'Tile & Stone',e:'🟦',d:'Premium cement grout 2–20mm. Anti-efflorescence, stain resistant, BioBlock. 24 colours. UAE-made.',sp:[{k:'Joint',v:'2–20mm'},{k:'Class',v:'CG2 WA'},{k:'Origin',v:'UAE & Italy'},{k:'Colours',v:'24'}],rec:'Top Pick',org:'UAE'},
+  {n:'Adesilex P10',c:'Tile & Stone',e:'🟦',d:'2-component epoxy adhesive and chemical-resistant grout. Food plants, pharmaceutical, industrial.',sp:[{k:'Class',v:'RG EN 13888'},{k:'Chemical',v:'Excellent'},{k:'Origin',v:'Italy'},{k:'Joint',v:'2–15mm'}],rec:'',org:'Italy'},
+  {n:'Keraquick S1',c:'Tile & Stone',e:'🟦',d:'Fast-setting C2FT S1 adhesive. Set in 2–3 hours. Rapid refurbishment, cold stores.',sp:[{k:'Class',v:'C2FT S1'},{k:'Set',v:'2–3 hrs'},{k:'Origin',v:'Italy'},{k:'Use',v:'Fast-track'}],rec:'',org:'Italy'},
+  {n:'Kerapoxy CQ',c:'Tile & Stone',e:'🟦',d:'Chemical-resistant epoxy grout and adhesive. Acid-resistant. Food and pharma. Easy Clean Technology.',sp:[{k:'Class',v:'RG EN 13888'},{k:'Acid',v:'Excellent'},{k:'Origin',v:'Italy'},{k:'Clean',v:'Easy Clean'}],rec:'',org:'Italy'},
+  {n:'Mapefix PE SF',c:'Anchors & Grouts',e:'⚓',d:'Styrene-free polyester chemical anchor. ETA-approved. All base materials including hollow masonry.',sp:[{k:'Cure 20°C',v:'6 min'},{k:'Bar',v:'M8–M24'},{k:'Origin',v:'Italy'},{k:'ETA',v:'Approved'}],rec:'Top Pick',org:'Italy'},
+  {n:'Mapefix EP',c:'Anchors & Grouts',e:'⚓',d:'Two-component epoxy anchor. Heavy-duty cracked/uncracked concrete. Seismic C1+C2.',sp:[{k:'Seismic',v:'C1/C2'},{k:'Bar',v:'M8–M30'},{k:'Origin',v:'Italy'},{k:'Temp',v:'-40/+80°C'}],rec:'',org:'Italy'},
+  {n:'Mapefill',c:'Anchors & Grouts',e:'⚓',d:'Non-shrink cementitious precision grout. Machinery bases, column bases. UAE-made.',sp:[{k:'Compressive',v:'>60 MPa'},{k:'Shrinkage',v:'Non-shrink'},{k:'Origin',v:'UAE'},{k:'Std',v:'ASTM C1107'}],rec:'',org:'UAE'},
+  {n:'Nivoplan',c:'Resilient Flooring',e:'🪵',d:'Cementitious self-leveling compound 2–10mm. Always use before resilient flooring on uneven substrates. UAE-made.',sp:[{k:'Thickness',v:'2–10mm'},{k:'Walkable',v:'3 hrs'},{k:'Origin',v:'UAE'},{k:'CS',v:'C25 EN 13813'}],rec:'Top Pick',org:'UAE'},
+  {n:'Primer SN',c:'Resilient Flooring',e:'🪵',d:'Solvent-free acrylic primer. Always required before self-leveling compounds and resilient adhesives.',sp:[{k:'Coverage',v:'150–200ml/m²'},{k:'Recoat',v:'30–60min'},{k:'Origin',v:'Italy'},{k:'VOC',v:'<30g/L'}],rec:'Essential',org:'Italy'},
+  {n:'Ultrabond Eco VS90',c:'Resilient Flooring',e:'🪵',d:'Pressure-sensitive acrylic adhesive for LVT and vinyl planks. Repositionable. Low VOC Class A+.',sp:[{k:'Coverage',v:'200–250ml/m²'},{k:'Open time',v:'40 min'},{k:'Origin',v:'Italy'},{k:'VOC',v:'Class A+'}],rec:'Top Pick',org:'Italy'},
+  {n:'Ultrabond Eco S955 1K',c:'Resilient Flooring',e:'🪵',d:'High-moisture substrate adhesive for LVT/vinyl. Works up to 95% RH — eliminates separate DPM.',sp:[{k:'Max RH',v:'95%'},{k:'Coverage',v:'300–400ml/m²'},{k:'Origin',v:'Italy'},{k:'DPM',v:'Integrated'}],rec:'',org:'Italy'},
+  {n:'Elastocolor Waterproof',c:'Protective Coatings',e:'🛡️',d:'Elastic anti-carbonation waterproofing paint. UV resistant, breathable, crack-bridging >0.3mm. EN 1504-2.',sp:[{k:'Coverage',v:'0.25–0.3 kg/m²'},{k:'Crack bridge',v:'>0.3mm'},{k:'Origin',v:'Italy'},{k:'Std',v:'EN 1504-2'}],rec:'Top Pick',org:'Italy'},
   {n:'Mapecoat I 400',c:'Protective Coatings',e:'🛡️',d:'Solvent-free epoxy coating for industrial floors and walls. High chemical resistance, anti-dust.',sp:[{k:'DFT',v:'200–300μm'},{k:'Chemical',v:'Excellent'},{k:'Origin',v:'Italy'},{k:'Gloss',v:'High'}],rec:'',org:'Italy'},
 ];
 
-// ─── DATA: FEATURES ─────────────────────────────────────────
-var FEATURES=[
-  {n:'01',t:'AI Specification Writer',d:'Generates NBS/CSI-style specification clauses with correct EN, BS and ASTM standards automatically applied.'},
-  {n:'02',t:'Deep Questionnaire Engine',d:'Never jumps to recommendations. Asks every technical question a senior consultant would before selecting any product.'},
-  {n:'03',t:'Mapei System Designer',d:'Designs complete layer-by-layer systems: primer, base, intermediate, finish and accessories — all from the Mapei range.'},
-  {n:'04',t:'BOQ Generator',d:'Itemised bills of quantities with real Mapei TDS consumption rates, units and product references for every line item.'},
-  {n:'05',t:'Method Statement Engine',d:'Contractor-ready method statements following Mapei installation guidelines, step by step.'},
-  {n:'06',t:'Inspection Test Plan',d:'Auto-generates ITP with hold, witness and review points for each system layer and critical checkpoint.'},
-  {n:'07',t:'Risk Assessment',d:'Technical risk register identifying compatibility issues, exposure risks and system limitations.'},
-  {n:'08',t:'Value Engineering',d:'Proposes Mapei system alternatives that optimise cost without compromising technical performance.'},
-  {n:'09',t:'UAE Product Priority',d:'Consistently prioritises UAE-manufactured and Italian Mapei products across all recommendations.'},
+var FEATS=[
+  {n:'01',t:'Deep Questionnaire Engine',d:'Never jumps to recommendations. Asks every technical question a senior consultant would — application, substrate, exposure, design life, traffic and more.'},
+  {n:'02',t:'Smart Product Selection',d:'Built-in product rules engine ensures the correct Mapei product is chosen for every application. UAE manufacture prioritised throughout.'},
+  {n:'03',t:'Technical Spec Writer',d:'NBS/CSI-style specification clauses with correct EN, BS and ASTM standards, performance requirements and workmanship clauses.'},
+  {n:'04',t:'Designer Spec Mode',d:'Plain-language specification clauses for designers and consultants — ready to paste directly into project documentation packages.'},
+  {n:'05',t:'BOQ Generator',d:'Itemised bills of quantities with real Mapei TDS consumption rates, units and product references for every line item.'},
+  {n:'06',t:'Method Statement Engine',d:'Contractor-ready method statements following Mapei installation guidelines, step by step with QC requirements.'},
+  {n:'07',t:'Inspection Test Plan',d:'Auto-generates ITP with hold, witness and review points for each system layer and critical quality checkpoint.'},
+  {n:'08',t:'Risk Assessment',d:'Technical risk register identifying compatibility issues, substrate risks, application conditions and system limitations.'},
+  {n:'09',t:'Value Engineering',d:'Proposes Mapei system alternatives that optimise project cost without compromising technical performance or warranty.'},
 ];
 
-// ─── DATA: WIZARD FLOWS ─────────────────────────────────────
 var FLOWS={
 waterproofing:[
   {id:'project_type',type:'options',q:'Is this a new build or a refurbishment project?',opts:[{e:'🏗️',l:'New Build',d:'New construction',v:'New Build'},{e:'🔨',l:'Refurbishment',d:'Existing structure',v:'Refurbishment'}]},
-  {id:'application',type:'options',q:'What is the waterproofing application area?',opts:[{e:'🏠',l:'Roof / Terrace',v:'Roof/Terrace'},{e:'⬇️',l:'Basement',d:'Below grade',v:'Basement'},{e:'🚿',l:'Wet Room',d:'Bathroom, kitchen',v:'Wet Room'},{e:'💦',l:'Swimming Pool',v:'Swimming Pool'},{e:'🌿',l:'Podium / Planter',v:'Podium/Planter'},{e:'🚗',l:'Car Park Deck',v:'Car Park Deck'},{e:'🚇',l:'Tunnel',v:'Tunnel'},{e:'🏗️',l:'Water Tank',v:'Water Tank'}]},
-  {id:'side',type:'options',q:'Positive side (dry side) or negative side (wet side)?',opts:[{e:'✅',l:'Positive Side',d:'Water pressure away from membrane',v:'Positive side'},{e:'🔄',l:'Negative Side',d:'Hydrostatic pressure behind membrane',v:'Negative side'},{e:'🤔',l:'Both / Unsure',v:'Both/unsure'}]},
+  {id:'application',type:'options',q:'What is the waterproofing application area?',opts:[{e:'🏠',l:'Roof / Terrace',v:'Roof/Terrace'},{e:'⬇️',l:'Basement',d:'Below grade',v:'Basement'},{e:'🚿',l:'Wet Room',d:'Bathroom/shower',v:'Wet Room'},{e:'💦',l:'Swimming Pool',v:'Swimming Pool'},{e:'🌿',l:'Podium / Planter',v:'Podium/Planter'},{e:'🚗',l:'Car Park Deck',v:'Car Park Deck'},{e:'🚇',l:'Tunnel',v:'Tunnel'},{e:'🏗️',l:'Water Tank',v:'Water Tank'}]},
+  {id:'side',type:'options',q:'Positive side (dry face) or negative side (wet face) application?',opts:[{e:'✅',l:'Positive Side',d:'Membrane on dry face',v:'Positive side'},{e:'🔄',l:'Negative Side',d:'Hydrostatic pressure behind',v:'Negative side'},{e:'🤔',l:'Both / Unsure',v:'Both/unsure'}]},
   {id:'substrate',type:'options',q:'What is the substrate material?',opts:[{e:'🧱',l:'Cast Concrete',v:'Cast in-situ concrete'},{e:'🏗️',l:'Precast Concrete',v:'Precast concrete'},{e:'🧱',l:'Masonry',v:'Masonry/blockwork'},{e:'🔩',l:'Metal Deck',v:'Metal deck'},{e:'📐',l:'Screed',v:'Screed/mortar'}]},
-  {id:'exposure',type:'chips',q:'Key exposure and performance requirements (select all):',opts:['UV Exposure','Foot Traffic','Vehicular Traffic','Root-Resistant','Potable Water Contact','Hydrostatic Pressure','Thermal Movement','Chemical Exposure','Crack Bridging >1mm']},
-  {id:'water_table',type:'radio',q:'What is the water table or hydrostatic head condition?',opts:[{l:'None / Dry',d:'No groundwater pressure',v:'None'},{l:'Occasional',d:'Seasonal groundwater',v:'Occasional'},{l:'Permanent Low Head',d:'Less than 3m head',v:'Low head <3m'},{l:'Permanent High Head',d:'Greater than 3m head',v:'High head >3m'}]},
-  {id:'design_life',type:'radio',q:'What is the required design life of the system?',opts:[{l:'10 Years',v:'10 years'},{l:'20 Years',v:'20 years'},{l:'25 Years',v:'25 years'},{l:'Lifetime of Structure (50+ Years)',d:'Critical infrastructure',v:'50+ years'}]},
-  {id:'warranty',type:'options',q:'Is a manufacturer warranty required?',opts:[{e:'❌',l:'Not Required',v:'Not required'},{e:'📋',l:'10-Year',v:'10-year warranty'},{e:'⭐',l:'15-Year',v:'15-year warranty'},{e:'🏆',l:'Extended',v:'Extended warranty'}]},
+  {id:'exposure',type:'chips',q:'Key exposure and performance requirements (select all that apply):',opts:['UV Exposure','Foot Traffic','Vehicular Traffic','Root-Resistant (Planter)','Potable Water Contact','Permanent Hydrostatic Pressure','Thermal Movement','Chemical Exposure','Crack Bridging > 1mm Required']},
+  {id:'water_table',type:'radio',q:'What is the groundwater / hydrostatic head condition?',opts:[{l:'None / Dry Site',d:'No groundwater pressure',v:'None'},{l:'Occasional',d:'Seasonal groundwater',v:'Occasional'},{l:'Permanent Low Head',d:'Less than 3m head',v:'Low head less than 3m'},{l:'Permanent High Head',d:'Greater than 3m head',v:'High head greater than 3m'}]},
+  {id:'crack_movement',type:'radio',q:'Is crack or substrate movement expected?',opts:[{l:'None — rigid substrate',v:'No movement expected'},{l:'Low — hairline cracks only',v:'Low movement'},{l:'Moderate — up to 1mm',v:'Moderate up to 1mm'},{l:'High — greater than 1mm',d:'Requires high-flexibility system',v:'High greater than 1mm'}]},
+  {id:'design_life',type:'radio',q:'What is the required design life?',opts:[{l:'10 Years',v:'10 years'},{l:'20 Years',v:'20 years'},{l:'25 Years',v:'25 years'},{l:'50+ Years / Lifetime of Structure',d:'Critical infrastructure',v:'50 plus years lifetime'}]},
+  {id:'traffic',type:'radio',q:'What traffic will the waterproofing be exposed to?',opts:[{l:'No Traffic — inaccessible membrane',v:'No traffic'},{l:'Foot Traffic — pedestrian',v:'Pedestrian traffic'},{l:'Light Vehicular — cars, vans',v:'Light vehicular'},{l:'Heavy Vehicular — trucks, forklifts',v:'Heavy vehicular'}]},
   {id:'area',type:'input',q:'Approximate waterproofing area (m²):',ph:'e.g. 500',it:'number'},
-  {id:'notes',type:'input',q:'Any special constraints or previous failure notes? (optional)',ph:'e.g. pool is saltwater, previous membrane failed, high UV exposure…',it:'text'},
+  {id:'notes',type:'input',q:'Previous failures, special constraints or notes (optional):',ph:'e.g. saltwater pool, building is occupied, previous membrane failed…',it:'text'},
 ],
 flooring:[
-  {id:'sector',type:'options',q:'What is the primary use of the space?',opts:[{e:'🏭',l:'Industrial',v:'Industrial'},{e:'🏬',l:'Commercial',v:'Commercial'},{e:'🏥',l:'Healthcare',v:'Healthcare'},{e:'🧪',l:'Pharma / Food',v:'Pharmaceutical/Food'},{e:'🏢',l:'Car Park',v:'Car Park'},{e:'🏪',l:'Retail',v:'Retail'},{e:'🏠',l:'Residential',v:'Residential'}]},
-  {id:'substrate',type:'options',q:'What is the existing floor substrate?',opts:[{e:'🧱',l:'Concrete Slab',v:'Concrete slab'},{e:'📐',l:'Cement Screed',v:'Cement screed'},{e:'🟥',l:'Existing Tiles',v:'Existing tiles'},{e:'🟨',l:'Failed Coating',v:'Failed coating'},{e:'🪵',l:'Timber / Ply',v:'Timber'}]},
-  {id:'chemical',type:'radio',q:'What is the level of chemical exposure?',opts:[{l:'None',v:'None'},{l:'Mild',d:'Cleaning agents',v:'Mild'},{l:'Moderate',d:'Oils, fuels',v:'Moderate'},{l:'Severe',d:'Acids, alkalis, solvents',v:'Severe'},{l:'Extreme',d:'Strong acids pH <4 or >10',v:'Extreme'}]},
-  {id:'traffic',type:'radio',q:'What is the traffic intensity?',opts:[{l:'Light Foot Traffic',v:'Light foot traffic'},{l:'Heavy Foot Traffic',v:'Heavy foot traffic'},{l:'Light Wheeled',d:'Pallet trucks',v:'Light wheeled'},{l:'Heavy Forklifts',v:'Heavy forklifts'},{l:'Vehicles',d:'Cars in car park',v:'Vehicles'}]},
-  {id:'slip',type:'radio',q:'What slip resistance classification is required?',opts:[{l:'R9 Standard',v:'R9'},{l:'R10 Slightly Enhanced',v:'R10'},{l:'R11 Moderate',v:'R11'},{l:'R12 High (wet industrial)',v:'R12'},{l:'R13 Extreme (ramps)',v:'R13'}]},
-  {id:'thermal',type:'options',q:'Are there special environment requirements?',opts:[{e:'🌡️',l:'Thermal Shock',d:'Hot wash-down',v:'Thermal shock'},{e:'🧼',l:'Hygienic',d:'Food-safe',v:'Hygienic food-safe'},{e:'⚡',l:'Anti-Static ESD',v:'Anti-static ESD'},{e:'🔵',l:'None',v:'None'}]},
-  {id:'thickness',type:'radio',q:'Preferred system thickness?',opts:[{l:'0.1–0.5mm Thin Coat',d:'Decorative, light duty',v:'0.1–0.5mm'},{l:'0.5–2mm Coating',d:'Standard coating',v:'0.5–2mm'},{l:'2–6mm Screed',d:'Industrial screed',v:'2–6mm'},{l:'6–12mm Heavy Screed',d:'PU-cementitious, heavy duty',v:'6–12mm'}]},
+  {id:'sector',type:'options',q:'What is the primary sector and use of the space?',opts:[{e:'🏭',l:'Industrial',v:'Industrial'},{e:'🏬',l:'Commercial',v:'Commercial'},{e:'🏥',l:'Healthcare',v:'Healthcare'},{e:'🧪',l:'Pharma / Food',v:'Pharmaceutical or Food and Beverage'},{e:'🏢',l:'Car Park',v:'Car Park'},{e:'🏪',l:'Retail',v:'Retail'},{e:'🏠',l:'Residential',v:'Residential'}]},
+  {id:'substrate',type:'options',q:'What is the existing floor substrate?',opts:[{e:'🧱',l:'Concrete Slab',v:'Concrete slab'},{e:'📐',l:'Cement Screed',v:'Cement screed'},{e:'🟥',l:'Existing Tiles',v:'Existing tiles'},{e:'🟨',l:'Failed Coating',v:'Failed coating'},{e:'🪵',l:'Timber / Ply',v:'Timber or plywood'}]},
+  {id:'chemical',type:'radio',q:'What is the level of chemical exposure on the floor?',opts:[{l:'None',d:'No chemical contact',v:'None'},{l:'Mild',d:'Cleaning agents, dilute solutions',v:'Mild'},{l:'Moderate',d:'Oils, fuels, hydraulic fluids',v:'Moderate'},{l:'Severe',d:'Acids, alkalis, solvents',v:'Severe'},{l:'Extreme',d:'Strong acids pH below 4 or above 10',v:'Extreme'}]},
+  {id:'traffic',type:'radio',q:'What is the traffic intensity?',opts:[{l:'Light Foot Traffic',d:'Offices, corridors',v:'Light foot traffic'},{l:'Heavy Foot Traffic',d:'Retail, hospitals',v:'Heavy foot traffic'},{l:'Light Wheeled',d:'Pallet trucks, trolleys',v:'Light wheeled vehicles'},{l:'Heavy Forklifts',d:'Counterbalance trucks',v:'Heavy forklifts'},{l:'Vehicles',d:'Car park',v:'Vehicle traffic car park'}]},
+  {id:'slip',type:'radio',q:'What slip resistance classification is required?',opts:[{l:'R9 — Standard',v:'R9'},{l:'R10 — Slightly Enhanced',v:'R10'},{l:'R11 — Moderate',v:'R11'},{l:'R12 — High (wet industrial)',v:'R12'},{l:'R13 — Extreme (ramps)',v:'R13'}]},
+  {id:'thermal',type:'options',q:'Special environment requirements?',opts:[{e:'🌡️',l:'Thermal Shock',d:'Hot wash-down, steam',v:'Thermal shock'},{e:'🧼',l:'Hygienic / Food-Safe',v:'Hygienic food-safe'},{e:'⚡',l:'Anti-Static ESD',v:'Anti-static ESD'},{e:'❄️',l:'Cold Store',d:'Below 0°C',v:'Cold store'},{e:'🔵',l:'None',v:'None'}]},
+  {id:'thickness',type:'radio',q:'Preferred system build-up thickness?',opts:[{l:'0.1–0.5mm Thin Coat',d:'Decorative, light duty',v:'0.1 to 0.5mm thin coat'},{l:'0.5–2mm Standard Coating',v:'0.5 to 2mm coating'},{l:'2–6mm Industrial Screed',v:'2 to 6mm screed'},{l:'6–12mm Heavy Duty Screed',d:'PU-cementitious',v:'6 to 12mm heavy screed'}]},
   {id:'area',type:'input',q:'Floor area (m²):',ph:'e.g. 2000',it:'number'},
-  {id:'notes',type:'input',q:'Temperature range or special notes:',ph:'e.g. cold store -20°C, drain locations…',it:'text'},
+  {id:'notes',type:'input',q:'Temperature range, drain locations or special constraints:',ph:'e.g. cold store -20°C, drain locations, expansion joint spacing…',it:'text'},
 ],
 resilient:[
-  {id:'type',type:'options',q:'What type of resilient floor covering is being installed?',opts:[{e:'📋',l:'Sheet Vinyl',d:'Homogeneous/heterogeneous',v:'Sheet vinyl'},{e:'🟫',l:'LVT / LVP',d:'Luxury vinyl',v:'LVT/LVP'},{e:'⚫',l:'Rubber',v:'Rubber flooring'},{e:'🟩',l:'Linoleum',v:'Linoleum'},{e:'🟦',l:'Carpet Tiles',v:'Carpet tiles'}]},
-  {id:'substrate',type:'radio',q:'What is the existing substrate?',opts:[{l:'New Concrete Slab',v:'New concrete'},{l:'Existing Concrete',v:'Existing concrete'},{l:'Timber / Plywood',v:'Timber'},{l:'Existing Vinyl',v:'Existing vinyl'},{l:'Anhydrite Screed',v:'Anhydrite screed'}]},
-  {id:'moisture',type:'radio',q:'What is the substrate moisture condition?',opts:[{l:'Dry — below 75% RH',v:'Dry <75% RH'},{l:'Slightly elevated — 75–85% RH',v:'75–85% RH'},{l:'High — 85–95% RH',v:'85–95% RH'},{l:'Unknown — testing required',v:'Unknown'}]},
-  {id:'flatness',type:'radio',q:'What is the floor flatness condition?',opts:[{l:'Good — less than 3mm in 2m',v:'Good <3mm/2m'},{l:'Moderate — 3–8mm in 2m',v:'Moderate 3–8mm'},{l:'Poor — more than 8mm in 2m',d:'Self-leveling required',v:'Poor >8mm'}]},
+  {id:'covering',type:'options',q:'What type of resilient floor covering is being installed?',opts:[{e:'📋',l:'Sheet Vinyl',d:'Homogeneous / heterogeneous',v:'Sheet vinyl'},{e:'🟫',l:'LVT / LVP',d:'Luxury Vinyl Tile or Plank',v:'LVT or LVP'},{e:'⚫',l:'Rubber Flooring',v:'Rubber flooring'},{e:'🟩',l:'Linoleum',v:'Linoleum'},{e:'🟦',l:'Carpet Tiles',v:'Carpet tiles'}]},
+  {id:'substrate',type:'radio',q:'What is the existing substrate type?',opts:[{l:'New Concrete Slab',v:'New concrete slab'},{l:'Existing Concrete',v:'Existing concrete'},{l:'Timber / Plywood',v:'Timber or plywood'},{l:'Existing Resilient Floor',v:'Existing vinyl or rubber'},{l:'Anhydrite / Liquid Screed',v:'Anhydrite liquid screed'}]},
+  {id:'moisture',type:'radio',q:'Substrate moisture condition? (Test with Tramex or CM method)',opts:[{l:'Dry — below 75% RH',v:'Dry below 75 percent RH'},{l:'Slightly Elevated — 75 to 85% RH',v:'75 to 85 percent RH'},{l:'High — 85 to 95% RH',v:'85 to 95 percent RH'},{l:'Unknown — testing needed',v:'Unknown moisture test required'}]},
+  {id:'flatness',type:'radio',q:'Floor flatness condition?',opts:[{l:'Good — less than 3mm in 2m',v:'Flat less than 3mm per 2m'},{l:'Moderate — 3 to 8mm in 2m',d:'Light self-leveling required',v:'Moderate 3 to 8mm'},{l:'Poor — greater than 8mm in 2m',d:'Full self-leveling required',v:'Poor greater than 8mm'}]},
   {id:'sector',type:'options',q:'Use of the space?',opts:[{e:'🏥',l:'Healthcare',v:'Healthcare'},{e:'🏢',l:'Office',v:'Office'},{e:'🏭',l:'Industrial',v:'Industrial'},{e:'🏫',l:'Education',v:'Education'},{e:'🏠',l:'Residential',v:'Residential'}]},
   {id:'area',type:'input',q:'Floor area (m²):',ph:'e.g. 800',it:'number'},
-  {id:'notes',type:'input',q:'Acoustic requirements, heated floor or other notes:',ph:'Optional…',it:'text'},
+  {id:'notes',type:'input',q:'Acoustic, heated floor or other notes:',ph:'Optional…',it:'text'},
 ],
 repair:[
-  {id:'cause',type:'options',q:'What is the primary cause of concrete deterioration?',opts:[{e:'🧂',l:'Chloride Attack',d:'Marine / de-icing salts',v:'Chloride attack'},{e:'💨',l:'Carbonation',d:'CO₂ ingress',v:'Carbonation'},{e:'💥',l:'Structural Crack',d:'Load or settlement',v:'Structural cracking'},{e:'🔵',l:'Non-structural Crack',d:'Shrinkage / thermal',v:'Non-structural cracking'},{e:'🍯',l:'Honeycombing',d:'Poor compaction',v:'Honeycombing'},{e:'🔩',l:'Spalling',v:'Spalling/section loss'}]},
-  {id:'extent',type:'radio',q:'What is the extent of deterioration?',opts:[{l:'Localised — less than 10%',v:'Localised <10%'},{l:'Moderate — 10 to 30%',v:'Moderate 10–30%'},{l:'Extensive — more than 30%',v:'Extensive >30%'},{l:'Full Section Loss',v:'Full section'}]},
-  {id:'rebar',type:'options',q:'Is reinforcement exposed or corroding?',opts:[{e:'❌',l:'No — Cover Intact',v:'No exposure'},{e:'⚠️',l:'Partially Exposed',v:'Partial exposure'},{e:'🔴',l:'Active Corrosion',d:'Rust staining visible',v:'Active corrosion'}]},
-  {id:'location',type:'options',q:'Where is the repair required?',opts:[{e:'⬆️',l:'Soffit / Overhead',v:'Soffit'},{e:'➡️',l:'Vertical Surface',v:'Vertical'},{e:'⬇️',l:'Horizontal / Floor',v:'Horizontal'},{e:'↗️',l:'Corner / Edge',v:'Corner/edge'}]},
-  {id:'structural',type:'radio',q:'Structural or cosmetic repair?',opts:[{l:'Structural — load-bearing',d:'Requires EN 1504-3 R4 or R3',v:'Structural'},{l:'Cosmetic — non-structural',d:'Appearance and protection',v:'Cosmetic'},{l:'Both',v:'Both'}]},
-  {id:'environment',type:'radio',q:'What is the exposure environment?',opts:[{l:'Interior — dry',v:'Interior dry'},{l:'Interior — humid',v:'Interior humid'},{l:'Exterior — sheltered',v:'Exterior sheltered'},{l:'Exterior — exposed',v:'Exterior exposed'},{l:'Marine / Coastal',v:'Marine/coastal'}]},
-  {id:'area',type:'input',q:'Approximate repair area (m²) or volume (m³):',ph:'e.g. 45 m²',it:'text'},
-  {id:'notes',type:'input',q:'Previous repair attempts or special constraints:',ph:'Optional…',it:'text'},
+  {id:'cause',type:'options',q:'What is the primary cause of concrete deterioration?',opts:[{e:'🧂',l:'Chloride Attack',d:'Marine, de-icing salts',v:'Chloride attack'},{e:'💨',l:'Carbonation',d:'CO2 ingress',v:'Carbonation'},{e:'💥',l:'Structural Crack',d:'Load, settlement',v:'Structural cracking'},{e:'🔵',l:'Non-structural Crack',d:'Shrinkage, thermal',v:'Non-structural cracking'},{e:'🍯',l:'Honeycombing',d:'Poor compaction',v:'Honeycombing'},{e:'🔩',l:'Spalling',d:'Cover loss',v:'Spalling and section loss'}]},
+  {id:'extent',type:'radio',q:'Extent and depth of deterioration?',opts:[{l:'Localised — less than 10%',v:'Localised less than 10 percent'},{l:'Moderate — 10 to 30%',v:'Moderate 10 to 30 percent'},{l:'Extensive — greater than 30%',v:'Extensive greater than 30 percent'},{l:'Full Section Loss',v:'Full section replacement required'}]},
+  {id:'rebar',type:'options',q:'Reinforcement condition?',opts:[{e:'✅',l:'Cover Intact',d:'No rebar visible',v:'Cover intact no rebar exposed'},{e:'⚠️',l:'Rebar Exposed',d:'Cover lost',v:'Rebar exposed'},{e:'🔴',l:'Active Corrosion',d:'Rust staining visible',v:'Active rebar corrosion'}]},
+  {id:'location',type:'options',q:'Where is the repair required?',opts:[{e:'⬆️',l:'Soffit / Overhead',v:'Soffit overhead'},{e:'➡️',l:'Vertical Surface',v:'Vertical surface'},{e:'⬇️',l:'Horizontal / Floor',v:'Horizontal floor slab'},{e:'↗️',l:'Corner / Edge',v:'Corner and edge repairs'},{e:'⬛',l:'Full Element',v:'Full element'}]},
+  {id:'structural',type:'radio',q:'Structural (load-bearing) or cosmetic repair?',opts:[{l:'Structural — load-bearing element',d:'EN 1504-3 Class R4 or R3 required',v:'Structural load-bearing'},{l:'Cosmetic — non-structural',d:'Appearance and protection only',v:'Cosmetic non-structural'},{l:'Both structural and cosmetic',v:'Both'}]},
+  {id:'environment',type:'radio',q:'Exposure environment of the repaired element?',opts:[{l:'Interior — dry',v:'Interior dry'},{l:'Interior — humid',v:'Interior humid'},{l:'Exterior — sheltered',v:'Exterior sheltered'},{l:'Exterior — fully exposed',v:'Exterior fully exposed'},{l:'Marine / Coastal',v:'Marine coastal'},{l:'Industrial / Chemical',v:'Industrial chemical'}]},
+  {id:'urgency',type:'radio',q:'Repair programme urgency?',opts:[{l:'Standard — no time restrictions',v:'Standard programme'},{l:'Fast-track — rapid return to service',d:'Trafficable in hours',v:'Fast-track rapid cure'},{l:'Night shift only',v:'Night shift works only'}]},
+  {id:'area',type:'input',q:'Approximate repair area (m²) or volume (m³):',ph:'e.g. 45 m² or 2 m³',it:'text'},
+  {id:'notes',type:'input',q:'Previous repair attempts or structural notes:',ph:'Optional…',it:'text'},
 ],
 anchors:[
-  {id:'load_type',type:'options',q:'What type of load will the anchor resist?',opts:[{e:'⬇️',l:'Tensile',d:'Pull-out',v:'Tensile'},{e:'↔️',l:'Shear',v:'Shear'},{e:'🔄',l:'Combined',d:'Tension + Shear',v:'Combined'},{e:'💪',l:'Rebar Connection',v:'Rebar connection'}]},
-  {id:'load_nature',type:'radio',q:'What is the nature of the applied load?',opts:[{l:'Static — permanent load',v:'Static'},{l:'Dynamic — vibration or impact',v:'Dynamic'},{l:'Fatigue — cyclic loading',v:'Fatigue'},{l:'Seismic — earthquake zone',v:'Seismic'}]},
-  {id:'base',type:'radio',q:'What is the base material?',opts:[{l:'Uncracked Concrete',v:'Uncracked concrete'},{l:'Cracked Concrete',v:'Cracked concrete'},{l:'Solid Masonry',v:'Solid masonry'},{l:'Hollow Block / AAC',v:'Hollow masonry'},{l:'Natural Stone',v:'Stone'}]},
-  {id:'bar_dia',type:'radio',q:'Bar or anchor diameter?',opts:[{l:'M8 / 8mm',v:'M8'},{l:'M10–M12',v:'M10–M12'},{l:'M16',v:'M16'},{l:'M20',v:'M20'},{l:'M24 and above',v:'M24+'}]},
-  {id:'embedment',type:'radio',q:'Required embedment depth?',opts:[{l:'Less than 100mm',v:'<100mm'},{l:'100–150mm',v:'100–150mm'},{l:'150–200mm',v:'150–200mm'},{l:'200–300mm',v:'200–300mm'},{l:'More than 300mm',v:'>300mm'}]},
-  {id:'setting',type:'options',q:'Installation conditions?',opts:[{e:'🌡️',l:'High Temp',d:'Above 40°C',v:'High temp'},{e:'❄️',l:'Cold / Wet Hole',v:'Cold/wet'},{e:'⏱️',l:'Fast-cure Needed',v:'Fast cure'},{e:'🔵',l:'Standard',v:'Standard'}]},
+  {id:'load_type',type:'options',q:'What type of load will the anchor resist?',opts:[{e:'⬇️',l:'Tensile',d:'Pull-out force',v:'Tensile pull-out'},{e:'↔️',l:'Shear',v:'Shear'},{e:'🔄',l:'Combined',d:'Tension + Shear',v:'Combined tension and shear'},{e:'💪',l:'Rebar Connection',d:'Post-installed rebar',v:'Post-installed rebar connection'}]},
+  {id:'load_nature',type:'radio',q:'Nature of the applied load?',opts:[{l:'Static — permanent load',v:'Static permanent load'},{l:'Dynamic — vibration or impact',v:'Dynamic vibration or impact'},{l:'Fatigue — cyclic loading',v:'Fatigue cyclic'},{l:'Seismic — earthquake zone',v:'Seismic C1 or C2'}]},
+  {id:'base',type:'radio',q:'Base material to be anchored into?',opts:[{l:'Uncracked Concrete',v:'Uncracked concrete'},{l:'Cracked Concrete',v:'Cracked concrete'},{l:'Solid Masonry',v:'Solid masonry'},{l:'Hollow Block / AAC',d:'Requires specific anchor',v:'Hollow masonry or AAC'},{l:'Natural Stone',v:'Natural stone'}]},
+  {id:'bar_dia',type:'radio',q:'Anchor rod or rebar diameter?',opts:[{l:'M8 / 8mm',v:'M8'},{l:'M10 to M12',v:'M10 to M12'},{l:'M16',v:'M16'},{l:'M20',v:'M20'},{l:'M24 and above',v:'M24 plus'}]},
+  {id:'embedment',type:'radio',q:'Required embedment depth?',opts:[{l:'Less than 100mm',v:'less than 100mm'},{l:'100 to 150mm',v:'100 to 150mm'},{l:'150 to 200mm',v:'150 to 200mm'},{l:'200 to 300mm',v:'200 to 300mm'},{l:'More than 300mm',v:'more than 300mm'}]},
+  {id:'conditions',type:'options',q:'Installation conditions?',opts:[{e:'🌡️',l:'High Temp',d:'Above 40°C ambient',v:'High ambient temp above 40 degrees'},{e:'❄️',l:'Cold or Wet Hole',v:'Cold or wet drill hole'},{e:'⏱️',l:'Fast Cure Needed',v:'Fast cure required'},{e:'🔵',l:'Standard',v:'Standard conditions'}]},
   {id:'qty',type:'input',q:'Approximate number of anchor points:',ph:'e.g. 120',it:'number'},
-  {id:'notes',type:'input',q:'Structural engineer specification or ETA reference:',ph:'Optional…',it:'text'},
+  {id:'notes',type:'input',q:'Structural engineer reference or loading details:',ph:'Optional…',it:'text'},
 ],
 tile:[
-  {id:'tile_type',type:'options',q:'What type of tile or stone is being installed?',opts:[{e:'⬛',l:'Ceramic / Porcelain',v:'Ceramic/porcelain'},{e:'🪨',l:'Natural Stone',d:'Marble, granite',v:'Natural stone'},{e:'🟦',l:'Large Format Slab',d:'Above 60×60cm',v:'Large format slab'},{e:'💎',l:'Glass / Mosaic',v:'Glass/mosaic'},{e:'🔶',l:'Terracotta',v:'Terracotta'}]},
-  {id:'location',type:'options',q:'Where is the tile being installed?',opts:[{e:'🏠',l:'Interior Floor',d:'Dry area',v:'Interior floor'},{e:'🚿',l:'Wet Room',d:'Bathroom, shower',v:'Wet room'},{e:'🌤️',l:'Exterior Terrace',v:'Exterior terrace'},{e:'🏢',l:'Facade',v:'Facade'},{e:'💦',l:'Swimming Pool',v:'Swimming pool'},{e:'🔥',l:'Underfloor Heating',v:'UFH'}]},
-  {id:'substrate',type:'radio',q:'What is the substrate?',opts:[{l:'Concrete or Screed',v:'Concrete/screed'},{l:'Tile on Tile',v:'Tile on tile'},{l:'Plasterboard',v:'Plasterboard'},{l:'Waterproofed Substrate',v:'Pre-waterproofed'},{l:'Timber / Plywood',v:'Timber'}]},
-  {id:'size',type:'radio',q:'Tile format?',opts:[{l:'Small — less than 15×15cm',v:'<15cm'},{l:'Medium — 15 to 60cm',v:'15–60cm'},{l:'Large — 60 to 90cm',v:'60–90cm'},{l:'Extra Large — above 90cm',d:'Requires high-performance adhesive',v:'>90cm'}]},
-  {id:'joint',type:'radio',q:'Intended grout joint width?',opts:[{l:'Rectified — 1–2mm',v:'1–2mm'},{l:'Standard — 3–5mm',v:'3–5mm'},{l:'Wide — 5–15mm',v:'5–15mm'},{l:'Large — 15–20mm',v:'15–20mm'}]},
-  {id:'wp',type:'options',q:'Is waterproofing required beneath the tiles?',opts:[{e:'✅',l:'Yes — Wet Room',v:'Yes'},{e:'🔵',l:'No',v:'No'},{e:'🤔',l:'Unsure',v:'Unsure'}]},
+  {id:'tile_type',type:'options',q:'What type of tile or stone is being installed?',opts:[{e:'⬛',l:'Ceramic / Porcelain',v:'Ceramic or porcelain'},{e:'🪨',l:'Natural Stone',d:'Marble, travertine, granite',v:'Natural stone marble or granite'},{e:'🟦',l:'Large Format Slab',d:'Greater than 60x60cm',v:'Large format slab greater than 60cm'},{e:'💎',l:'Glass / Mosaic',v:'Glass or mosaic tiles'},{e:'🔶',l:'Terracotta',v:'Terracotta or quarry tile'}]},
+  {id:'location',type:'options',q:'Where is the tile installation?',opts:[{e:'🏠',l:'Interior Floor',d:'Dry area',v:'Interior floor dry'},{e:'🚿',l:'Wet Room',d:'Bathroom, shower, kitchen',v:'Interior wet room'},{e:'🌤️',l:'Exterior Terrace',d:'Exposed to weather',v:'Exterior terrace exposed'},{e:'🏢',l:'Facade',d:'Vertical, wind-driven rain',v:'Facade wall cladding'},{e:'💦',l:'Swimming Pool',d:'Permanently submerged',v:'Swimming pool submerged'},{e:'🔥',l:'Underfloor Heating',v:'Underfloor heating UFH'}]},
+  {id:'substrate',type:'radio',q:'Substrate to be tiled onto?',opts:[{l:'Concrete or Cement Screed',v:'Concrete or screed'},{l:'Tile on Tile (renovation)',v:'Tile on tile renovation'},{l:'Plasterboard / Drywall',v:'Plasterboard'},{l:'Pre-waterproofed Substrate',v:'Pre-waterproofed'},{l:'Timber / Plywood',v:'Timber or plywood'}]},
+  {id:'tile_size',type:'radio',q:'Tile format (size)?',opts:[{l:'Small — less than 15x15cm',v:'Small less than 15cm'},{l:'Medium — 15 to 60cm',v:'Medium 15 to 60cm'},{l:'Large — 60 to 90cm',v:'Large 60 to 90cm'},{l:'Extra Large — greater than 90cm',d:'Back-buttering and S2 adhesive required',v:'Extra large greater than 90cm'}]},
+  {id:'joint',type:'radio',q:'Grout joint width?',opts:[{l:'Rectified — 1 to 2mm',v:'Rectified 1 to 2mm'},{l:'Standard — 3 to 5mm',v:'Standard 3 to 5mm'},{l:'Wide — 5 to 15mm',v:'Wide 5 to 15mm'},{l:'Large — 15 to 20mm',v:'Large 15 to 20mm'}]},
+  {id:'wp',type:'options',q:'Waterproofing required beneath the tiles?',opts:[{e:'✅',l:'Yes — Wet Room / Pool',v:'Waterproofing required'},{e:'🔵',l:'No — Dry Area',v:'No waterproofing needed'},{e:'🤔',l:'Unsure',v:'To be confirmed'}]},
   {id:'area',type:'input',q:'Total tile area (m²):',ph:'e.g. 300',it:'number'},
-  {id:'notes',type:'input',q:'Special requirements (movement joints, chemical exposure):',ph:'Optional…',it:'text'},
+  {id:'notes',type:'input',q:'Chemical exposure, movement joints or special requirements:',ph:'Optional…',it:'text'},
 ],
 protective:[
-  {id:'substrate',type:'options',q:'What needs to be protected?',opts:[{e:'🏗️',l:'Concrete Structure',d:'Beams, columns, slabs',v:'Concrete structure'},{e:'🏭',l:'Industrial Floor',v:'Industrial floor'},{e:'🌊',l:'Marine Structure',d:'Jetty, harbour',v:'Marine structure'},{e:'🌉',l:'Bridge / Infrastructure',v:'Bridge'},{e:'🏢',l:'Building Facade',v:'Facade'},{e:'💧',l:'Water-Retaining',v:'Water retaining'}]},
-  {id:'threats',type:'chips',q:'Primary threats (select all that apply):',opts:['Carbonation / CO₂','Chloride Ingress','Water Ingress','Chemical Attack','Abrasion','UV Degradation','Thermal Cycling','Biological Growth']},
-  {id:'exposure',type:'radio',q:'Exposure classification (EN 1504 / ISO)?',opts:[{l:'XC1 — Dry or permanently wet',v:'XC1'},{l:'XC3/XC4 — Moderate / cyclic humidity',v:'XC3/XC4'},{l:'XS1/XS2 — Marine, no direct contact',v:'XS1/XS2'},{l:'XS3 — Tidal and splash zone',v:'XS3'},{l:'XA — Chemical attack',v:'XA'}]},
-  {id:'system',type:'radio',q:'Preferred coating system type?',opts:[{l:'Cementitious Elastic / Flexible',v:'Cementitious elastic'},{l:'Acrylic / Elastomeric',v:'Acrylic elastomeric'},{l:'Epoxy',v:'Epoxy'},{l:'Polyurethane',v:'Polyurethane'},{l:'Anti-Carbonation Paint Only',v:'Anti-carbonation paint'}]},
-  {id:'design_life',type:'radio',q:'Required design life of protective system?',opts:[{l:'5–10 years (maintenance cycle)',v:'5–10 years'},{l:'15–20 years',v:'15–20 years'},{l:'25 years (major infrastructure)',v:'25 years'}]},
+  {id:'substrate',type:'options',q:'What structure or substrate needs protection?',opts:[{e:'🏗️',l:'Concrete Structure',d:'Beams, columns, soffits',v:'Concrete structural elements'},{e:'🏭',l:'Industrial Floor',v:'Industrial concrete floor'},{e:'🌊',l:'Marine Structure',d:'Jetty, harbour, splash zone',v:'Marine structure'},{e:'🌉',l:'Bridge / Infrastructure',v:'Bridge or infrastructure'},{e:'🏢',l:'Building Facade',v:'Building facade external walls'},{e:'💧',l:'Water-Retaining',d:'Tank, reservoir',v:'Water retaining structure'}]},
+  {id:'threats',type:'chips',q:'Primary threats to protect against (select all):',opts:['Carbonation / CO2 ingress','Chloride ingress (marine/de-icing)','Water ingress / dampness','Chemical attack (acids/alkalis)','Abrasion / wear','UV degradation','Thermal cycling','Biological growth (algae/moss)']},
+  {id:'exposure',type:'radio',q:'EN 1504 exposure class?',opts:[{l:'XC1 — Dry or permanently submerged',v:'XC1'},{l:'XC3 / XC4 — Moderate or cyclic humidity',v:'XC3 or XC4'},{l:'XS1 / XS2 — Marine atmosphere',v:'XS1 or XS2'},{l:'XS3 — Tidal, splash and spray zone',v:'XS3 tidal splash'},{l:'XA — Chemical attack environment',v:'XA chemical attack'}]},
+  {id:'system',type:'radio',q:'Preferred coating system family?',opts:[{l:'Cementitious Elastic / Polymer-Modified',v:'Cementitious elastic polymer'},{l:'Acrylic / Elastomeric Paint',v:'Acrylic elastomeric'},{l:'Epoxy Coating System',v:'Epoxy coating'},{l:'Polyurethane Coating System',v:'Polyurethane coating'},{l:'Anti-Carbonation Paint Only',v:'Anti-carbonation thin coat paint'}]},
+  {id:'design_life',type:'radio',q:'Required design life of coating system?',opts:[{l:'5 to 10 years — maintenance cycle',v:'5 to 10 years'},{l:'15 to 20 years',v:'15 to 20 years'},{l:'25 years — major infrastructure',v:'25 years critical infrastructure'}]},
   {id:'area',type:'input',q:'Area to be coated (m²):',ph:'e.g. 1500',it:'number'},
-  {id:'notes',type:'input',q:'Previous coating history or client preferences:',ph:'Optional…',it:'text'},
+  {id:'notes',type:'input',q:'Previous coating history or client requirements:',ph:'Optional…',it:'text'},
 ],
 };
 
-// ─── STATE ──────────────────────────────────────────────────
-var S={mod:null,idx:-1,answers:{},flow:[],busy:false};
+var S={mod:null,idx:-1,ans:{},flow:[],busy:false,mode:'full'};
 
-// ─── INIT ───────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',function(){
-  buildModGrid();
-  buildFeatGrid();
-  buildPdb();
-  initWizard();
+  buildMG();buildFG();buildPDB();initW();
 });
 
-// ─── MODULE GRID ────────────────────────────────────────────
-function buildModGrid(){
-  var el=document.getElementById('mod-grid');
-  if(!el) return;
-  el.innerHTML=MODULES.map(function(m){
-    return '<div class="mod-card" onclick="jumpToMod(\''+m.id+'\')">'+
-      '<div class="mod-ico">'+m.e+'</div>'+
-      '<div class="mod-arr">↗</div>'+
-      '<h3>'+m.l+'</h3><p>'+m.s+'</p></div>';
+function buildMG(){
+  var el=$('mod-grid');if(!el)return;
+  el.innerHTML=MODS.map(function(m){
+    return '<div class="mc" onclick="jumpMod(\''+m.id+'\')">'
+      +'<span class="mc-e">'+m.e+'</span><div class="mc-ar">↗</div>'
+      +'<h3>'+m.l+'</h3><p>'+m.s+'</p></div>';
   }).join('');
 }
-function jumpToMod(id){
-  gotoSection('#platform');
+function jumpMod(id){
+  G('#platform');
   setTimeout(function(){
-    var cards=document.querySelectorAll('#plat-body .opt-card');
-    var idx=MODULES.findIndex(function(m){return m.id===id;});
-    if(cards[idx]) cards[idx].click();
+    var c=document.querySelectorAll('#pbody .oc');
+    var i=MODS.findIndex(function(m){return m.id===id;});
+    if(c[i])c[i].click();
   },700);
 }
-
-// ─── FEATURES ───────────────────────────────────────────────
-function buildFeatGrid(){
-  var el=document.getElementById('feat-grid');
-  if(!el) return;
-  el.innerHTML=FEATURES.map(function(f){
-    return '<div class="feat-card"><div class="feat-n">'+f.n+'</div><h3>'+f.t+'</h3><p>'+f.d+'</p></div>';
+function buildFG(){
+  var el=$('feat-grid');if(!el)return;
+  el.innerHTML=FEATS.map(function(f){
+    return '<div class="fc"><div class="fcn">'+f.n+'</div><h3>'+f.t+'</h3><p>'+f.d+'</p></div>';
   }).join('');
 }
 
-// ─── PRODUCT DATABASE ───────────────────────────────────────
-var pdbCat='All';
-function buildPdb(){
-  var cats=['All'].concat([...new Set(PRODUCTS.map(function(p){return p.c;}))]);
-  var el=document.getElementById('pdb-cats');
-  if(!el) return;
+var pCat='All';
+function buildPDB(){
+  var cats=['All'].concat(PRODS.reduce(function(a,p){if(a.indexOf(p.c)<0)a.push(p.c);return a;},[]) );
+  var el=$('pdb-cats');if(!el)return;
   el.innerHTML=cats.map(function(c){
-    return '<div class="pdb-cat'+(c==='All'?' active':'')+'" onclick="setPdbCat(\''+c+'\',this)">'+c+'</div>';
+    return '<div class="pdbcat'+(c==='All'?' on':'')+'" onclick="setPCat(\''+esc(c)+'\',this)">'+c+'</div>';
   }).join('');
-  renderPdb();
+  renderPDB();
 }
-function setPdbCat(c,el){
-  pdbCat=c;
-  document.querySelectorAll('.pdb-cat').forEach(function(e){e.classList.remove('active');});
-  el.classList.add('active');
-  renderPdb();
+function setPCat(c,el){
+  pCat=c;
+  document.querySelectorAll('.pdbcat').forEach(function(e){e.classList.remove('on');});
+  el.classList.add('on');renderPDB();
 }
-function filterPdb(){renderPdb();}
-function renderPdb(){
-  var q=(document.getElementById('pdb-q')||{}).value||'';
-  q=q.toLowerCase();
-  var items=PRODUCTS.filter(function(p){
-    var mc=pdbCat==='All'||p.c===pdbCat;
-    var mq=!q||p.n.toLowerCase().indexOf(q)>-1||p.d.toLowerCase().indexOf(q)>-1;
-    return mc&&mq;
+function filterP(){renderPDB();}
+function renderPDB(){
+  var q=(($('pdbq')||{}).value||'').toLowerCase();
+  var items=PRODS.filter(function(p){
+    return(pCat==='All'||p.c===pCat)&&(!q||p.n.toLowerCase().indexOf(q)>-1||p.d.toLowerCase().indexOf(q)>-1);
   });
-  var el=document.getElementById('pdb-grid');
-  if(!el) return;
-  if(!items.length){el.innerHTML='<div style="padding:2rem;color:var(--text3);text-align:center;grid-column:1/-1">No products found</div>';return;}
+  var el=$('pdb-grid');if(!el)return;
+  if(!items.length){el.innerHTML='<div style="padding:2rem;color:var(--tx3);text-align:center;grid-column:1/-1">No products found.</div>';return;}
   el.innerHTML=items.map(function(p){
-    var sps=p.sp.map(function(s){return '<div class="pdb-sp">'+s.k+': <strong>'+s.v+'</strong></div>';}).join('');
-    return '<div class="pdb-item">'+
-      '<div class="pdb-top"><div class="pdb-name">'+p.e+' '+p.n+'</div><div class="pdb-ctag">'+p.c+'</div></div>'+
-      '<div class="pdb-desc">'+p.d+'</div>'+
-      '<div class="pdb-specs">'+sps+(p.rec?'<div class="pdb-rec">⭐ '+p.rec+'</div>':'')+'<div class="pdb-orig">🌍 '+p.org+'</div></div>'+
-      '</div>';
+    var sp=p.sp.map(function(s){return '<div class="pdbs">'+s.k+': <strong>'+s.v+'</strong></div>';}).join('');
+    return '<div class="pdbit"><div class="pdbtp"><div class="pdbnm">'+p.e+' '+p.n+'</div><div class="pdbct">'+p.c+'</div></div>'
+      +'<div class="pdbds">'+p.d+'</div>'
+      +'<div class="pdbsp">'+sp+(p.rec?'<div class="pdbrc">⭐ '+p.rec+'</div>':'')+'<div class="pdbor">🌍 '+p.org+'</div></div></div>';
   }).join('');
 }
 
-// ─── WIZARD ─────────────────────────────────────────────────
-function initWizard(){
-  S={mod:null,idx:-1,answers:{},flow:[],busy:false};
-  setProgress(0);
-  setText('step-lbl','');
-  setText('plat-title','ConcretIQ Consultation');
-  setText('foot-hint','Select a discipline to begin');
-  setText('sb-name','New Consultation');
-  hide('btn-back');
-  setBtnNext('Continue →','btn-next',true,false);
-  renderModSelect();
+function initW(){
+  S={mod:null,idx:-1,ans:{},flow:[],busy:false,mode:'full'};
+  setP(0);T('pslbl','');T('ptitle','ConcretIQ Consultation');
+  T('fhint','Select a discipline to begin');T('sb-name','New Consultation');
+  hide('btn-back');setBtn('btn-next','bnext','Continue →',true,nextS);
+  renderModSel();
 }
-function resetWizard(){initWizard();}
+function resetW(){initW();}
 
-function renderModSelect(){
-  var html='<div class="ai-bub">'+
-    '<div class="ai-av">CQ</div>'+
-    '<div class="ai-body">'+
-      '<div class="ai-name">ConcretIQ AI</div>'+
-      '<div class="ai-txt">Welcome. I\'m your AI construction chemicals consultant.<br>'+
-      'Before recommending any product, I need to understand your project fully — just like a senior consultant would.<br><br>'+
-      '<strong>Which discipline do you need expertise in?</strong></div>'+
-    '</div></div>'+
-    '<div class="q-block"><div class="opt-grid">'+
-    MODULES.map(function(m){
-      return '<div class="opt-card" onclick="selectMod(\''+m.id+'\',this)">'+
-        '<div class="oc-e">'+m.e+'</div>'+
-        '<div class="oc-l">'+m.l+'</div>'+
-        '<div class="oc-s">'+m.s+'</div></div>';
-    }).join('')+
-    '</div></div>';
-  setBody(html);
+function renderModSel(){
+  var h='<div class="aib"><div class="aiav">CQ</div>'
+    +'<div class="aibd"><div class="ailbl">ConcretIQ AI</div>'
+    +'<div class="aitx">Welcome. I\'m your AI construction chemicals consultant.<br>'
+    +'Before recommending any product or system, I gather all the technical intelligence a senior consultant would need.<br><br>'
+    +'<strong>Which discipline do you need expertise in?</strong></div></div></div>'
+    +'<div class="qblk"><div class="og">'
+    +MODS.map(function(m){
+      return '<div class="oc" onclick="selMod(\''+m.id+'\',this)">'
+        +'<div class="oc-e">'+m.e+'</div><div class="oc-l">'+m.l+'</div><div class="oc-s">'+m.s+'</div></div>';
+    }).join('')+'</div></div>';
+  H('pbody',h);
 }
 
-function selectMod(id,el){
+function selMod(id,el){
   S.mod=id;
-  document.querySelectorAll('#plat-body .opt-card').forEach(function(c){c.classList.remove('sel');});
+  document.querySelectorAll('#pbody .oc').forEach(function(c){c.classList.remove('sel');});
   el.classList.add('sel');
-  var m=MODULES.find(function(x){return x.id===id;});
-  setText('sb-name',m.l);
-  setText('foot-hint',m.l+' selected');
-  setBtnNext('Continue →','btn-next',false,false);
+  var m=MODS.find(function(x){return x.id===id;});
+  T('sb-name',m.l);T('fhint',m.l+' selected — click Continue');
+  setBtn('btn-next','bnext','Continue →',false,nextS);
 }
 
 function startFlow(){
-  S.flow=FLOWS[S.mod]||[];
-  S.idx=0;
-  S.answers={};
-  show('btn-back');
-  renderQ();
+  S.flow=FLOWS[S.mod]||[];S.idx=0;S.ans={};
+  show('btn-back');renderQ();
 }
 
-function nextStep(){
-  if(S.busy) return;
-  if(S.mod===null) return;
+function nextS(){
+  if(S.busy)return;
+  if(S.mod===null)return;
   if(S.idx===-1){startFlow();return;}
   var step=S.flow[S.idx];
-  if(!canProceed(step)){toast('Please make a selection to continue.');return;}
+  if(!canGo(step)){toast('Please make a selection to continue.');return;}
   S.idx++;
-  if(S.idx>=S.flow.length){showSummary();}
-  else{renderQ();}
+  if(S.idx>=S.flow.length)showModeSelect();
+  else renderQ();
 }
 
-function prevStep(){
-  if(S.busy) return;
+function prevS(){
+  if(S.busy)return;
   if(S.idx<=0){
-    S.idx=-1;S.mod=null;S.answers={};S.flow=[];
-    hide('btn-back');
-    setProgress(0);
-    setText('foot-hint','Select a discipline to begin');
-    setText('plat-title','ConcretIQ Consultation');
-    setText('step-lbl','');
-    setBtnNext('Continue →','btn-next',true,false);
-    renderModSelect();
-    return;
+    S.idx=-1;S.mod=null;S.ans={};S.flow=[];
+    hide('btn-back');setP(0);
+    T('fhint','Select a discipline to begin');
+    T('ptitle','ConcretIQ Consultation');T('pslbl','');
+    setBtn('btn-next','bnext','Continue →',true,nextS);
+    renderModSel();return;
   }
-  S.idx--;
-  renderQ();
+  S.idx--;renderQ();
 }
 
-function canProceed(step){
-  if(!step) return false;
-  if(step.type==='input'||step.type==='chips') return true;
-  return !!S.answers[step.id];
+function canGo(step){
+  if(!step)return false;
+  if(step.type==='input'||step.type==='chips')return true;
+  return!!S.ans[step.id];
 }
 
 function renderQ(){
-  var step=S.flow[S.idx];
-  if(!step) return;
-  var total=S.flow.length;
-  var num=S.idx+1;
-  setProgress((num/total)*100);
-  setText('step-lbl','Question '+num+' of '+total);
-  setText('foot-hint','Question '+num+' of '+total);
-  var mod=MODULES.find(function(m){return m.id===S.mod;});
-  setText('plat-title',(mod?mod.l:'')+' — Q'+num);
-
-  var ex=S.answers[step.id];
-  var hasAns=ex!==undefined&&ex!==''&&(!Array.isArray(ex)||ex.length>0);
-  var optional=step.type==='input'||step.type==='chips';
-
-  var html='<div class="ai-bub">'+
-    '<div class="ai-av">CQ</div>'+
-    '<div class="ai-body">'+
-      '<div class="ai-name">ConcretIQ AI — Q'+num+'/'+total+'</div>'+
-      '<div class="ai-txt">'+step.q+'</div>'+
-    '</div></div>'+
-    '<div class="q-block">';
-
+  var step=S.flow[S.idx];if(!step)return;
+  var total=S.flow.length,num=S.idx+1;
+  setP((num/total)*100);
+  T('pslbl','Q'+num+' / '+total);T('fhint','Question '+num+' of '+total);
+  var mod=MODS.find(function(m){return m.id===S.mod;});
+  T('ptitle',(mod?mod.l:'')+' — Q'+num);
+  var ex=S.ans[step.id];
+  var hasA=ex!==undefined&&ex!==''&&(!Array.isArray(ex)||ex.length>0);
+  var opt=step.type==='input'||step.type==='chips';
+  var h='<div class="aib"><div class="aiav">CQ</div>'
+    +'<div class="aibd"><div class="ailbl">ConcretIQ AI — Q'+num+'/'+total+'</div>'
+    +'<div class="aitx">'+step.q+'</div></div></div><div class="qblk">';
   if(step.type==='options'){
-    html+='<div class="opt-grid">'+
-      step.opts.map(function(o){
-        var sel=ex===o.v?' sel':'';
-        return '<div class="opt-card'+sel+'" onclick="ansOpt(\''+step.id+'\',\''+esc(o.v)+'\',this)">'+
-          '<div class="oc-e">'+(o.e||'📋')+'</div>'+
-          '<div class="oc-l">'+o.l+'</div>'+
-          (o.d?'<div class="oc-s">'+o.d+'</div>':'')+
-          '</div>';
-      }).join('')+
-    '</div>';
-  } else if(step.type==='radio'){
-    html+='<div class="radio-list">'+
-      step.opts.map(function(o){
-        var sel=ex===o.v?' sel':'';
-        return '<div class="radio-opt'+sel+'" onclick="ansRadio(\''+step.id+'\',\''+esc(o.v)+'\',this)">'+
-          '<div class="rdot"></div>'+
-          '<div><div class="r-lbl">'+o.l+'</div>'+(o.d?'<div class="r-desc">'+o.d+'</div>':'')+
-          '</div></div>';
-      }).join('')+
-    '</div>';
-  } else if(step.type==='chips'){
+    h+='<div class="og">'+step.opts.map(function(o){
+      var s=ex===o.v?' sel':'';
+      return '<div class="oc'+s+'" onclick="ansOpt(\''+esc(step.id)+'\',\''+esc(o.v)+'\',this)">'
+        +'<div class="oc-e">'+(o.e||'📋')+'</div><div class="oc-l">'+o.l+'</div>'+(o.d?'<div class="oc-s">'+o.d+'</div>':'')+'</div>';
+    }).join('')+'</div>';
+  }else if(step.type==='radio'){
+    h+='<div class="rl">'+step.opts.map(function(o){
+      var s=ex===o.v?' sel':'';
+      return '<div class="ro'+s+'" onclick="ansRadio(\''+esc(step.id)+'\',\''+esc(o.v)+'\',this)">'
+        +'<div class="rodot"></div><div><div class="rol">'+o.l+'</div>'+(o.d?'<div class="rod">'+o.d+'</div>':'')+'</div></div>';
+    }).join('')+'</div>';
+  }else if(step.type==='chips'){
     var sel=ex||[];
-    html+='<div class="q-hint">Select all that apply</div><div class="chip-grp">'+
-      step.opts.map(function(o){
-        var on=sel.indexOf(o)>-1?' sel':'';
-        return '<div class="chip'+on+'" onclick="ansChip(\''+step.id+'\',\''+esc(o)+'\',this)">'+o+'</div>';
-      }).join('')+
-    '</div>';
-  } else if(step.type==='input'){
-    html+='<input class="s-input" type="'+(step.it||'text')+'" placeholder="'+(step.ph||'')+'" value="'+(ex||'')+'" oninput="ansInput(\''+step.id+'\',this.value)">';
+    h+='<div class="qhint">Select all that apply</div><div class="cg">'
+      +step.opts.map(function(o){
+        var s=sel.indexOf(o)>-1?' sel':'';
+        return '<div class="chip'+s+'" onclick="ansChip(\''+esc(step.id)+'\',\''+esc(o)+'\',this)">'+o+'</div>';
+      }).join('')+'</div>';
+  }else if(step.type==='input'){
+    h+='<input class="sinp" type="'+(step.it||'text')+'" placeholder="'+(step.ph||'')+'" value="'+(ex||'')+'" oninput="ansInput(\''+esc(step.id)+'\',this.value)">';
   }
-
-  html+='</div>';
-  setBody(html);
-  setBtnNext('Continue →','btn-next',!hasAns&&!optional,false);
+  h+='</div>';H('pbody',h);
+  setBtn('btn-next','bnext','Continue →',!hasA&&!opt,nextS);
 }
 
 function ansOpt(id,val,el){
-  S.answers[id]=val;
-  el.closest('.opt-grid').querySelectorAll('.opt-card').forEach(function(c){c.classList.remove('sel');});
-  el.classList.add('sel');
-  setBtnNext('Continue →','btn-next',false,false);
+  S.ans[id]=val;
+  el.closest('.og').querySelectorAll('.oc').forEach(function(c){c.classList.remove('sel');});
+  el.classList.add('sel');setBtn('btn-next','bnext','Continue →',false,nextS);
 }
 function ansRadio(id,val,el){
-  S.answers[id]=val;
-  el.closest('.radio-list').querySelectorAll('.radio-opt').forEach(function(c){c.classList.remove('sel');});
-  el.classList.add('sel');
-  setBtnNext('Continue →','btn-next',false,false);
+  S.ans[id]=val;
+  el.closest('.rl').querySelectorAll('.ro').forEach(function(c){c.classList.remove('sel');});
+  el.classList.add('sel');setBtn('btn-next','bnext','Continue →',false,nextS);
 }
 function ansChip(id,val,el){
-  if(!S.answers[id]) S.answers[id]=[];
-  var i=S.answers[id].indexOf(val);
-  if(i>-1){S.answers[id].splice(i,1);el.classList.remove('sel');}
-  else{S.answers[id].push(val);el.classList.add('sel');}
+  if(!S.ans[id])S.ans[id]=[];
+  var i=S.ans[id].indexOf(val);
+  if(i>-1){S.ans[id].splice(i,1);el.classList.remove('sel');}
+  else{S.ans[id].push(val);el.classList.add('sel');}
 }
-function ansInput(id,val){
-  S.answers[id]=val;
-  setBtnNext('Continue →','btn-next',false,false);
+function ansInput(id,val){S.ans[id]=val;setBtn('btn-next','bnext','Continue →',false,nextS);}
+
+function showModeSelect(){
+  setP(100);T('pslbl','Choose output format');T('ptitle','Select Specification Type');T('fhint','Choose your preferred output');
+  var mod=MODS.find(function(m){return m.id===S.mod;});
+  var items=Object.entries(S.ans).filter(function(e){var v=e[1];return v&&(!Array.isArray(v)||v.length>0);})
+    .map(function(e){
+      var k=e[0],v=e[1];
+      var step=S.flow.find(function(s){return s.id===k;});
+      var lbl=step?step.q.replace(/\?.*$/,'').replace(/^(What is the |What are the |Is this |Where is the )/i,'').trim():k;
+      var val=Array.isArray(v)?v.join(', '):v;
+      return '<div class="sumi"><div class="sumk">'+lbl+'</div><div class="sumv">'+val+'</div></div>';
+    }).join('');
+  var h='<div class="aib"><div class="aiav">CQ</div>'
+    +'<div class="aibd"><div class="ailbl">ConcretIQ AI</div>'
+    +'<div class="aitx">All project parameters collected. Now choose how you\'d like your specification generated.<br><br>'
+    +'<strong>Select the output format that best suits your role.</strong></div></div></div>'
+    +'<div class="sumc"><h4>📋 Project Summary — '+(mod?mod.l:'')+'</h4>'
+    +'<div class="sumg">'+items+'</div></div>'
+    +'<div class="smc"><h4>📄 Specification Output Format</h4>'
+    +'<p>Choose the type of output — a full technical package for engineers and contractors, or a clear plain-language spec for designers and consultants.</p>'
+    +'<div class="smcg">'
+    +'<div class="smco sel" id="smc-full" onclick="selMode(\'full\',this)">'
+    +'<div class="smco-e">⚙️</div><div class="smco-t">Full Technical Package</div>'
+    +'<div class="smco-d">Complete specification with EN standards, BOQ, method statement, ITP, risk register and value engineering. For engineers and contractors.</div>'
+    +'<div class="tag-e tag-t">Engineer / Contractor</div></div>'
+    +'<div class="smco" id="smc-des" onclick="selMode(\'designer_spec\',this)">'
+    +'<div class="smco-e">✏️</div><div class="smco-t">Designer / Consultant Spec</div>'
+    +'<div class="smco-d">Clear, plain-language specification clauses with product schedule. Ready to paste into project documentation. For designers and consultants.</div>'
+    +'<div class="tag-e tag-d">Designer / Consultant</div></div>'
+    +'</div></div>';
+  H('pbody',h);
+  S.mode='full';
+  setBtn('btn-next','bgen','⚡ Generate Specification',false,doGen);
 }
-function esc(s){return String(s).replace(/'/g,"\\'").replace(/"/g,'&quot;');}
 
-// ─── SUMMARY ────────────────────────────────────────────────
-function showSummary(){
-  setProgress(100);
-  setText('step-lbl','Ready to generate');
-  setText('plat-title','Review & Generate');
-  setText('foot-hint','All questions answered');
-  var mod=MODULES.find(function(m){return m.id===S.mod;});
-  var items=Object.entries(S.answers).filter(function(e){
-    var v=e[1];return v&&(!Array.isArray(v)||v.length>0);
-  }).map(function(e){
-    var k=e[0],v=e[1];
-    var step=S.flow.find(function(s){return s.id===k;});
-    var label=step?step.q.split('?')[0].replace(/^What (is the |are the |type |)/i,'').replace(/^Is this /i,'').trim():k;
-    var val=Array.isArray(v)?v.join(', '):v;
-    return '<div class="sum-item"><div class="sum-k">'+label+'</div><div class="sum-v">'+val+'</div></div>';
-  }).join('');
-  var html='<div class="ai-bub">'+
-    '<div class="ai-av">CQ</div>'+
-    '<div class="ai-body"><div class="ai-name">ConcretIQ AI</div>'+
-    '<div class="ai-txt">I have all the technical information I need. Review your project parameters below, then click <strong>Generate Specification</strong> to produce your complete consultant-grade package.</div>'+
-    '</div></div>'+
-    '<div class="sum-card"><h4>📋 Project Summary — '+(mod?mod.l:'')+'</h4>'+
-    '<div class="sum-grid">'+items+'</div></div>';
-  setBody(html);
-  setBtnNext('⚡ Generate Specification','btn-gen',false,true);
+function selMode(mode,el){
+  S.mode=mode;
+  document.querySelectorAll('.smco').forEach(function(c){c.classList.remove('sel');});
+  el.classList.add('sel');
 }
 
-// ─── GENERATE ───────────────────────────────────────────────
-function generateSpec(){
-  if(S.busy) return;
-  S.busy=true;
-  hide('btn-back');
-  setBtnNext('Generating…','btn-gen',true,true);
-  setText('foot-hint','Generating your specification…');
-
-  var steps=['Analysing project parameters…','Selecting Mapei system layers…','Writing specification clauses…','Generating BOQ with consumption rates…','Building method statement…','Compiling ITP and risk register…'];
-  var html='<div class="load-wrap">'+
-    '<div class="load-ring"></div>'+
-    '<div class="load-txt">ConcretIQ AI is generating your specification…</div>'+
-    '<div class="load-steps">'+
-    steps.map(function(s,i){return '<div class="ls'+(i===0?' act':'')+'" id="ls'+i+'">'+s+'</div>';}).join('')+
-    '</div></div>';
-  setBody(html);
-  setProgress(10);
-
+function doGen(){
+  if(S.busy)return;
+  S.busy=true;hide('btn-back');
+  setBtn('btn-next','bnext','Generating…',true,null);
+  T('fhint','AI is generating your specification…');
+  var steps=['Analysing project parameters…','Applying Mapei product selection rules…','Selecting correct products…','Writing specification clauses…','Building BOQ with TDS rates…','Compiling method statement and ITP…'];
+  var lh='<div class="lw"><div class="lring"></div>'
+    +'<div class="ltxt">ConcretIQ AI is generating your package…</div>'
+    +'<div class="lsteps">'+steps.map(function(s,i){return '<div class="ls'+(i===0?' act':'')+'" id="ls'+i+'">'+s+'</div>';}).join('')+'</div></div>';
+  H('pbody',lh);setP(8);
   var si=0;
   var iv=setInterval(function(){
-    var prev=document.getElementById('ls'+si);
-    if(prev){prev.classList.remove('act');prev.classList.add('done');}
-    si++;
-    if(si<steps.length){
-      var cur=document.getElementById('ls'+si);
-      if(cur) cur.classList.add('act');
-      setProgress(10+((si+1)/steps.length)*80);
-    }
+    var prev=$('ls'+si);if(prev){prev.classList.remove('act');prev.classList.add('done');}
+    si++;if(si<steps.length){var cur=$('ls'+si);if(cur)cur.classList.add('act');}
+    setP(8+((si+1)/steps.length)*82);
   },900);
-
-  var mod=MODULES.find(function(m){return m.id===S.mod;});
+  var mod=MODS.find(function(m){return m.id===S.mod;});
   fetch('/api/consult',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({module:mod?mod.l:S.mod,answers:S.answers})
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({module:mod?mod.l:S.mod,answers:S.ans,mode:S.mode})
   }).then(function(r){
     clearInterval(iv);
-    if(!r.ok) throw new Error('HTTP '+r.status);
+    if(!r.ok)throw new Error('HTTP '+r.status);
     return r.json();
   }).then(function(data){
-    setProgress(100);
-    S.busy=false;
-    renderResults(data);
+    setP(100);S.busy=false;
+    if(data.error)throw new Error(data.error);
+    if(S.mode==='designer_spec')renderDS(data);
+    else renderFull(data);
   }).catch(function(err){
-    clearInterval(iv);
-    setProgress(100);
-    S.busy=false;
-    toast('AI generation failed ('+err.message+'). Showing offline preview.');
+    clearInterval(iv);setP(100);S.busy=false;
+    toast('AI failed ('+err.message+'). Showing offline preview.');
     renderFallback();
   });
 }
 
-// ─── RESULTS ────────────────────────────────────────────────
-function renderResults(d){
-  var mod=MODULES.find(function(m){return m.id===S.mod;});
-  var stds=(d.applicable_standards||[]).map(function(s){return '<span class="res-tag">'+s+'</span>';}).join('');
-  var dl=d.design_life?'<span class="res-tag">🕐 '+d.design_life+'</span>':'';
-
-  var html='<div class="res-hero">'+
-    '<div class="res-top">'+
-      '<div>'+
-        '<div class="res-badge">✓ Specification Generated</div>'+
-        '<div class="res-title">'+(d.system_title||(mod?mod.l:'')+'System')+'</div>'+
-        '<div class="res-sub">'+(d.executive_summary||'')+'</div>'+
-        '<div class="res-tags">'+stds+dl+'</div>'+
-      '</div>'+
-      '<div class="res-acts">'+
-        '<button class="res-btn" onclick="window.print()">⬇ Export PDF</button>'+
-        '<button class="res-btn" onclick="copySpec()">📋 Copy Spec</button>'+
-        '<button class="res-btn" onclick="resetWizard()">↺ New Consult</button>'+
-      '</div>'+
-    '</div></div>'+
-    '<div class="out-tabs">'+
-      '<div class="otab active" onclick="switchTab(this,\'t-layers\')">System Layers</div>'+
-      '<div class="otab" onclick="switchTab(this,\'t-spec\')">Specification</div>'+
-      '<div class="otab" onclick="switchTab(this,\'t-boq\')">BOQ</div>'+
-      '<div class="otab" onclick="switchTab(this,\'t-ms\')">Method Statement</div>'+
-      '<div class="otab" onclick="switchTab(this,\'t-itp\')">ITP</div>'+
-      '<div class="otab" onclick="switchTab(this,\'t-risk\')">Risk Register</div>'+
-      '<div class="otab" onclick="switchTab(this,\'t-ve\')">Value Engineering</div>'+
-    '</div>'+
-    '<div class="o-panel active" id="t-layers">'+buildLayers(d.mapei_system||{})+'</div>'+
-    '<div class="o-panel" id="t-spec">'+buildSpec(d.specification||[])+'</div>'+
-    '<div class="o-panel" id="t-boq">'+buildBoq(d.boq||[])+'</div>'+
-    '<div class="o-panel" id="t-ms">'+buildMS(d.method_statement||[])+'</div>'+
-    '<div class="o-panel" id="t-itp">'+buildITP(d.itp||[])+'</div>'+
-    '<div class="o-panel" id="t-risk">'+buildRisks(d.risks||[])+'</div>'+
-    '<div class="o-panel" id="t-ve">'+buildVE(d.value_engineering||[])+'</div>';
-
-  setBody(html);
-  setText('foot-hint','Specification complete');
-  setBtnNext('↺ New Consultation','btn-next',false,false);
-  show('btn-back');
-  // override back to reset
-  document.getElementById('btn-back').onclick=resetWizard;
-  document.getElementById('btn-back').textContent='↺ New Consult';
+function renderFull(d){
+  var mod=MODS.find(function(m){return m.id===S.mod;});
+  var stds=(d.applicable_standards||[]).map(function(s){return '<span class="rtag">'+s+'</span>';}).join('');
+  var dl=d.design_life?'<span class="rtag">🕐 '+d.design_life+'</span>':'';
+  var rat=d.product_selection_rationale?'<div class="rat"><div class="rat-hd">🧠 Product Selection Rationale</div><p>'+d.product_selection_rationale+'</p></div>':'';
+  var h='<div class="rhero"><div class="rtop"><div>'
+    +'<div class="rbadge">✓ AI Specification Generated</div>'
+    +'<div class="rtitle">'+(d.system_title||(mod?mod.l:'')+'System')+'</div>'
+    +'<div class="rsub">'+(d.executive_summary||'')+'</div>'
+    +'<div class="rtags">'+stds+dl+'</div>'
+    +'</div><div class="racts">'
+    +'<button class="rbtn" onclick="window.print()">⬇ PDF</button>'
+    +'<button class="rbtn" onclick="cpSpec()">📋 Copy</button>'
+    +'<button class="rbtn" onclick="resetW()">↺ New</button>'
+    +'</div></div></div>'+rat
+    +'<div class="otabs">'
+    +'<div class="otab on" onclick="swTab(this,\'tl\')">System Layers</div>'
+    +'<div class="otab" onclick="swTab(this,\'ts\')">Specification</div>'
+    +'<div class="otab" onclick="swTab(this,\'tb\')">BOQ</div>'
+    +'<div class="otab" onclick="swTab(this,\'tm\')">Method Statement</div>'
+    +'<div class="otab" onclick="swTab(this,\'ti\')">ITP</div>'
+    +'<div class="otab" onclick="swTab(this,\'tr\')">Risks</div>'
+    +'<div class="otab" onclick="swTab(this,\'tv\')">Value Engineering</div>'
+    +'</div>'
+    +'<div class="opanel on" id="tl">'+bLayers(d.mapei_system||{})+'</div>'
+    +'<div class="opanel" id="ts">'+bSpec(d.specification||[])+'</div>'
+    +'<div class="opanel" id="tb">'+bBoq(d.boq||[])+'</div>'
+    +'<div class="opanel" id="tm">'+bMS(d.method_statement||[])+'</div>'
+    +'<div class="opanel" id="ti">'+bITP(d.itp||[])+'</div>'
+    +'<div class="opanel" id="tr">'+bRisks(d.risks||[])+'</div>'
+    +'<div class="opanel" id="tv">'+bVE(d.value_engineering||[])+'</div>';
+  H('pbody',h);
+  T('fhint','Specification complete');
+  setBtn('btn-next','bnext','↺ New Consultation',false,resetW);
+  show('btn-back');$('btn-back').onclick=resetW;$('btn-back').textContent='↺ New';
 }
 
-function switchTab(el,id){
-  var wrap=el.parentElement.parentElement;
-  wrap.querySelectorAll('.otab').forEach(function(t){t.classList.remove('active');});
-  el.classList.add('active');
-  wrap.querySelectorAll('.o-panel').forEach(function(p){p.classList.remove('active');});
-  var t=wrap.querySelector('#'+id);
-  if(t) t.classList.add('active');
+function swTab(el,id){
+  var w=el.parentElement.parentElement;
+  w.querySelectorAll('.otab').forEach(function(t){t.classList.remove('on');});
+  el.classList.add('on');
+  w.querySelectorAll('.opanel').forEach(function(p){p.classList.remove('on');});
+  var t=w.querySelector('#'+id);if(t)t.classList.add('on');
 }
 
-// ─── BUILD RESULT SECTIONS ──────────────────────────────────
-function buildLayers(sys){
+function renderDS(d){
+  var mod=MODS.find(function(m){return m.id===S.mod;});
+  var secs=(d.sections||[]).map(function(sec){
+    var cls=(sec.clauses||[]).map(function(c){
+      return '<div class="dsc"><div class="dscn">'+c.num+'</div>'
+        +'<div class="dscb"><h5>'+c.title+'</h5><p>'+c.text+'</p></div></div>';
+    }).join('');
+    return '<div class="dssec"><div class="dssect">'+sec.section_num+'. '+sec.section_title+'</div>'+cls+'</div>';
+  }).join('');
+  var prods=(d.approved_products||[]).map(function(p){
+    var db=PRODS.find(function(x){return x.n.toLowerCase().indexOf(p.name.toLowerCase().split(' ')[0])>-1;})||{};
+    return '<div class="dsprod"><div class="dsprod-e">'+(db.e||'🔬')+'</div><div>'
+      +'<div class="dsprod-n">'+p.name+'</div>'
+      +'<div class="dsprod-d">'+(p.description||'')+'</div>'
+      +'<div class="dsprod-w">Selected because: '+(p.why_selected||'')+'</div></div></div>';
+  }).join('');
+  var notes=(d.key_notes||[]).map(function(n){return '<div class="dsnote">'+n+'</div>';}).join('');
+  var h='<div class="rhero"><div class="rtop"><div>'
+    +'<div class="rbadge">✏️ Designer Specification</div>'
+    +'<div class="rtitle">'+(d.spec_title||(mod?mod.l:'')+'Specification')+'</div>'
+    +'<div class="rsub">'+(d.project_note||'')+'</div>'
+    +'</div><div class="racts">'
+    +'<button class="rbtn" onclick="window.print()">⬇ Print / PDF</button>'
+    +'<button class="rbtn" onclick="cpSpec()">📋 Copy All</button>'
+    +'<button class="rbtn" onclick="resetW()">↺ New</button>'
+    +'<button class="rbtn" style="border-color:rgba(200,134,10,.3);color:var(--gold2)" onclick="switchFull()">⚙️ Full Technical Version</button>'
+    +'</div></div></div>'
+    +'<div class="dsdoc">'+secs
+    +'<div class="dsprods"><div class="dsprodlbl">✅ Approved Mapei Products</div>'
+    +'<div class="dsprodg">'+prods+'</div></div>'
+    +(notes?'<div class="dsnotes"><div class="dsprodlbl" style="color:var(--sky)">ℹ️ Key Notes for Designer / Consultant</div>'+notes+'</div>':'')
+    +'</div>';
+  H('pbody',h);
+  T('fhint','Designer specification complete');
+  setBtn('btn-next','bnext','↺ New Consultation',false,resetW);
+  show('btn-back');$('btn-back').onclick=resetW;$('btn-back').textContent='↺ New';
+}
+
+function switchFull(){S.mode='full';doGen();}
+
+function bLayers(sys){
   var order=[{k:'primer',l:'Primer / Preparation'},{k:'base_layer',l:'Base Layer'},{k:'intermediate',l:'Intermediate Layer'},{k:'finish_layer',l:'Finish / Top Layer'}];
-  var html='<div class="layers">';
-  var n=1;
+  var h='<div class="layers">';var n=1;
   order.forEach(function(o){
-    var layer=sys[o.k];
-    if(layer&&layer.name){
-      var dbp=PRODUCTS.find(function(p){return p.n.toLowerCase().indexOf(layer.name.toLowerCase().split(' ')[0])>-1;})||{};
-      var specs=(dbp.sp||[]).slice(0,2).map(function(s){return '<div class="lsp">'+s.k+': <strong>'+s.v+'</strong></div>';}).join('');
-      if(layer.coverage) specs='<div class="lsp">Coverage: <strong>'+layer.coverage+'</strong></div>'+specs;
-      if(layer.origin) specs+='<div class="lsp">Origin: <strong>'+layer.origin+'</strong></div>';
-      html+='<div class="layer">'+
-        '<div class="layer-n">'+n+'</div>'+
-        '<div><div class="layer-role">'+o.l+'</div>'+
-        '<div class="layer-name">'+layer.name+'</div>'+
-        '<div class="layer-note">'+(layer.role||'')+'</div>'+
-        '<div class="layer-specs">'+specs+'</div></div></div>';
+    var ly=sys[o.k];
+    if(ly&&ly.name){
+      var db=PRODS.find(function(p){return p.n.toLowerCase().indexOf(ly.name.toLowerCase().split(' ')[0])>-1;})||{};
+      var sp='';
+      if(ly.coverage)sp+='<div class="lsp">Coverage: <strong>'+ly.coverage+'</strong></div>';
+      if(ly.origin)sp+='<div class="lsp">Origin: <strong>'+ly.origin+'</strong></div>';
+      (db.sp||[]).slice(0,2).forEach(function(s){sp+='<div class="lsp">'+s.k+': <strong>'+s.v+'</strong></div>';});
+      h+='<div class="lyr"><div class="lyrc">'+n+'</div><div>'
+        +'<div class="lyrole">'+o.l+'</div><div class="lyrname">'+ly.name+'</div>'
+        +'<div class="lyrnote">'+(ly.role||'')+'</div><div class="lyrsp">'+sp+'</div></div></div>';
       n++;
     }
   });
-  if(sys.accessories){
-    sys.accessories.forEach(function(a){
-      if(a.name){
-        html+='<div class="layer" style="border-left-color:var(--teal2)">'+
-          '<div class="layer-n" style="background:rgba(26,188,156,.1);border-color:rgba(26,188,156,.3);color:var(--teal2)">A</div>'+
-          '<div><div class="layer-role" style="color:var(--teal2)">Accessory</div>'+
-          '<div class="layer-name">'+a.name+'</div>'+
-          '<div class="layer-note">'+(a.role||'')+'</div></div></div>';
-      }
-    });
-  }
-  html+='</div>';
-  return html;
+  if(sys.accessories)(sys.accessories||[]).forEach(function(a){
+    if(a.name)h+='<div class="lyr" style="border-left-color:var(--teal2)">'
+      +'<div class="lyrc" style="background:rgba(20,184,166,.1);border-color:rgba(20,184,166,.28);color:var(--teal2)">A</div>'
+      +'<div><div class="lyrole" style="color:var(--teal2)">Accessory</div>'
+      +'<div class="lyrname">'+a.name+'</div><div class="lyrnote">'+(a.role||'')+'</div></div></div>';
+  });
+  return h+'</div>';
 }
-
-function buildSpec(clauses){
-  if(!clauses.length) return '<p style="color:var(--text2)">No specification clauses generated.</p>';
-  return '<div class="spec-doc">'+clauses.map(function(c){
-    return '<div class="s-clause"><div class="s-num">'+c.clause+'</div>'+
-      '<div class="s-body"><h5>'+c.title+'</h5><p>'+c.text+'</p></div></div>';
+function bSpec(cls){
+  if(!cls.length)return'<p style="color:var(--tx2)">No specification clauses generated.</p>';
+  return'<div class="sdoc">'+cls.map(function(c){
+    return'<div class="sc"><div class="scn">'+c.clause+'</div>'
+      +'<div class="scb"><h5>'+c.title+'</h5><p>'+c.text+'</p></div></div>';
   }).join('')+'</div>';
 }
-
-function buildBoq(items){
-  if(!items.length) return '<p style="color:var(--text2)">No BOQ generated.</p>';
-  return '<div class="boq-wrap"><table class="boq-t">'+
-    '<thead><tr><th>Ref</th><th>Description</th><th>Unit</th><th>Consumption</th><th>Mapei Product</th><th>Note</th></tr></thead>'+
-    '<tbody>'+items.map(function(b){
-      return '<tr><td style="color:var(--text2)">'+b.ref+'</td><td>'+b.description+'</td>'+
-        '<td class="td-unit">'+b.unit+'</td><td>'+b.consumption+'</td>'+
-        '<td class="td-prod">'+(b.mapei_product||'—')+'</td>'+
-        '<td style="color:var(--text2);font-size:.73rem">'+(b.note||'')+'</td></tr>';
-    }).join('')+'</tbody></table>'+
-    '<div class="boq-note">⚠️ Quantities are AI-generated based on typical Mapei TDS consumption rates. Confirm all quantities by site measurement and with the Mapei technical team before procurement.</div></div>';
+function bBoq(items){
+  if(!items.length)return'<p style="color:var(--tx2)">No BOQ generated.</p>';
+  return'<div class="boqw"><table class="boqt">'
+    +'<thead><tr><th>Ref</th><th>Description</th><th>Unit</th><th>Consumption</th><th>Mapei Product</th><th>Note</th></tr></thead>'
+    +'<tbody>'+items.map(function(b){
+      return'<tr><td style="color:var(--tx2)">'+b.ref+'</td><td>'+b.description+'</td>'
+        +'<td class="tdu">'+b.unit+'</td><td>'+b.consumption+'</td>'
+        +'<td class="tdp">'+(b.mapei_product||'—')+'</td>'
+        +'<td style="color:var(--tx2);font-size:.72rem">'+(b.note||'')+'</td></tr>';
+    }).join('')+'</tbody></table>'
+    +'<div class="boqnote">⚠️ Quantities are AI-generated from Mapei TDS consumption rates. Confirm all quantities by site measurement and Mapei technical team prior to procurement.</div></div>';
 }
-
-function buildMS(steps){
-  if(!steps.length) return '<p style="color:var(--text2)">No method statement generated.</p>';
-  return '<div class="ms-list">'+steps.map(function(s,i){
-    return '<div class="ms-step"><div class="ms-n">'+(s.step||i+1)+'</div>'+
-      '<div><div class="ms-h">'+(s.title||'Step '+(i+1))+'</div>'+
-      '<div class="ms-p">'+(s.detail||'')+'</div></div></div>';
+function bMS(steps){
+  if(!steps.length)return'<p style="color:var(--tx2)">No method statement generated.</p>';
+  return'<div class="mslist">'+steps.map(function(s,i){
+    return'<div class="msstep"><div class="msn">'+(s.step||i+1)+'</div>'
+      +'<div><div class="msh">'+(s.title||'Step '+(i+1))+'</div>'
+      +'<div class="msp">'+(s.detail||'')+'</div></div></div>';
   }).join('')+'</div>';
 }
-
-function buildITP(items){
-  if(!items.length) return '<p style="color:var(--text2)">No ITP generated.</p>';
-  return '<div style="overflow-x:auto"><table class="itp-t">'+
-    '<thead><tr><th>Activity</th><th>Hold</th><th>Witness</th><th>Review</th><th>Acceptance Criteria</th></tr></thead>'+
-    '<tbody>'+items.map(function(i){
-      return '<tr><td>'+i.activity+'</td>'+
-        '<td class="itp-ic">'+(i.hold?'🔴':'—')+'</td>'+
-        '<td class="itp-ic">'+(i.witness?'🟡':'—')+'</td>'+
-        '<td class="itp-ic">'+(i.review?'🟢':'—')+'</td>'+
-        '<td style="font-size:.76rem;color:var(--text2)">'+(i.acceptance_criteria||'')+'</td></tr>';
+function bITP(items){
+  if(!items.length)return'<p style="color:var(--tx2)">No ITP generated.</p>';
+  return'<div style="overflow-x:auto"><table class="itpt">'
+    +'<thead><tr><th>Activity</th><th>Hold 🔴</th><th>Witness 🟡</th><th>Review 🟢</th><th>Acceptance Criteria</th></tr></thead>'
+    +'<tbody>'+items.map(function(i){
+      return'<tr><td>'+i.activity+'</td>'
+        +'<td class="itpic">'+(i.hold?'🔴':'—')+'</td>'
+        +'<td class="itpic">'+(i.witness?'🟡':'—')+'</td>'
+        +'<td class="itpic">'+(i.review?'🟢':'—')+'</td>'
+        +'<td style="font-size:.74rem;color:var(--tx2)">'+(i.acceptance_criteria||'')+'</td></tr>';
     }).join('')+'</tbody></table></div>';
 }
-
-function buildRisks(risks){
-  if(!risks.length) return '<p style="color:var(--text2)">No risks identified.</p>';
-  return '<div class="risk-list">'+risks.map(function(r){
-    var sev=(r.severity||'medium').toLowerCase();
-    var cls=sev==='high'?'sev-high':sev==='low'?'sev-low':'sev-medium';
-    return '<div class="risk-card">'+
-      '<div class="risk-sev '+cls+'">'+(r.severity||'Medium')+'</div>'+
-      '<div><div class="risk-h">'+(r.id||'')+' — '+r.risk+'</div>'+
-      '<div class="risk-p"><strong style="color:var(--teal2)">Mitigation:</strong> '+r.mitigation+'</div></div></div>';
+function bRisks(risks){
+  if(!risks.length)return'<p style="color:var(--tx2)">No risks generated.</p>';
+  return'<div class="riskl">'+risks.map(function(r){
+    var s=(r.severity||'medium').toLowerCase();
+    var cls=s==='high'?'svhi':s==='low'?'svlo':'svmd';
+    return'<div class="riskc"><div class="risksv '+cls+'">'+(r.severity||'Medium')+'</div>'
+      +'<div><div class="riskh">'+(r.id||'')+' — '+r.risk+'</div>'
+      +'<div class="riskp"><span style="color:var(--teal2);font-weight:600">Mitigation:</span> '+r.mitigation+'</div></div></div>';
+  }).join('')+'</div>';
+}
+function bVE(opts){
+  if(!opts.length)return'<p style="color:var(--tx2)">No value engineering options generated.</p>';
+  return'<div class="veg">'+opts.map(function(o){
+    return'<div class="vec"><div class="veh">'+o.option+'</div>'
+      +'<div class="ves">'+o.saving+'</div>'
+      +'<div class="vep"><strong style="color:var(--tx)">Alternative:</strong> '+o.product+'</div>'
+      +'<div class="vet">⚖️ Trade-off: '+o.trade_off+'</div></div>';
   }).join('')+'</div>';
 }
 
-function buildVE(options){
-  if(!options.length) return '<p style="color:var(--text2)">No value engineering options generated.</p>';
-  return '<div class="ve-grid">'+options.map(function(o){
-    return '<div class="ve-card">'+
-      '<div class="ve-h">'+o.option+'</div>'+
-      '<div class="ve-save">'+o.saving+'</div>'+
-      '<div class="ve-p"><strong style="color:var(--text)">Alternative:</strong> '+o.product+'</div>'+
-      '<div class="ve-trade">⚖️ Trade-off: '+o.trade_off+'</div></div>';
-  }).join('')+'</div>';
-}
-
-// ─── FALLBACK SPEC ──────────────────────────────────────────
 function renderFallback(){
   var catMap={waterproofing:'Waterproofing',flooring:'Flooring',resilient:'Resilient Flooring',repair:'Concrete Repair',anchors:'Anchors & Grouts',tile:'Tile & Stone',protective:'Protective Coatings'};
-  var cat=catMap[S.mod]||'';
-  var rel=PRODUCTS.filter(function(p){return p.c===cat;}).slice(0,4);
-  var mod=MODULES.find(function(m){return m.id===S.mod;});
-
-  var d={
-    system_title:(mod?mod.l:'')+'— Mapei System',
-    executive_summary:'A complete Mapei-backed '+( mod?mod.l.toLowerCase():'')+' system designed for the specified project parameters. UAE-manufactured and Italian products are prioritised. This specification should be reviewed and confirmed by a qualified Mapei technical representative.',
-    design_life:'As specified by Engineer',
-    applicable_standards:['EN 1504','EN 14891','ASTM','BS 8102'],
+  var rel=PRODS.filter(function(p){return p.c===catMap[S.mod];}).slice(0,4);
+  var mod=MODS.find(function(m){return m.id===S.mod;});
+  renderFull({
+    system_title:(mod?mod.l:'')+'— Mapei System (Offline Preview)',
+    executive_summary:'Offline preview — built-in Mapei product intelligence. Connect your Anthropic API key for full AI-generated specifications tailored to your exact project parameters.',
+    design_life:'As specified by Engineer',applicable_standards:['EN 1504','EN 14891','EN 12004','ASTM'],
+    product_selection_rationale:'Products selected from the Mapei range based on application type. UAE-manufactured products prioritised. This is a generic preview — live AI generates a fully accurate, project-specific selection.',
     mapei_system:{
       primer:{name:rel[0]?rel[0].n:'Primer SN',role:'Surface preparation and adhesion promotion',coverage:'150–200 ml/m²',origin:'UAE / Italy'},
-      base_layer:{name:rel[1]?rel[1].n:'Mapelastic Smart',role:'Primary waterproofing / functional layer',coverage:'1.5–2.0 kg/m²',origin:'UAE / Italy'},
-      intermediate:{name:rel[2]?rel[2].n:'Reinforcement mesh',role:'Crack bridging and system reinforcement',coverage:'1 layer with 50mm overlaps',origin:'Italy'},
-      finish_layer:{name:rel[3]?rel[3].n:'Finish coat',role:'UV protection and final protection layer',coverage:'Per Mapei TDS',origin:'Italy'},
-      accessories:[{name:'Mapei Sealant / Tape',role:'Sealing of upstands, joints and penetrations'}]
+      base_layer:{name:rel[1]?rel[1].n:'Mapelastic Smart',role:'Primary functional layer',coverage:'1.5–2.0 kg/m²',origin:'UAE / Italy'},
+      intermediate:{name:rel[2]?rel[2].n:'Intermediate layer',role:'Reinforcement and build-up',coverage:'Per TDS',origin:'Italy'},
+      finish_layer:{name:rel[3]?rel[3].n:'Finish coat',role:'Protection and UV resistance',coverage:'Per TDS',origin:'Italy'},
+      accessories:[{name:'Mapei Sealant and Tape System',role:'Upstands, joints and penetrations'}]
     },
     specification:[
-      {clause:'1.1',title:'Scope of Work',text:'This specification covers the complete '+(mod?mod.l.toLowerCase():'')+'system for all designated areas shown on the contract drawings. The Contractor shall supply a complete, CE-marked system from Mapei as the single approved manufacturer.'},
-      {clause:'1.2',title:'Standards and Compliance',text:'All materials shall comply with relevant EN standards, Dubai Municipality requirements and current Mapei Technical Data Sheets (TDS). UAE-manufactured or Italian-manufactured Mapei products shall be prioritised in all selections.'},
-      {clause:'1.3',title:'Substrate Preparation',text:'All substrates shall be structurally sound, clean, dry and free from contamination, oil, laitance and poorly-adhering material. Mechanical preparation shall achieve minimum CSP 3 profile. All defects shall be repaired using approved Mapei repair mortar prior to system application.'},
-      {clause:'1.4',title:'Application Conditions',text:'Do not apply when ambient or substrate temperature is below +5°C or above +35°C, or when relative humidity exceeds 85%. Do not apply to substrates exposed to direct sunlight when surface temperature exceeds 40°C. Protect freshly applied material from rain, foot traffic and direct UV for the curing period stated in the Mapei TDS.'},
-      {clause:'1.5',title:'Quality Control and Testing',text:'The Contractor shall provide certificates of conformity, CE marking documentation and batch numbers for all products. Pull-off adhesion testing shall be carried out in accordance with EN 1542 at a minimum frequency of 1 test per 200m². All test results shall be submitted to the Engineer within 24 hours of testing.'},
-      {clause:'1.6',title:'Manufacturer Warranty',text:'The Contractor shall provide a minimum 10-year system warranty backed by a Mapei manufacturer\'s warranty covering the complete installed system, subject to Mapei warranty terms, conditions and periodic inspection requirements.'},
+      {clause:'1.1',title:'Scope',text:'This specification covers the complete '+(mod?mod.l.toLowerCase():'')+'system for all areas shown on the contract drawings. The complete system shall be supplied by Mapei as the sole approved manufacturer.'},
+      {clause:'1.2',title:'Standards and Compliance',text:'All materials shall comply with the relevant EN standards, current Mapei TDS and Dubai Municipality requirements. UAE-manufactured products shall be prioritised.'},
+      {clause:'1.3',title:'Substrate Preparation',text:'Substrate shall be structurally sound, clean, dry and free from contamination. Prepare to CSP 3–5 profile. Repair all defects with Mapei repair mortar prior to system application.'},
+      {clause:'1.4',title:'Application Conditions',text:'Do not apply below +5°C or above +35°C, or when RH exceeds 85%. Protect fresh material from rain, UV and traffic for the full cure period stated in the Mapei TDS.'},
+      {clause:'1.5',title:'Quality Control',text:'Provide CE marking, batch numbers and certificates of conformity. Carry out pull-off testing at minimum 1 per 200m² per EN 1542. Submit all records to the Engineer.'},
+      {clause:'1.6',title:'Warranty',text:'Provide minimum 10-year system warranty backed by Mapei manufacturer warranty, subject to compliance with TDS and Mapei warranty terms.'},
     ],
     boq:[
-      {ref:'A',description:'Surface preparation — mechanical cleaning, grinding and repair of defects',unit:'m²',consumption:'Allow for full preparation',mapei_product:'Mapei repair mortar as required',note:''},
+      {ref:'A',description:'Surface preparation — mechanical cleaning and defect repair',unit:'m²',consumption:'Allow',mapei_product:'Mapei repair mortar',note:''},
       {ref:'B',description:'Priming of substrate',unit:'m²',consumption:'150–200 ml/m²',mapei_product:rel[0]?rel[0].n:'Primer SN',note:'2 coats on absorbent surfaces'},
-      {ref:'C',description:'Base layer / first coat application',unit:'m²',consumption:'1.5–2.0 kg/m²',mapei_product:rel[1]?rel[1].n:'As specified',note:'Per Mapei TDS'},
-      {ref:'D',description:'Reinforcement layer / intermediate coat',unit:'m²',consumption:'1.0 kg/m²',mapei_product:rel[2]?rel[2].n:'As specified',note:'Embed mesh while wet'},
+      {ref:'C',description:'Base layer application',unit:'m²',consumption:'1.5–2.0 kg/m²',mapei_product:rel[1]?rel[1].n:'As specified',note:'Per Mapei TDS'},
+      {ref:'D',description:'Intermediate coat',unit:'m²',consumption:'Per TDS',mapei_product:rel[2]?rel[2].n:'As specified',note:''},
       {ref:'E',description:'Finish coat / top layer',unit:'m²',consumption:'Per TDS',mapei_product:rel[3]?rel[3].n:'As specified',note:''},
-      {ref:'F',description:'Detailing — upstands, joints, penetrations, drains',unit:'sum',consumption:'PC Sum',mapei_product:'Mapei sealant and tape system',note:'Measured separately or allow PC sum'},
+      {ref:'F',description:'Detailing — upstands, joints, penetrations',unit:'sum',consumption:'PC Sum',mapei_product:'Mapei sealant and tape',note:'Measure separately'},
     ],
     method_statement:[
-      {step:'MS1',title:'Pre-Application Survey',detail:'Carry out a full substrate survey prior to commencing works. Record moisture content (CM method — maximum 4% for most systems), pH (7–10 acceptable), pull-off strength (minimum 1.0 MPa) and identify all cracks, honeycombs and defects. Submit survey report to Engineer for review and approval.'},
-      {step:'MS2',title:'Surface Preparation',detail:'Mechanically prepare the substrate by shot-blasting, grinding or pressure washing as appropriate to achieve CSP 3–5 profile. Remove all laitance, contamination, oil, grease and weak material. Repair all cracks and defects using approved Mapei repair mortar. Allow to cure fully before proceeding.'},
-      {step:'MS3',title:'Primer Application',detail:'Apply Mapei approved primer at the specified coverage rate using brush, roller or airless spray as directed by the TDS. Ensure complete and even coverage with no missed areas. Allow to cure to a tack-free or fully dry state (as specified in TDS) before applying the first coat. Do not apply in temperatures below 5°C or above 35°C.'},
-      {step:'MS4',title:'Main System Application',detail:'Mix all multi-component Mapei products strictly in accordance with the TDS mixing ratios using a calibrated slow-speed drill mixer. Apply coats in the specified sequence, observing minimum and maximum overcoating intervals. Check wet film thickness at regular intervals using a wet film gauge.'},
-      {step:'MS5',title:'Detailing and Terminations',detail:'Prior to or during main system application, apply all details including upstands (minimum 150mm above finished floor level), pipe and service penetrations, drain surrounds, construction joints and movement joints using Mapei sealant, waterproofing tape and compatible accessories as specified.'},
-      {step:'MS6',title:'Curing, Testing and Handover',detail:'Protect all freshly applied layers from rain, UV, foot traffic and thermal shock during the full curing period specified in the Mapei TDS. Once fully cured, carry out flood testing (minimum 24 hours for waterproofing), pull-off testing and visual inspection. Submit all ITP records, test certificates and product batch certificates to the Engineer. Obtain written acceptance before proceeding to subsequent trades.'},
+      {step:'MS1',title:'Pre-Application Survey',detail:'Test substrate: moisture CM method max 4%, pH 7–10, pull-off min 1.0 MPa. Identify all defects. Submit survey report to Engineer.'},
+      {step:'MS2',title:'Surface Preparation',detail:'Shot-blast or grind to CSP 3–5. Remove all laitance, contamination and weak material. Repair defects with Mapei mortar and allow to cure fully.'},
+      {step:'MS3',title:'Primer Application',detail:'Apply Mapei primer at TDS coverage rate by brush or roller. Full coverage — no missed areas. Cure to tack-free per TDS before overcoating.'},
+      {step:'MS4',title:'System Application',detail:'Mix multi-component materials at TDS ratios using slow-speed mixer. Apply coats in sequence observing overcoating intervals. Check wet film thickness throughout.'},
+      {step:'MS5',title:'Detailing',detail:'Apply all upstands min 150mm, pipe penetrations, drain surrounds and joints using Mapei sealant, tape and accessories before or during main application.'},
+      {step:'MS6',title:'Curing, Testing and Handover',detail:'Protect from rain, UV and traffic for full cure period. Flood test 24 hours minimum. Submit all ITP records and test certificates to Engineer. Obtain written acceptance.'},
     ],
     itp:[
-      {activity:'Substrate Survey and Inspection',hold:true,witness:false,review:true,acceptance_criteria:'Moisture <4%, pH 7–10, pull-off >1.0 MPa, no cracks or defects unrepaired'},
-      {activity:'Primer Application',hold:false,witness:true,review:true,acceptance_criteria:'Full coverage at specified rate, tack-free before overcoating, no missed areas'},
-      {activity:'First Coat Application',hold:false,witness:true,review:true,acceptance_criteria:'WFT within TDS tolerance, no pinholes, fish-eyes or contamination'},
-      {activity:'Intermediate / Reinforcement Layer',hold:false,witness:false,review:true,acceptance_criteria:'Mesh fully embedded, 50mm overlaps at all joints, no air pockets'},
-      {activity:'Final Coat and Flood Test',hold:true,witness:true,review:true,acceptance_criteria:'24hr flood test — zero leaks, DFT within TDS tolerance, complete coverage'},
+      {activity:'Substrate Survey',hold:true,witness:false,review:true,acceptance_criteria:'Moisture <4% CM, pH 7–10, pull-off >1.0 MPa, no unrepaired defects'},
+      {activity:'Primer Application',hold:false,witness:true,review:true,acceptance_criteria:'Full coverage at TDS rate, tack-free before overcoating'},
+      {activity:'First Coat',hold:false,witness:true,review:true,acceptance_criteria:'WFT within TDS tolerance, no pinholes or contamination'},
+      {activity:'Intermediate Coat',hold:false,witness:false,review:true,acceptance_criteria:'Correct coverage, no air pockets'},
+      {activity:'Final Coat and Flood Test',hold:true,witness:true,review:true,acceptance_criteria:'24hr flood test zero leaks, DFT within TDS tolerance'},
     ],
     risks:[
-      {id:'R01',risk:'Elevated substrate moisture causing bond failure',mitigation:'Test using CM method before application. If >4% RH use Mapei DPM primer. Do not proceed without Engineer approval if moisture is above limit.',severity:'High'},
-      {id:'R02',risk:'High ambient temperature reducing pot life and causing premature skinning',mitigation:'Apply in early morning. Use chilled mixing water. Observe 35°C maximum ambient. Consider rapid-set alternative products in extreme heat.',severity:'High'},
-      {id:'R03',risk:'Insufficient surface preparation leading to delamination',mitigation:'Achieve minimum CSP 3 profile. Carry out pull-off test before system application. Ensure Engineer approves substrate before proceeding.',severity:'High'},
-      {id:'R04',risk:'Incorrect mixing ratios causing system failure',mitigation:'Mix full units only — never part-mix. Use Mapei pre-weighed component kits. Train operatives before commencing. Dispose of any suspect material.',severity:'Medium'},
+      {id:'R01',risk:'Elevated substrate moisture causing bond failure',mitigation:'Test with CM method. If >4% use Mapei DPM primer. Do not proceed without Engineer approval.',severity:'High'},
+      {id:'R02',risk:'High ambient temperature reducing pot life',mitigation:'Apply in early morning. Chill mixing water. Observe 35°C maximum.',severity:'High'},
+      {id:'R03',risk:'Insufficient surface preparation causing delamination',mitigation:'Achieve CSP 3 minimum. Pull-off test before application. Engineer to approve substrate.',severity:'High'},
+      {id:'R04',risk:'Incorrect mixing ratios causing system failure',mitigation:'Mix full units only. Never part-mix. Trained operatives only.',severity:'Medium'},
     ],
     value_engineering:[
-      {option:'Single-component system',product:rel[0]?rel[0].n:'Mapelastic Smart (single-component)',saving:'Labour cost reduction ~15%',trade_off:'Slightly reduced crack-bridging performance. Suitable where expected crack movement is low. Requires Engineer approval.'},
-      {option:'Reduce system to minimum TDS coverage',product:'Same products at minimum specified coverage rate',saving:'Material saving of 10–15%',trade_off:'Reduced design life and warranty period. Increased inspection frequency required.'},
+      {option:'Single-component variant',product:rel[0]?rel[0].n:'Single-component Mapei product',saving:'Labour cost ~15% reduction',trade_off:'Reduced crack-bridging performance. Suitable for low movement substrates only. Engineer approval required.'},
+      {option:'Minimum TDS coverage rate',product:'Same products at minimum specified coverage',saving:'Material saving 10–15%',trade_off:'Reduced design life and warranty. Higher inspection frequency required.'},
     ]
-  };
-  renderResults(d);
+  });
 }
 
-// ─── UTILITIES ──────────────────────────────────────────────
-function setBody(html){
-  var el=document.getElementById('plat-body');
-  if(el) el.innerHTML=html;
-}
-function setText(id,txt){
-  var el=document.getElementById(id);
-  if(el) el.textContent=txt;
-}
-function setProgress(pct){
-  var el=document.getElementById('prog-fill');
-  if(el) el.style.width=pct+'%';
-}
-function show(id){
-  var el=document.getElementById(id);
-  if(el) el.style.display='';
-}
-function hide(id){
-  var el=document.getElementById(id);
-  if(el) el.style.display='none';
-}
-function setBtnNext(label,cls,disabled,isGen){
-  var el=document.getElementById('btn-next');
-  if(!el) return;
-  el.textContent=label;
-  el.className=isGen?'btn-gen':'btn-next';
-  el.disabled=!!disabled;
-  el.onclick=isGen?generateSpec:nextStep;
-}
-function toast(msg){
-  var t=document.getElementById('toast');
-  if(!t) return;
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(function(){t.classList.remove('show');},4000);
-}
-function copySpec(){
-  var el=document.querySelector('.spec-doc');
-  if(!el){toast('No specification to copy yet.');return;}
-  navigator.clipboard.writeText(el.innerText).then(function(){toast('Specification copied to clipboard!');}).catch(function(){toast('Please select the text and copy manually.');});
+function cpSpec(){
+  var el=document.querySelector('.sdoc')||document.querySelector('.dsdoc');
+  if(!el){toast('No specification to copy.');return;}
+  navigator.clipboard.writeText(el.innerText)
+    .then(function(){toast('Specification copied!');})
+    .catch(function(){toast('Select text manually to copy.');});
 }
 </script>
 </body>
